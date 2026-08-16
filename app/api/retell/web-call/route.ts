@@ -15,6 +15,12 @@ export const dynamic = "force-dynamic"
 /** Cached across requests in a warm instance so discovery costs one lookup. */
 let discoveredAgentId: string | null = null
 
+/** Hosting dashboards happily store "  " or a leftover placeholder. */
+function configuredAgentId(): string | null {
+  const raw = (process.env.NEXT_PUBLIC_RETELL_AGENT_ID ?? "").trim()
+  return raw.length > 0 ? raw : null
+}
+
 /**
  * Prefers the configured agent ID, but falls back to looking up the agent this
  * project created. That fallback is what lets the /setup page work end to end:
@@ -22,13 +28,24 @@ let discoveredAgentId: string | null = null
  * and no redeploy.
  */
 async function resolveAgentId(apiKey: string): Promise<string | null> {
-  const configured = process.env.NEXT_PUBLIC_RETELL_AGENT_ID
+  const configured = configuredAgentId()
   if (configured) return configured
 
   if (discoveredAgentId) return discoveredAgentId
 
   discoveredAgentId = await findExistingAgent(apiKey)
   return discoveredAgentId
+}
+
+async function createWebCall(apiKey: string, agentId: string) {
+  return fetch("https://api.retellai.com/v2/create-web-call", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ agent_id: agentId }),
+  })
 }
 
 export async function POST() {
@@ -54,14 +71,20 @@ export async function POST() {
   }
 
   try {
-    const res = await fetch("https://api.retellai.com/v2/create-web-call", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ agent_id: agentId }),
-    })
+    let res = await createWebCall(apiKey, agentId)
+
+    // A configured ID can be stale or mistyped — an easy mistake when pasting
+    // variables into a hosting dashboard. Rather than leaving the site broken,
+    // fall back to the agent this project actually created.
+    if (!res.ok && configuredAgentId()) {
+      console.error(
+        `create-web-call rejected agent "${agentId}" (${res.status}); retrying with a looked-up agent.`,
+      )
+      const fallbackId = await findExistingAgent(apiKey)
+      if (fallbackId && fallbackId !== agentId) {
+        res = await createWebCall(apiKey, fallbackId)
+      }
+    }
 
     if (!res.ok) {
       const detail = await res.text()

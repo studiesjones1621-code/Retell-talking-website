@@ -72,8 +72,10 @@ export async function POST(request: Request) {
     const result = await provisionAgent({
       retellApiKey,
       calApiKey: process.env.CAL_API_KEY,
-      existingAgentId: process.env.NEXT_PUBLIC_RETELL_AGENT_ID || undefined,
-      existingLlmId: process.env.RETELL_LLM_ID || undefined,
+      // Trimmed because a hosting dashboard will happily store a blank-looking
+      // value that is really a space, which would target a nonexistent resource.
+      existingAgentId: process.env.NEXT_PUBLIC_RETELL_AGENT_ID?.trim() || undefined,
+      existingLlmId: process.env.RETELL_LLM_ID?.trim() || undefined,
     })
 
     return NextResponse.json({
