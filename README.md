@@ -1,5 +1,13 @@
 # OnDuty Agent — Talking Website
 
+> **Just want the voice agent on the website you already have?**
+> Read **[docs/START-HERE.md](docs/START-HERE.md)** instead — a click-by-click
+> walkthrough that keeps your current site and adds the agent with one line of
+> code. You can ignore the rest of this README.
+
+---
+
+
 A one-page site for OnDuty Agent with an embedded Retell voice agent that answers
 visitor questions and drives the booking CTA.
 
