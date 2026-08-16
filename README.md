@@ -41,11 +41,21 @@ Open **http://localhost:3000**.
 
 ## 3. Provision the voice agent
 
-Secrets live in `.env.local` (git-ignored; `.env.example` documents the shape).
+**Step by step, from a fresh clone:**
 
-```bash
-npm run provision:retell
-```
+1. Install [Node.js](https://nodejs.org) (version 22 or newer) if you don't have it.
+2. Open Terminal (macOS) or PowerShell (Windows) and `cd` into this folder.
+3. `npm install`
+4. `npm run provision:retell` — the first run creates `.env.local` for you and stops.
+5. Open `.env.local` in any text editor and paste in your `RETELL_API_KEY` and
+   `CAL_API_KEY`. Save it.
+6. `npm run provision:retell` again. It prints your **Agent ID** and writes it into
+   `.env.local` automatically.
+7. `npm run dev` → open http://localhost:3000 and click **Talk to us**.
+
+Prefer not to touch a terminal at all? `docs/agent-prompt.md` walks through building
+the same agent by hand in the Retell dashboard, and contains the exact system prompt
+to paste. You still need to copy the resulting Agent ID into Vercel.
 
 This script:
 

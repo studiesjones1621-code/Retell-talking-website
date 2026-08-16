@@ -21,7 +21,21 @@ import { business, hasPhone, fullAddress, cityState } from "../lib/business.ts"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const ENV_PATH = resolve(ROOT, ".env.local")
+const EXAMPLE_ENV_PATH = resolve(ROOT, ".env.example")
 const RETELL_BASE = "https://api.retellai.com"
+
+/** Prints the generated system prompt and exits, without touching any API. */
+const PRINT_ONLY = process.argv.includes("--print-prompt")
+
+// This file imports lib/business.ts directly, which needs Node's type stripping.
+const [major, minor] = process.versions.node.split(".").map(Number)
+if (major < 22 || (major === 22 && minor < 6)) {
+  console.error(
+    `\n✗ Node ${process.versions.node} is too old — this script needs Node 22.6 or newer.\n` +
+      `  Install the current LTS from https://nodejs.org, then re-run.\n`,
+  )
+  process.exit(1)
+}
 
 /** Voice preference order — the first one Retell actually offers wins. */
 const PREFERRED_VOICES = [
@@ -68,14 +82,35 @@ function upsertEnv(updates) {
   writeFileSync(ENV_PATH, lines.join("\n").replace(/\n{3,}/g, "\n\n").trimEnd() + "\n")
 }
 
+// .env.local is git-ignored, so a fresh clone will not have one. Create it from
+// the committed template rather than failing with a bare "key is missing".
+if (!PRINT_ONLY && !existsSync(ENV_PATH) && existsSync(EXAMPLE_ENV_PATH)) {
+  writeFileSync(ENV_PATH, readFileSync(EXAMPLE_ENV_PATH, "utf8"))
+  console.error(`
+✗ No .env.local found, so one was just created from .env.example.
+
+  Open .env.local, paste in your keys, and run this again:
+
+    RETELL_API_KEY   — retellai.com → Dashboard → API Keys
+    CAL_API_KEY      — app.cal.com → Settings → Developer → API Keys
+                       (leave blank for lead-capture mode instead of booking)
+`)
+  process.exit(1)
+}
+
 const fileEnv = parseEnvFile(ENV_PATH)
 const env = { ...fileEnv, ...process.env }
 
 const RETELL_API_KEY = env.RETELL_API_KEY
 const CAL_API_KEY = (env.CAL_API_KEY ?? "").trim()
 
-if (!RETELL_API_KEY) {
-  console.error("✗ RETELL_API_KEY is missing. Add it to .env.local and re-run.")
+if (!PRINT_ONLY && !RETELL_API_KEY) {
+  console.error(`
+✗ RETELL_API_KEY is empty in .env.local.
+
+  Get it from retellai.com → Dashboard → API Keys, paste it after the "=",
+  save the file, and run this again.
+`)
   process.exit(1)
 }
 
@@ -202,7 +237,8 @@ You cannot access the calendar directly.
 3. Confirm the details back to them.
 4. Tell them the office will call to confirm shortly. Do not promise a specific confirmed slot.`
 
-  return `You are the virtual receptionist for ${business.name}, an ${business.type.toLowerCase()}${cityState ? ` serving ${cityState}` : ""}.
+  return `You are the virtual receptionist for ${business.name}${cityState ? `, serving ${cityState}` : ""}.
+${business.shortDescription}
 
 ## Who you are talking to
 Callers are ${business.audience}. They run HVAC companies — they are not homeowners with a broken furnace. If someone calls with an actual heating or cooling problem at their home, tell them warmly that you are the assistant for ${business.name}, which provides answering services *to* HVAC companies, and that they will want to call their own local contractor.
@@ -222,7 +258,6 @@ This is a phone conversation, so:
 - If you did not catch something, ask them to repeat it.
 
 ## About ${business.name}
-${business.shortDescription}
 Tagline: "${business.tagline}"
 ${locationLine}
 ${phoneLine}
@@ -273,6 +308,14 @@ async function pickVoice() {
 }
 
 async function main() {
+  // `--print-prompt` is the no-command-line escape hatch: it renders the exact
+  // system prompt so it can be pasted into the Retell dashboard by hand.
+  if (PRINT_ONLY) {
+    const bookingEnabled = Boolean(CAL_API_KEY) && CAL_API_KEY.toUpperCase() !== "SKIP"
+    console.log(buildPrompt({ bookingEnabled, eventTitle: "appointment" }))
+    return
+  }
+
   console.log(`\nProvisioning Retell agent for ${business.name}…\n`)
 
   console.log("→ Resolving Cal.com booking…")
