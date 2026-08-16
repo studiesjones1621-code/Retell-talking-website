@@ -83,6 +83,20 @@
   </div>
 
   <div class="card">
+    <label for="orb">Or try the hosted "orb" page in a frame</label>
+    <p class="hint">
+      Retell hosts a ready-made talk-to-agent page per agent. Embedding it in an
+      <code>&lt;iframe&gt;</code> is the least work of all — no public key, no
+      snippet. It only works if Retell allows their page to be framed, which this
+      button tells you: if the box below fills with the agent's orb, it works. If
+      it stays blank, framing is blocked and you need the script snippet above.
+    </p>
+    <textarea id="orb" style="min-height:60px" spellcheck="false" placeholder="https://agent.retellai.com/orb/agent_xxxx?token=xxxx"></textarea>
+    <div class="row"><button id="frame" class="ghost">Try in a frame</button></div>
+    <div id="frame-host" style="margin-top:1rem"></div>
+  </div>
+
+  <div class="card">
     <strong>Checks</strong>
     <ul class="checks" id="checks">
       <li>Nothing run yet.</li>
@@ -222,6 +236,31 @@
       const added = document.body.children.length;
       log("Elements in body now: " + added + ". If no launcher appeared, check the console (F12) and your allowed domains.");
     }, 4000);
+  });
+
+  // ---- iframe / orb test ----------------------------------------------
+  // Whether Retell permits framing cannot be detected reliably from script:
+  // X-Frame-Options and CSP frame-ancestors both block silently, and onload
+  // still fires. So render it visibly and let the eye be the test.
+  $("frame").addEventListener("click", () => {
+    const url = $("orb").value.trim();
+    const host = $("frame-host");
+    host.innerHTML = "";
+
+    if (!url) { log("Paste your orb URL first."); return; }
+    if (!/^https:\/\//i.test(url)) { log("That does not look like an https URL."); return; }
+
+    const frame = document.createElement("iframe");
+    frame.src = url;
+    frame.allow = "microphone; autoplay";
+    frame.style.cssText =
+      "width:100%;height:420px;border:1px solid var(--line);border-radius:10px;background:#0d1626";
+    frame.onload = () => log("Frame reported load. If the box is blank, framing is blocked — use the script snippet instead.");
+    frame.onerror = () => log("Frame failed to load.");
+
+    host.appendChild(frame);
+    log("Framing " + url.split("?")[0] + " …");
+    log("  → Filled with the orb = it works. Blank after a few seconds = blocked.");
   });
 
   $("clear").addEventListener("click", () => location.reload());
