@@ -39,7 +39,30 @@ Open **http://localhost:3000**.
 
 ---
 
-## 3. Provision the voice agent
+## 3. Create the voice agent
+
+### The easy way — one button, no terminal
+
+1. Deploy to Vercel first (section 6 below). When you add the environment
+   variables, include **`SETUP_SECRET`** and make up any random word for it —
+   `hvac-setup-2026` is fine. It just stops strangers from using this page.
+2. Once deployed, visit **`https://your-site.vercel.app/setup?key=hvac-setup-2026`**
+   (swap in whatever word you chose).
+3. The page confirms it can see your Retell and Cal.com keys. Click
+   **Create my agent**.
+4. Done. Go to your home page and click **Talk to us** — it works immediately.
+   Nothing to copy, nothing to paste, no redeploy.
+
+The page tells you which mode you got: real Cal.com booking, or lead capture.
+
+Running it again updates the same agent rather than creating a second one.
+
+> If `SETUP_SECRET` is not set, `/setup` returns 404 — the page simply does not
+> exist. That is deliberate: a live site should never expose an unprotected
+> button that creates things on your Retell account. Once your agent is working,
+> you can delete `SETUP_SECRET` from Vercel to switch the page off for good.
+
+### The terminal way
 
 **Step by step, from a fresh clone:**
 
@@ -148,13 +171,16 @@ Steps:
 1. Push this branch to GitHub (already done).
 2. Go to **[vercel.com/new](https://vercel.com/new)** and sign in with GitHub.
 3. Click **Import** next to the `retell-talking-website` repository.
-4. Under **Environment Variables**, add each of these (values are in your local
-   `.env.local`):
-   - `RETELL_API_KEY`
-   - `NEXT_PUBLIC_RETELL_AGENT_ID`
-   - `CAL_API_KEY`
-   - `NEXT_PUBLIC_RETELL_PUBLIC_KEY`
-   - `RETELL_LLM_ID`
+4. Under **Environment Variables**, add:
+   - `RETELL_API_KEY` — your Retell private key
+   - `CAL_API_KEY` — your Cal.com key (skip for lead-capture mode)
+   - `SETUP_SECRET` — any random word you invent, for the `/setup` page
+   - `NEXT_PUBLIC_RETELL_PUBLIC_KEY` — only if you switch to the official widget
+
+   You do **not** need `NEXT_PUBLIC_RETELL_AGENT_ID`. If it is absent, the site
+   looks up the agent this project created on your Retell account, which is what
+   lets the `/setup` page work without a redeploy. Setting it explicitly is
+   slightly faster and still supported.
 5. Leave the framework preset as **Next.js** and click **Deploy**.
 6. When it finishes, open **Settings → Domains** and add `ondutyagent.com`, then
    update the DNS records Vercel shows you at your registrar.

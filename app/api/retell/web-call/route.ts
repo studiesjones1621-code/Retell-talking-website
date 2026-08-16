@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server"
 
+import { findExistingAgent } from "@/lib/provision"
+
 /**
  * Mints a short-lived Retell web-call access token.
  *
@@ -10,17 +12,37 @@ import { NextResponse } from "next/server"
 export const runtime = "nodejs"
 export const dynamic = "force-dynamic"
 
+/** Cached across requests in a warm instance so discovery costs one lookup. */
+let discoveredAgentId: string | null = null
+
+/**
+ * Prefers the configured agent ID, but falls back to looking up the agent this
+ * project created. That fallback is what lets the /setup page work end to end:
+ * the agent starts answering immediately, with no environment variable to paste
+ * and no redeploy.
+ */
+async function resolveAgentId(apiKey: string): Promise<string | null> {
+  const configured = process.env.NEXT_PUBLIC_RETELL_AGENT_ID
+  if (configured) return configured
+
+  if (discoveredAgentId) return discoveredAgentId
+
+  discoveredAgentId = await findExistingAgent(apiKey)
+  return discoveredAgentId
+}
+
 export async function POST() {
   const apiKey = process.env.RETELL_API_KEY
-  const agentId = process.env.NEXT_PUBLIC_RETELL_AGENT_ID
+  const agentId = apiKey ? await resolveAgentId(apiKey) : null
 
   // Setup gaps are a developer problem, so the detail goes to the server log and
   // the visitor gets a message that makes sense to them. This matters because the
   // site can legitimately be deployed before `npm run provision:retell` has run.
   if (!apiKey || !agentId) {
     console.error(
-      `Retell not configured: missing ${!apiKey ? "RETELL_API_KEY" : "NEXT_PUBLIC_RETELL_AGENT_ID"}.` +
-        " Run `npm run provision:retell`, then set the value in your hosting environment.",
+      !apiKey
+        ? "Retell not configured: RETELL_API_KEY is missing from the environment."
+        : "Retell not configured: no agent found. Visit /setup to create one, or run `npm run provision:retell`.",
     )
     return NextResponse.json(
       {
