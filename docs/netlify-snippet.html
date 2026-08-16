@@ -11,79 +11,169 @@
   Self-contained: no libraries, no build step, no API keys on the page.
   Every class is prefixed `oda-` so it cannot collide with your site's CSS.
 
-  TO CHANGE THE AGENT: edit ORB_URL below.
+  ALL THE KNOBS ARE IN THE :root BLOCK BELOW — colour, size, corner, position.
+  To change the agent, edit ORB_URL near the bottom.
 -->
 
 <style>
-  .oda-root {
-    position: fixed; right: 20px; bottom: 20px; z-index: 2147483000;
-    display: flex; flex-direction: column; align-items: flex-end; gap: 12px;
-    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  :root {
+    /* ---- tweak these ------------------------------------------------- */
+    --oda-accent:    #14b8a6;   /* main button colour                     */
+    --oda-accent-2:  #0d9488;   /* darker end of the button gradient      */
+    --oda-ink:       #ffffff;   /* text/icon on the button                */
+    --oda-panel:     #111827;   /* chat panel background                  */
+    --oda-panel-2:   #1f2937;   /* panel header                           */
+    --oda-bubble-bg: #1e2a3d;   /* speech bubble background               */
+    --oda-bubble-fg: #ffffff;   /* speech bubble text                     */
+    --oda-side:      24px;      /* distance from the right edge           */
+    --oda-bottom:    24px;      /* distance from the bottom edge          */
+    /* ------------------------------------------------------------------ */
   }
+
+  .oda-root {
+    position: fixed; right: var(--oda-side); bottom: var(--oda-bottom);
+    z-index: 2147483000; display: flex; flex-direction: column; align-items: flex-end;
+    gap: 14px; font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+
+  /* ---------- launcher ---------- */
+  .oda-launch {
+    position: relative; display: inline-flex; align-items: center; gap: 11px;
+    padding: 0 26px 0 20px; height: 60px; cursor: pointer; border: 0;
+    border-radius: 999px; font-size: 16px; font-weight: 650; letter-spacing: -0.01em;
+    color: var(--oda-ink);
+    background: linear-gradient(140deg, var(--oda-accent), var(--oda-accent-2));
+    box-shadow:
+      0 1px 1px rgba(0,0,0,.04),
+      0 8px 20px -6px color-mix(in srgb, var(--oda-accent) 55%, transparent),
+      0 18px 44px -12px color-mix(in srgb, var(--oda-accent) 45%, transparent);
+    transition: transform .22s cubic-bezier(.34,1.56,.64,1), box-shadow .22s ease;
+    animation: oda-enter .5s cubic-bezier(.34,1.56,.64,1) both;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .oda-launch:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow:
+      0 1px 1px rgba(0,0,0,.04),
+      0 12px 26px -6px color-mix(in srgb, var(--oda-accent) 65%, transparent),
+      0 26px 56px -14px color-mix(in srgb, var(--oda-accent) 55%, transparent);
+  }
+  .oda-launch:active { transform: translateY(-1px) scale(.99); }
+  .oda-launch:focus-visible { outline: 3px solid var(--oda-ink); outline-offset: 3px; }
+
+  /* soft ring that breathes outward — kept small so it never clips the viewport */
+  .oda-launch::before {
+    content: ""; position: absolute; inset: 0; border-radius: inherit;
+    background: var(--oda-accent); z-index: -1;
+    animation: oda-ring 3s cubic-bezier(0,0,.2,1) infinite;
+  }
+
+  /* glassy disc behind the mic glyph */
+  .oda-ico {
+    display: grid; place-items: center; width: 36px; height: 36px; flex: none;
+    border-radius: 50%; background: rgba(255,255,255,.18);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.25);
+  }
+  .oda-ico svg { width: 19px; height: 19px; display: block; }
+
+  @keyframes oda-enter {
+    from { opacity: 0; transform: translateY(18px) scale(.9); }
+  }
+  @keyframes oda-ring {
+    0%   { opacity: .5; transform: scale(1); }
+    70%, 100% { opacity: 0; transform: scale(1.3); }
+  }
+
+  /* ---------- speech bubble ---------- */
+  .oda-bubble {
+    position: relative; max-width: 268px; padding: 14px 18px; cursor: pointer;
+    text-align: left; font-size: 14.5px; font-weight: 550; line-height: 1.45;
+    color: var(--oda-bubble-fg); background: var(--oda-bubble-bg);
+    border: 0; border-radius: 18px 18px 6px 18px;
+    box-shadow:
+      0 10px 30px -8px rgba(0,0,0,.45),
+      0 2px 8px rgba(0,0,0,.15),
+      inset 0 0 0 1px rgba(255,255,255,.09);
+    animation: oda-pop .35s cubic-bezier(.34,1.56,.64,1) both;
+  }
+  .oda-bubble small {
+    display: block; margin-top: 5px; font-size: 12.5px; font-weight: 500;
+    color: var(--oda-accent);
+  }
+  /* little tail pointing down at the launcher */
+  .oda-bubble::after {
+    content: ""; position: absolute; right: 20px; bottom: -6px;
+    width: 14px; height: 14px; background: var(--oda-bubble-bg);
+    border-radius: 0 0 4px 0; transform: rotate(45deg);
+  }
+  @keyframes oda-pop {
+    from { opacity: 0; transform: translateY(12px) scale(.94); }
+  }
+
+  .oda-dismiss {
+    display: grid; place-items: center; width: 26px; height: 26px; margin-right: 10px;
+    border-radius: 50%; cursor: pointer; font-size: 15px; line-height: 1;
+    color: rgba(255,255,255,.7); background: rgba(17,24,39,.75);
+    border: 1px solid rgba(255,255,255,.15); backdrop-filter: blur(6px);
+    transition: color .15s ease, background .15s ease;
+  }
+  .oda-dismiss:hover { color: #fff; background: rgba(17,24,39,.95); }
+  .oda-row { display: flex; align-items: center; }
+
+  /* ---------- panel ---------- */
   .oda-panel {
-    width: min(380px, calc(100vw - 40px)); height: min(560px, calc(100vh - 140px));
-    background: #172033; border: 1px solid rgba(255,255,255,.12);
-    border-radius: 16px; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,.45);
-    display: none; flex-direction: column;
+    width: min(390px, calc(100vw - 32px));
+    height: min(580px, calc(100vh - 130px));
+    display: none; flex-direction: column; overflow: hidden;
+    background: var(--oda-panel); border: 1px solid rgba(255,255,255,.1);
+    border-radius: 20px; box-shadow: 0 30px 70px -12px rgba(0,0,0,.5);
+    animation: oda-pop .3s cubic-bezier(.34,1.56,.64,1) both;
   }
   .oda-panel.oda-open { display: flex; }
   .oda-head {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 12px 16px; background: #1e293f; border-bottom: 1px solid rgba(255,255,255,.1);
+    display: flex; align-items: center; gap: 12px; padding: 14px 16px;
+    background: var(--oda-panel-2); border-bottom: 1px solid rgba(255,255,255,.08);
   }
-  .oda-title { color: #fff; font-size: 14px; font-weight: 600; }
-  .oda-sub { color: rgba(255,255,255,.5); font-size: 11px; }
+  .oda-dot {
+    width: 9px; height: 9px; border-radius: 50%; flex: none;
+    background: var(--oda-accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--oda-accent) 25%, transparent);
+  }
+  .oda-title { color: #fff; font-size: 14.5px; font-weight: 650; line-height: 1.2; }
+  .oda-sub { color: rgba(255,255,255,.5); font-size: 11.5px; margin-top: 2px; }
   .oda-x {
-    background: none; border: 0; color: rgba(255,255,255,.6); cursor: pointer;
-    font-size: 22px; line-height: 1; padding: 2px 6px; border-radius: 6px;
+    margin-left: auto; background: none; border: 0; cursor: pointer;
+    color: rgba(255,255,255,.55); font-size: 24px; line-height: 1;
+    padding: 2px 7px; border-radius: 8px; transition: background .15s, color .15s;
   }
   .oda-x:hover { background: rgba(255,255,255,.1); color: #fff; }
-  .oda-frame { flex: 1; width: 100%; border: 0; background: #0d1626; }
+  .oda-frame { flex: 1; width: 100%; border: 0; background: var(--oda-panel); }
   .oda-fallback {
-    display: none; padding: 20px; color: rgba(255,255,255,.75); font-size: 14px; line-height: 1.6;
+    display: none; padding: 22px; font-size: 14px; line-height: 1.6;
+    color: rgba(255,255,255,.75);
   }
-  .oda-fallback a { color: #22d3c5; }
+  .oda-fallback a { color: var(--oda-accent); font-weight: 600; }
 
-  .oda-bubble {
-    max-width: 260px; padding: 12px 16px; cursor: pointer; text-align: left;
-    background: #172033; color: #fff; font-size: 14px; font-weight: 500;
-    border: 1px solid rgba(34,211,197,.35); border-radius: 16px 16px 4px 16px;
-    box-shadow: 0 12px 32px rgba(0,0,0,.4);
-    animation: oda-in .25s ease-out;
+  /* ---------- small screens ---------- */
+  @media (max-width: 480px) {
+    .oda-launch { height: 56px; font-size: 15px; padding: 0 22px 0 17px; }
+    .oda-bubble { max-width: 220px; font-size: 14px; }
   }
-  .oda-bubble small { display: block; margin-top: 4px; color: #22d3c5; font-weight: 400; font-size: 12px; }
-  @keyframes oda-in { from { opacity: 0; transform: translateY(8px) scale(.96); } }
 
-  .oda-launch {
-    display: inline-flex; align-items: center; gap: 10px; cursor: pointer;
-    background: #22d3c5; color: #06231f; font-size: 15px; font-weight: 700;
-    border: 0; border-radius: 999px; padding: 14px 22px;
-    box-shadow: 0 12px 30px rgba(34,211,197,.3);
-    transition: transform .15s ease;
-  }
-  .oda-launch:hover { transform: scale(1.05); }
-  .oda-launch svg { width: 20px; height: 20px; }
-
-  .oda-dismiss {
-    background: rgba(23,32,51,.85); border: 1px solid rgba(255,255,255,.12);
-    color: rgba(255,255,255,.55); cursor: pointer; border-radius: 999px;
-    width: 28px; height: 28px; font-size: 15px; line-height: 1; margin-right: 8px;
-  }
-  .oda-row { display: flex; align-items: center; }
   @media (prefers-reduced-motion: reduce) {
-    .oda-bubble { animation: none; }
-    .oda-launch { transition: none; }
+    .oda-launch, .oda-bubble, .oda-panel { animation: none; transition: none; }
+    .oda-launch::before { animation: none; opacity: 0; }
   }
 </style>
 
 <div class="oda-root" id="oda-root">
   <div class="oda-panel" id="oda-panel">
     <div class="oda-head">
+      <span class="oda-dot"></span>
       <div>
         <div class="oda-title">OnDuty Agent</div>
         <div class="oda-sub">Answers instantly, 24/7</div>
       </div>
-      <button class="oda-x" id="oda-close" aria-label="Close">&times;</button>
+      <button class="oda-x" id="oda-close" aria-label="Close assistant">&times;</button>
     </div>
     <iframe class="oda-frame" id="oda-frame" allow="microphone; autoplay" title="Talk to OnDuty Agent"></iframe>
     <div class="oda-fallback" id="oda-fallback">
@@ -94,13 +184,16 @@
 
   <div class="oda-row">
     <button class="oda-dismiss" id="oda-dismiss" aria-label="Dismiss" style="display:none">&times;</button>
-    <button class="oda-launch" id="oda-launch">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
-        <path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/>
-      </svg>
-      Talk to us
+    <button class="oda-launch" id="oda-launch" aria-label="Talk to our assistant">
+      <span class="oda-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="9" y="2" width="6" height="11" rx="3"/>
+          <path d="M5 11a7 7 0 0 0 14 0"/>
+          <line x1="12" y1="18" x2="12" y2="22"/>
+        </svg>
+      </span>
+      <span>Talk to us</span>
     </button>
   </div>
 </div>
@@ -146,7 +239,7 @@
     bubble.innerHTML = MESSAGES[idx].replace(/</g, "&lt;") + "<small>Tap to talk &rarr;</small>";
     bubble.addEventListener("click", open);
     root.insertBefore(bubble, row);
-    dismiss.style.display = "block";
+    dismiss.style.display = "grid";
     timer = setTimeout(hideBubble, VISIBLE);
   }
 
@@ -185,6 +278,9 @@
   launch.addEventListener("click", open);
   closeBtn.addEventListener("click", close);
   dismiss.addEventListener("click", stopRotation);
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && panel.classList.contains("oda-open")) close();
+  });
 
   timer = setTimeout(showBubble, FIRST_DELAY);
 })();
