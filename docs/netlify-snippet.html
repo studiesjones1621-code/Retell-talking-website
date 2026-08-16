@@ -1,0 +1,191 @@
+<!--
+  OnDuty Agent — floating voice launcher
+  ======================================
+  Paste this WHOLE block (including the <style> and <script> tags) into:
+    Netlify → Site configuration → Build & deploy → Post processing
+           → Snippet injection → Add snippet → Before </body>
+
+  Pasting a bare URL there just prints the URL on your page — it has to be
+  markup, which this is.
+
+  Self-contained: no libraries, no build step, no API keys on the page.
+  Every class is prefixed `oda-` so it cannot collide with your site's CSS.
+
+  TO CHANGE THE AGENT: edit ORB_URL below.
+-->
+
+<style>
+  .oda-root {
+    position: fixed; right: 20px; bottom: 20px; z-index: 2147483000;
+    display: flex; flex-direction: column; align-items: flex-end; gap: 12px;
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  .oda-panel {
+    width: min(380px, calc(100vw - 40px)); height: min(560px, calc(100vh - 140px));
+    background: #172033; border: 1px solid rgba(255,255,255,.12);
+    border-radius: 16px; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,.45);
+    display: none; flex-direction: column;
+  }
+  .oda-panel.oda-open { display: flex; }
+  .oda-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 16px; background: #1e293f; border-bottom: 1px solid rgba(255,255,255,.1);
+  }
+  .oda-title { color: #fff; font-size: 14px; font-weight: 600; }
+  .oda-sub { color: rgba(255,255,255,.5); font-size: 11px; }
+  .oda-x {
+    background: none; border: 0; color: rgba(255,255,255,.6); cursor: pointer;
+    font-size: 22px; line-height: 1; padding: 2px 6px; border-radius: 6px;
+  }
+  .oda-x:hover { background: rgba(255,255,255,.1); color: #fff; }
+  .oda-frame { flex: 1; width: 100%; border: 0; background: #0d1626; }
+  .oda-fallback {
+    display: none; padding: 20px; color: rgba(255,255,255,.75); font-size: 14px; line-height: 1.6;
+  }
+  .oda-fallback a { color: #22d3c5; }
+
+  .oda-bubble {
+    max-width: 260px; padding: 12px 16px; cursor: pointer; text-align: left;
+    background: #172033; color: #fff; font-size: 14px; font-weight: 500;
+    border: 1px solid rgba(34,211,197,.35); border-radius: 16px 16px 4px 16px;
+    box-shadow: 0 12px 32px rgba(0,0,0,.4);
+    animation: oda-in .25s ease-out;
+  }
+  .oda-bubble small { display: block; margin-top: 4px; color: #22d3c5; font-weight: 400; font-size: 12px; }
+  @keyframes oda-in { from { opacity: 0; transform: translateY(8px) scale(.96); } }
+
+  .oda-launch {
+    display: inline-flex; align-items: center; gap: 10px; cursor: pointer;
+    background: #22d3c5; color: #06231f; font-size: 15px; font-weight: 700;
+    border: 0; border-radius: 999px; padding: 14px 22px;
+    box-shadow: 0 12px 30px rgba(34,211,197,.3);
+    transition: transform .15s ease;
+  }
+  .oda-launch:hover { transform: scale(1.05); }
+  .oda-launch svg { width: 20px; height: 20px; }
+
+  .oda-dismiss {
+    background: rgba(23,32,51,.85); border: 1px solid rgba(255,255,255,.12);
+    color: rgba(255,255,255,.55); cursor: pointer; border-radius: 999px;
+    width: 28px; height: 28px; font-size: 15px; line-height: 1; margin-right: 8px;
+  }
+  .oda-row { display: flex; align-items: center; }
+  @media (prefers-reduced-motion: reduce) {
+    .oda-bubble { animation: none; }
+    .oda-launch { transition: none; }
+  }
+</style>
+
+<div class="oda-root" id="oda-root">
+  <div class="oda-panel" id="oda-panel">
+    <div class="oda-head">
+      <div>
+        <div class="oda-title">OnDuty Agent</div>
+        <div class="oda-sub">Answers instantly, 24/7</div>
+      </div>
+      <button class="oda-x" id="oda-close" aria-label="Close">&times;</button>
+    </div>
+    <iframe class="oda-frame" id="oda-frame" allow="microphone; autoplay" title="Talk to OnDuty Agent"></iframe>
+    <div class="oda-fallback" id="oda-fallback">
+      The assistant could not open in this window.
+      <a id="oda-newtab" href="#" target="_blank" rel="noopener">Open it in a new tab instead →</a>
+    </div>
+  </div>
+
+  <div class="oda-row">
+    <button class="oda-dismiss" id="oda-dismiss" aria-label="Dismiss" style="display:none">&times;</button>
+    <button class="oda-launch" id="oda-launch">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+        <path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/>
+      </svg>
+      Talk to us
+    </button>
+  </div>
+</div>
+
+<script>
+(function () {
+  // ---- EDIT THIS LINE to change the agent -----------------------------
+  var ORB_URL = "https://agent.retellai.com/orb/agent_62ce46e1c550774a94d48952dd?token=b01d29269efb9c8aa4aa021ef30e3ba9";
+  // ---------------------------------------------------------------------
+
+  var MESSAGES = [
+    "Would you like to book a demo?",
+    "Have a question? Just ask.",
+    "Talk to our AI agent — no hold music."
+  ];
+  var FIRST_DELAY = 5000, VISIBLE = 5000, HIDDEN = 5000;
+
+  var root = document.getElementById("oda-root");
+  var panel = document.getElementById("oda-panel");
+  var frame = document.getElementById("oda-frame");
+  var launch = document.getElementById("oda-launch");
+  var dismiss = document.getElementById("oda-dismiss");
+  var closeBtn = document.getElementById("oda-close");
+  var fallback = document.getElementById("oda-fallback");
+  var newTab = document.getElementById("oda-newtab");
+  var row = launch.parentNode;
+
+  var bubble = null, timer = null, idx = 0, engaged = false, loaded = false;
+
+  newTab.href = ORB_URL;
+
+  function clearBubble() {
+    if (bubble && bubble.parentNode) bubble.parentNode.removeChild(bubble);
+    bubble = null;
+    dismiss.style.display = "none";
+  }
+
+  function showBubble() {
+    if (engaged) return;
+    clearBubble();
+    bubble = document.createElement("button");
+    bubble.className = "oda-bubble";
+    bubble.innerHTML = MESSAGES[idx].replace(/</g, "&lt;") + "<small>Tap to talk &rarr;</small>";
+    bubble.addEventListener("click", open);
+    root.insertBefore(bubble, row);
+    dismiss.style.display = "block";
+    timer = setTimeout(hideBubble, VISIBLE);
+  }
+
+  function hideBubble() {
+    if (engaged) return;
+    clearBubble();
+    idx = (idx + 1) % MESSAGES.length;
+    timer = setTimeout(showBubble, HIDDEN);
+  }
+
+  function stopRotation() {
+    engaged = true;
+    clearTimeout(timer);
+    clearBubble();
+  }
+
+  function open() {
+    stopRotation();
+    if (!loaded) { frame.src = ORB_URL; loaded = true; }
+    panel.classList.add("oda-open");
+    launch.style.display = "none";
+    // If the orb is blocked from being framed the panel stays empty, so offer
+    // a new-tab escape hatch rather than leaving a blank box.
+    setTimeout(function () {
+      try {
+        if (!frame.contentWindow || frame.clientHeight === 0) fallback.style.display = "block";
+      } catch (e) { /* cross-origin is expected and fine */ }
+    }, 6000);
+  }
+
+  function close() {
+    panel.classList.remove("oda-open");
+    launch.style.display = "inline-flex";
+  }
+
+  launch.addEventListener("click", open);
+  closeBtn.addEventListener("click", close);
+  dismiss.addEventListener("click", stopRotation);
+
+  timer = setTimeout(showBubble, FIRST_DELAY);
+})();
+</script>
