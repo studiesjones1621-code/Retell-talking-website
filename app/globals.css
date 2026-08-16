@@ -1,0 +1,162 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* OnDuty Agent — midnight navy base, signal-teal accent */
+  --background: oklch(0.16 0.028 258);
+  --foreground: oklch(0.97 0.005 250);
+  --card: oklch(0.21 0.03 258);
+  --card-foreground: oklch(0.97 0.005 250);
+  --popover: oklch(0.19 0.03 258);
+  --popover-foreground: oklch(0.97 0.005 250);
+  --primary: oklch(0.78 0.14 189);
+  --primary-foreground: oklch(0.17 0.03 258);
+  --secondary: oklch(0.26 0.032 258);
+  --secondary-foreground: oklch(0.97 0.005 250);
+  --muted: oklch(0.26 0.032 258);
+  --muted-foreground: oklch(0.71 0.02 250);
+  --accent: oklch(0.78 0.14 189);
+  --accent-foreground: oklch(0.17 0.03 258);
+  --destructive: oklch(0.62 0.21 25);
+  --destructive-foreground: oklch(0.97 0.005 250);
+  --border: oklch(0.31 0.032 258);
+  --input: oklch(0.31 0.032 258);
+  --ring: oklch(0.78 0.14 189);
+  --chart-1: oklch(0.78 0.14 189);
+  --chart-2: oklch(0.7 0.13 210);
+  --chart-3: oklch(0.82 0.13 90);
+  --chart-4: oklch(0.65 0.14 170);
+  --chart-5: oklch(0.6 0.12 240);
+  --radius: 0.75rem;
+
+  /* Brand ramp used directly by sections */
+  --brand-950: oklch(0.13 0.026 258);
+  --brand-900: oklch(0.16 0.028 258);
+  --brand-800: oklch(0.21 0.03 258);
+  --brand-700: oklch(0.27 0.032 258);
+  --brand-accent: oklch(0.78 0.14 189);
+  --brand-accent-soft: oklch(0.85 0.1 189);
+  --brand-gold: oklch(0.83 0.13 84);
+
+  --sidebar: oklch(0.19 0.03 258);
+  --sidebar-foreground: oklch(0.97 0.005 250);
+  --sidebar-primary: oklch(0.78 0.14 189);
+  --sidebar-primary-foreground: oklch(0.17 0.03 258);
+  --sidebar-accent: oklch(0.26 0.032 258);
+  --sidebar-accent-foreground: oklch(0.97 0.005 250);
+  --sidebar-border: oklch(0.31 0.032 258);
+  --sidebar-ring: oklch(0.78 0.14 189);
+}
+
+
+@theme inline {
+  --font-sans: var(--font-host-grotesk), 'Host Grotesk', sans-serif;
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-brand-950: var(--brand-950);
+  --color-brand-900: var(--brand-900);
+  --color-brand-800: var(--brand-800);
+  --color-brand-700: var(--brand-700);
+  --color-brand-accent: var(--brand-accent);
+  --color-brand-accent-soft: var(--brand-accent-soft);
+  --color-brand-gold: var(--brand-gold);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--brand-900);
+  }
+  ::selection {
+    background: var(--brand-accent);
+    color: var(--brand-950);
+  }
+}
+
+@layer utilities {
+  .brand-grid {
+    background-image:
+      linear-gradient(to right, color-mix(in oklab, var(--brand-accent) 7%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in oklab, var(--brand-accent) 7%, transparent) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+  .brand-glow {
+    background: radial-gradient(
+      60% 60% at 50% 0%,
+      color-mix(in oklab, var(--brand-accent) 22%, transparent) 0%,
+      transparent 70%
+    );
+  }
+}
+
+@layer utilities {
+  /* Attention pulse for the voice launcher. Kept to a small scale so the ring
+     never overflows the viewport edge the way Tailwind's 2x `animate-ping` does. */
+  @keyframes brand-pulse-ring {
+    0% {
+      transform: scale(1);
+      opacity: 0.45;
+    }
+    70%,
+    100% {
+      transform: scale(1.28);
+      opacity: 0;
+    }
+  }
+  .animate-pulse-ring {
+    animation: brand-pulse-ring 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-pulse-ring {
+      animation: none;
+    }
+  }
+}
