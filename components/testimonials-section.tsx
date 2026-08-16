@@ -11,7 +11,7 @@ export function TestimonialsSection() {
             Reviews
           </p>
           <h2 className="mt-4 text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-            What owners tell us.
+            What contractors tell us.
           </h2>
         </div>
 

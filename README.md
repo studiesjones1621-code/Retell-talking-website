@@ -123,6 +123,18 @@ This was not run during the build: the supplied Gemini key returned HTTP 429
 
 ## 6. Deploy free on Vercel (no command line)
 
+**You can deploy before the agent exists.** The agent ID is just an environment
+variable, so the order is up to you:
+
+- *Deploy first:* the site goes live and the launcher politely says the assistant
+  is finishing setup. Later, run `npm run provision:retell`, paste the resulting
+  `NEXT_PUBLIC_RETELL_AGENT_ID` into Vercel, and redeploy — the voice agent turns on
+  with no code changes.
+- *Provision first:* run the script, confirm the agent works locally, then deploy
+  once with everything already set.
+
+Steps:
+
 1. Push this branch to GitHub (already done).
 2. Go to **[vercel.com/new](https://vercel.com/new)** and sign in with GitHub.
 3. Click **Import** next to the `retell-talking-website` repository.
@@ -136,6 +148,10 @@ This was not run during the build: the supplied Gemini key returned HTTP 429
 5. Leave the framework preset as **Next.js** and click **Deploy**.
 6. When it finishes, open **Settings → Domains** and add `ondutyagent.com`, then
    update the DNS records Vercel shows you at your registrar.
+
+> Whenever you add or change an environment variable in Vercel, redeploy for it to
+> take effect: **Deployments → ⋯ on the latest one → Redeploy**. Saving the variable
+> alone does not update the running site.
 
 To deploy the `claude/ondutyagent-talking-website-ev0b71` branch as production,
 set it as the Production Branch under **Settings → Git**, or merge it into `main`.

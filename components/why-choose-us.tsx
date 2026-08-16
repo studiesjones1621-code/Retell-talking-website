@@ -16,10 +16,10 @@ export function WhyChooseUs() {
               Why {business.name}
             </p>
             <h2 className="mt-4 text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-              Missed calls are lost customers.
+              A missed call is a lost job.
             </h2>
             <p className="mt-5 text-lg leading-relaxed text-white/60">
-              Most businesses miss a third of their calls. We answer all of them.
+              Most contractors miss a third of their calls. We answer all of them.
             </p>
           </div>
 

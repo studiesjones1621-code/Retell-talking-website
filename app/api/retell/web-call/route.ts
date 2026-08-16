@@ -14,19 +14,18 @@ export async function POST() {
   const apiKey = process.env.RETELL_API_KEY
   const agentId = process.env.NEXT_PUBLIC_RETELL_AGENT_ID
 
-  if (!apiKey) {
-    return NextResponse.json(
-      { error: "not_configured", message: "RETELL_API_KEY is not set on the server." },
-      { status: 503 },
+  // Setup gaps are a developer problem, so the detail goes to the server log and
+  // the visitor gets a message that makes sense to them. This matters because the
+  // site can legitimately be deployed before `npm run provision:retell` has run.
+  if (!apiKey || !agentId) {
+    console.error(
+      `Retell not configured: missing ${!apiKey ? "RETELL_API_KEY" : "NEXT_PUBLIC_RETELL_AGENT_ID"}.` +
+        " Run `npm run provision:retell`, then set the value in your hosting environment.",
     )
-  }
-
-  if (!agentId) {
     return NextResponse.json(
       {
         error: "not_configured",
-        message:
-          "NEXT_PUBLIC_RETELL_AGENT_ID is not set. Run `npm run provision:retell` to create the agent.",
+        message: "Our assistant is finishing setup and isn't taking calls just yet.",
       },
       { status: 503 },
     )

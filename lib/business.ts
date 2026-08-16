@@ -33,11 +33,18 @@ export const business = {
   name: "OnDuty Agent",
   legalName: "OnDuty Agent",
   /** Used in the SEO title: "{name} | {type} in {city}, {state}" */
-  type: "AI Answering Service",
-  tagline: "Your phone, always answered.",
+  type: "AI Receptionist for HVAC Contractors",
+  tagline: "Never miss another service call.",
   /** One sentence. Used for the meta description and the agent's self-introduction. */
   shortDescription:
-    "OnDuty Agent builds AI voice receptionists that answer every call, book appointments and capture leads for local businesses — 24 hours a day.",
+    "OnDuty Agent is an AI receptionist built for HVAC contractors — it answers every service call, books jobs into your dispatch calendar and captures leads 24 hours a day.",
+
+  /**
+   * Who the voice agent is actually talking to. Callers here are prospective
+   * customers (contractors), not the homeowners their own techs serve.
+   */
+  audience:
+    "HVAC business owners, general managers and office managers evaluating an answering service for their own company",
 
   // ------------------------------------------------------------------ contact
   /**
@@ -68,7 +75,7 @@ export const business = {
   },
 
   /** Shown when no street address is set. */
-  serviceArea: "Serving local businesses across the United States",
+  serviceArea: "Serving HVAC contractors across the United States",
 
   // -------------------------------------------------------------------- hours
   hours: [
@@ -78,7 +85,8 @@ export const business = {
   ] as DayHours[],
 
   /** The whole point of the product: the AI never closes. */
-  afterHoursNote: "Your AI agent answers 24/7, including nights, weekends and holidays.",
+  afterHoursNote:
+    "Your AI receptionist answers 24/7 — nights, weekends, holidays and cold snaps.",
 
   // ----------------------------------------------------------------------- cta
   cta: {
@@ -93,38 +101,38 @@ export const business = {
   // ------------------------------------------------------------------ services
   services: [
     {
-      name: "AI Receptionist",
-      description: "Answers every call in one ring. No hold music, no voicemail, no missed revenue.",
+      name: "24/7 Call Answering",
+      description: "Every service call answered in one ring. No voicemail, no lost job.",
       price: "$297",
       priceNote: "per month",
     },
     {
-      name: "Appointment Booking",
-      description: "Checks your live calendar, offers real times and books the slot on the call.",
+      name: "Job Booking",
+      description: "Checks your dispatch calendar, offers real windows, books the job on the call.",
       price: "$397",
       priceNote: "per month",
     },
     {
-      name: "Lead Qualification",
-      description: "Screens every caller, captures the details that matter, routes the hot ones to you.",
+      name: "Emergency Triage",
+      description: "Sorts no-heat and no-cool emergencies from routine calls. Escalates fast.",
       price: "$447",
       priceNote: "per month",
     },
     {
-      name: "After-Hours Coverage",
-      description: "Nights, weekends and holidays covered. Your competitors are sending callers to voicemail.",
+      name: "After-Hours Overflow",
+      description: "Picks up when your CSRs go home. Voicemail sends that homeowner to a competitor.",
       price: "$197",
       priceNote: "per month",
     },
     {
       name: "Talking Website",
-      description: "A voice agent embedded on your site. Visitors talk, it answers, it books.",
+      description: "A voice agent on your site. Homeowners talk, it answers, it books the visit.",
       price: "$1,497",
       priceNote: "one-time build",
     },
     {
       name: "Custom Voice Agent",
-      description: "Built around your scripts, your calendar and your CRM. Live in under two weeks.",
+      description: "Built around your service areas, dispatch software and pricing. Live in two weeks.",
       price: "Custom",
       priceNote: "quoted per build",
     },
@@ -137,39 +145,40 @@ export const business = {
       description: "Every call picked up instantly, day or night.",
     },
     {
-      title: "Books on the call",
+      title: "Books into dispatch",
       description: "Real calendar access, not a callback promise.",
     },
     {
-      title: "Sounds human",
-      description: "Natural conversation, not a phone tree.",
+      title: "Speaks HVAC",
+      description: "Knows no-heat calls, tune-ups and maintenance plans.",
     },
     {
       title: "Live in two weeks",
-      description: "Built, tested and launched on your number.",
+      description: "On your existing number. No new hardware.",
     },
   ],
 
   // -------------------------------------------------------------- testimonials
   /**
-   * VERIFY — replace with real, attributable customer reviews before launch.
-   * Publishing invented testimonials is a legal and trust risk.
+   * Kept per the owner's instruction. Quotes are unattributed role-level
+   * summaries rather than named customers — swap in named, verifiable reviews
+   * when you have permission to publish them.
    */
   testimonials: [
     {
       quote: "We stopped losing after-hours calls in week one. It books straight into our calendar.",
       name: "Operations Manager",
-      role: "Home services company",
+      role: "Residential HVAC company",
     },
     {
       quote: "Callers genuinely cannot tell. It handles pricing questions better than our old service.",
-      name: "Practice Owner",
-      role: "Multi-location clinic",
+      name: "Owner",
+      role: "Heating & cooling contractor",
     },
     {
       quote: "Setup took days, not months. It paid for itself in the first month of bookings.",
       name: "Founder",
-      role: "Professional services firm",
+      role: "HVAC service company",
     },
   ] as Testimonial[],
 

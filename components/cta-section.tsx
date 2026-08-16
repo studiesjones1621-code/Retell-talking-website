@@ -8,7 +8,7 @@ export function CtaSection() {
 
       <div className="relative mx-auto max-w-3xl px-6 text-center md:px-12">
         <h2 className="text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-          Stop missing calls today.
+          Stop missing jobs today.
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-lg text-white/60">
           Talk to the agent on this page — it is the same one that will answer your phone.

@@ -9,10 +9,10 @@ export function ServicesSection() {
             Services
           </p>
           <h2 className="mt-4 text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-            Every call handled.
+            Every service call handled.
           </h2>
           <p className="mt-4 text-lg text-white/60">
-            Pick the coverage you need. Cancel any time.
+            Pick the coverage your shop needs. Cancel any time.
           </p>
         </div>
 

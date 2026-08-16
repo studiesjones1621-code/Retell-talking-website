@@ -6,7 +6,7 @@ import { business } from "@/lib/business"
 import { CtaButtons } from "@/components/cta-buttons"
 import { SiteHeader } from "@/components/site-header"
 
-const PROOF_POINTS = ["Answers in one ring", "Books on the call", "Live in two weeks"]
+const PROOF_POINTS = ["Answers in one ring", "Books into dispatch", "Live in two weeks"]
 
 export function Hero() {
   return (
@@ -48,8 +48,8 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.16 }}
             className="mt-6 max-w-xl text-lg leading-relaxed text-white/65"
           >
-            An AI receptionist that answers every call, books the appointment and never
-            takes a night off.
+            An AI receptionist for HVAC contractors. It answers every service call,
+            books the job, and never sleeps through a 2 a.m. no-heat.
           </motion.p>
 
           <motion.div
