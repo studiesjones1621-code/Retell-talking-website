@@ -4,6 +4,7 @@ import { Hero } from "@/components/hero"
 import { HoursLocation } from "@/components/hours-location"
 import { ServicesSection } from "@/components/services-section"
 import { TestimonialsSection } from "@/components/testimonials-section"
+import { VideoSection } from "@/components/video-section"
 import { WhyChooseUs } from "@/components/why-choose-us"
 import { VoiceAgentProvider } from "@/components/voice-agent/voice-agent-provider"
 import { VoiceAgentWidget } from "@/components/voice-agent/voice-agent-widget"
@@ -13,6 +14,7 @@ export default function Home() {
     <VoiceAgentProvider>
       <main>
         <Hero />
+        <VideoSection />
         <ServicesSection />
         <WhyChooseUs />
         <TestimonialsSection />

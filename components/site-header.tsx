@@ -7,6 +7,7 @@ import { useState } from "react"
 import { business, hasPhone, phoneHref, phoneLabel } from "@/lib/business"
 
 const NAV_LINKS = [
+  { label: "Watch", href: "#video" },
   { label: "Services", href: "#services" },
   { label: "Why Us", href: "#why-us" },
   { label: "Reviews", href: "#reviews" },

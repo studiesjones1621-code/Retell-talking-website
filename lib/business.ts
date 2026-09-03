@@ -182,6 +182,22 @@ export const business = {
     },
   ] as Testimonial[],
 
+  // --------------------------------------------------------------------- video
+  /**
+   * Demo video shown on the home page. Paste any normal YouTube link —
+   * `youtu.be/ID`, `watch?v=ID`, `/embed/ID` and `/shorts/ID` all parse.
+   * Set `url` to an empty string and the whole section disappears.
+   */
+  video: {
+    url: "https://youtu.be/oTjgAVIQ1nE",
+    eyebrow: "See it work",
+    heading: "Watch the agent take a call.",
+    subheading:
+      "Two minutes. A real conversation, start to booked job — no slides, no script reading.",
+    /** Shown to screen readers and used as the iframe title. */
+    title: "OnDuty Agent demo",
+  },
+
   // --------------------------------------------------------------------- brand
   social: {
     linkedin: "",
@@ -220,4 +236,37 @@ export const mapEmbedSrc = fullAddress
 
 export const mapLinkHref = fullAddress
   ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fullAddress)}`
+  : null
+
+// -------------------------------------------------------------------- video
+
+/**
+ * Pull the 11-character video id out of any common YouTube URL shape:
+ * `youtu.be/ID`, `watch?v=ID`, `/embed/ID`, `/live/ID`, `/shorts/ID`.
+ * Returns null for anything it does not recognise, which switches the
+ * video section off rather than rendering a broken player.
+ */
+export function youTubeId(url: string): string | null {
+  const match = url
+    .trim()
+    .match(/(?:youtu\.be\/|(?:v|vi|e|embed|shorts|live)\/|[?&]v=)([A-Za-z0-9_-]{11})/)
+  return match ? match[1] : null
+}
+
+export const videoId = youTubeId(business.video.url)
+export const hasVideo = videoId !== null
+
+/** youtube-nocookie keeps the tracking cookie off the page until playback starts. */
+export const videoEmbedSrc = videoId
+  ? `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`
+  : null
+
+export const videoWatchHref = videoId ? `https://www.youtube.com/watch?v=${videoId}` : null
+
+/** maxres is not generated for every upload — the component falls back to hq on error. */
+export const videoThumbnails = videoId
+  ? {
+      max: `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`,
+      fallback: `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
+    }
   : null
