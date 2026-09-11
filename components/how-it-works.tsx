@@ -1,9 +1,9 @@
 const STEPS = [
   {
     step: "01",
-    title: "We learn your business",
+    title: "We know your business",
     description:
-      "One call. Your services, your pricing, how you want calls handled, what counts as an emergency and who it should reach.",
+      "We have built this for your industry before, so nobody starts from a blank page. One call covers what is specific to you: your services, your pricing, what counts as an emergency and who it reaches.",
   },
   {
     step: "02",
