@@ -2,13 +2,22 @@
 
 import { motion } from "framer-motion"
 
-import { business } from "@/lib/business"
 import { CtaButtons } from "@/components/cta-buttons"
 import { SiteHeader } from "@/components/site-header"
 
-const PROOF_POINTS = ["Answers in one ring", "Books into dispatch", "Live in two weeks"]
-
-export function Hero() {
+export function Hero({
+  eyebrow,
+  headline,
+  subcopy,
+  proofPoints,
+  badge = "On duty 24/7",
+}: {
+  eyebrow?: string
+  headline: string
+  subcopy: string
+  proofPoints: readonly string[]
+  badge?: string
+}) {
   return (
     <section className="relative flex min-h-[100svh] w-full flex-col overflow-hidden bg-brand-950">
       {/* Layered gradient + grid treatment stands in for a hero photograph. */}
@@ -30,7 +39,7 @@ export function Hero() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-accent opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-brand-accent" />
             </span>
-            On duty 24/7
+            {eyebrow ?? badge}
           </motion.span>
 
           <motion.h1
@@ -39,7 +48,7 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.08 }}
             className="mt-6 text-balance text-5xl font-semibold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl"
           >
-            {business.tagline}
+            {headline}
           </motion.h1>
 
           <motion.p
@@ -48,8 +57,7 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.16 }}
             className="mt-6 max-w-xl text-lg leading-relaxed text-white/65"
           >
-            An AI receptionist for HVAC contractors. It answers every service call,
-            books the job, and never sleeps through a 2 a.m. no-heat.
+            {subcopy}
           </motion.p>
 
           <motion.div
@@ -66,7 +74,7 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.36 }}
             className="mt-12 flex flex-wrap gap-x-8 gap-y-3 text-sm text-white/45"
           >
-            {PROOF_POINTS.map((point) => (
+            {proofPoints.map((point) => (
               <li key={point} className="flex items-center gap-2">
                 <span className="h-1 w-1 rounded-full bg-brand-accent" />
                 {point}

@@ -23,13 +23,12 @@ export const metadata: Metadata = {
   title: seoTitle,
   description: business.shortDescription,
   keywords: [
-    "HVAC answering service",
-    "AI receptionist for HVAC",
-    "HVAC call answering",
-    "HVAC virtual receptionist",
-    "after hours HVAC answering service",
-    "HVAC dispatch booking",
+    "AI receptionist",
+    "AI answering service",
     "24/7 call answering",
+    "virtual receptionist for small business",
+    "appointment booking service",
+    "missed call solution",
     cityState,
   ].filter(Boolean),
   openGraph: {

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server"
 
 import { findExistingAgent } from "@/lib/provision"
+import { getNiche } from "@/lib/niches"
 
 /**
  * Mints a short-lived Retell web-call access token.
@@ -37,19 +38,50 @@ async function resolveAgentId(apiKey: string): Promise<string | null> {
   return discoveredAgentId
 }
 
-async function createWebCall(apiKey: string, agentId: string) {
+/**
+ * Dynamic variables are substituted into the agent prompt at call time, which
+ * is how one agent serves five industry pages. The prompt is written to work
+ * with an empty `niche` too (it just asks), so a rejected or ignored variable
+ * degrades to a slightly more generic call rather than a broken one.
+ */
+function dynamicVariables(niche: string | null) {
+  const matched = niche ? getNiche(niche) : undefined
+  if (!matched) return { niche: "" }
+
+  return {
+    niche: matched.name,
+    niche_slug: matched.slug,
+    niche_audience: matched.audience,
+  }
+}
+
+async function createWebCall(apiKey: string, agentId: string, niche: string | null) {
   return fetch("https://api.retellai.com/v2/create-web-call", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${apiKey}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ agent_id: agentId }),
+    body: JSON.stringify({
+      agent_id: agentId,
+      retell_llm_dynamic_variables: dynamicVariables(niche),
+    }),
   })
 }
 
-export async function POST() {
+/** The body is optional — an older cached client may post nothing at all. */
+async function readNiche(request: Request): Promise<string | null> {
+  try {
+    const body = (await request.json()) as { niche?: unknown }
+    return typeof body?.niche === "string" ? body.niche : null
+  } catch {
+    return null
+  }
+}
+
+export async function POST(request: Request) {
   const apiKey = process.env.RETELL_API_KEY
+  const niche = await readNiche(request)
   const agentId = apiKey ? await resolveAgentId(apiKey) : null
 
   // Setup gaps are a developer problem, so the detail goes to the server log and
@@ -71,7 +103,7 @@ export async function POST() {
   }
 
   try {
-    let res = await createWebCall(apiKey, agentId)
+    let res = await createWebCall(apiKey, agentId, niche)
 
     // A configured ID can be stale or mistyped — an easy mistake when pasting
     // variables into a hosting dashboard. Rather than leaving the site broken,
@@ -82,7 +114,7 @@ export async function POST() {
       )
       const fallbackId = await findExistingAgent(apiKey)
       if (fallbackId && fallbackId !== agentId) {
-        res = await createWebCall(apiKey, fallbackId)
+        res = await createWebCall(apiKey, fallbackId, niche)
       }
     }
 

@@ -1,0 +1,486 @@
+/**
+ * Per-industry content. One entry here produces one fully-formed landing page
+ * at `/{slug}`, its SEO tags, and the audience section of the voice agent's
+ * prompt. Adding a sixth niche means adding an object to this array — no new
+ * component, route or template.
+ *
+ * Two things deliberately differ from a generic landing-page config:
+ *
+ *  - `agentGuardrail` exists because the people calling *us* run these
+ *    businesses; they are not the end customer. Without a per-niche guardrail
+ *    the agent cheerfully tries to book a root canal for someone who called to
+ *    ask about buying a receptionist.
+ *
+ *  - `compliance` drives what the page is allowed to claim. See the note on
+ *    `ComplianceProfile` before editing that copy.
+ */
+
+import type { Testimonial, VideoConfig } from "./business"
+
+/**
+ * What the site may truthfully say about handling regulated information.
+ *
+ * The current posture across every regulated niche is `no-phi`: the agent takes
+ * a name, a callback number and a general reason for the call, then books or
+ * routes. It does not collect symptoms, diagnoses, treatment history or
+ * insurance identifiers, so no protected health information enters the system
+ * and no Business Associate Agreement is required to operate this way.
+ *
+ * >>> UPGRADE POINT <<<
+ * Do NOT change these strings to say "HIPAA compliant" until a signed BAA is in
+ * place with the telephony/LLM vendor AND your own safeguards are documented.
+ * Claiming compliance without one is the kind of thing that fails a procurement
+ * review and voids insurance. When the BAA exists, add a `hipaa` profile here
+ * and switch the affected niches over — the copy is centralised for exactly
+ * that reason.
+ */
+export type ComplianceProfile = {
+  /** Short label on the trust strip. */
+  label: string
+  /** One or two sentences. Must describe what is TRUE today. */
+  detail: string
+}
+
+const NO_PHI: ComplianceProfile = {
+  label: "Built to keep PHI out of the conversation",
+  detail:
+    "The agent takes a name, a callback number and a general reason for the call, then books or routes. It never asks for symptoms, diagnoses, treatment history or insurance identifiers — so the sensitive part of the conversation happens with your staff, where it belongs.",
+}
+
+const NO_LEGAL_ADVICE: ComplianceProfile = {
+  label: "Never gives legal advice",
+  detail:
+    "The agent captures who is calling, what kind of matter it is and when they are free — then books the consultation. It does not answer substantive legal questions, quote outcomes or discuss case merits, so nothing it says can be mistaken for advice from your firm.",
+}
+
+export type NicheService = {
+  name: string
+  description: string
+}
+
+export type Niche = {
+  /** URL segment. Keep it keyword-shaped — it is the page's strongest SEO signal. */
+  slug: string
+  /** Full audience name, e.g. "HVAC Contractors". Used in headings and schema. */
+  name: string
+  /** Short form for nav and chips, e.g. "HVAC". */
+  shortName: string
+
+  // ------------------------------------------------------------------- hero
+  eyebrow: string
+  /** The h1. Make it about their pain, not your product. */
+  headline: string
+  subcopy: string
+  proofPoints: [string, string, string]
+
+  // ---------------------------------------------------------------- sections
+  servicesHeading: string
+  servicesSubcopy: string
+  services: NicheService[]
+
+  differentiatorsHeading: string
+  differentiatorsSubcopy: string
+  differentiators: { title: string; description: string }[]
+
+  ctaHeading: string
+  ctaSubcopy: string
+
+  /** Null until real, attributable reviews exist. Section hides itself when empty. */
+  testimonials: Testimonial[]
+
+  /** Null when no video has been shot for this niche — the section disappears. */
+  video: VideoConfig | null
+
+  /** Null for unregulated niches. Renders a trust strip when present. */
+  compliance: ComplianceProfile | null
+
+  // ------------------------------------------------------------- voice agent
+  /** Who the agent is talking to on this page. */
+  audience: string
+  /** Who the caller is NOT, and what to do if the wrong person calls. */
+  agentGuardrail: string
+
+  // -------------------------------------------------------------------- seo
+  metaTitle: string
+  metaDescription: string
+  keywords: string[]
+}
+
+export const niches: Niche[] = [
+  // ------------------------------------------------------------------- HVAC
+  {
+    slug: "hvac",
+    name: "HVAC Contractors",
+    shortName: "HVAC",
+    eyebrow: "For HVAC contractors",
+    headline: "A missed call is a lost job.",
+    subcopy:
+      "Your AI receptionist answers every service call in one ring, sorts the no-heat emergencies from the tune-ups, and books the job into dispatch — at 2 a.m. on a Sunday if that is when the furnace dies.",
+    proofPoints: ["Answers in one ring", "Books into dispatch", "Live in two weeks"],
+
+    servicesHeading: "Every service call handled.",
+    servicesSubcopy:
+      "Most contractors miss a third of their calls. Here is what stops happening once the agent is on.",
+    services: [
+      {
+        name: "24/7 Call Answering",
+        description:
+          "Every service call answered on the first ring. No voicemail, no hold music, no homeowner dialing the next contractor on the list.",
+      },
+      {
+        name: "Job Booking",
+        description:
+          "Checks your dispatch calendar, offers real arrival windows and books the job while the homeowner is still on the phone.",
+      },
+      {
+        name: "Emergency Triage",
+        description:
+          "Separates a no-heat call in January from a routine maintenance request, and escalates the ones that cannot wait until morning.",
+      },
+      {
+        name: "After-Hours Overflow",
+        description:
+          "Picks up the moment your CSRs go home. Every call that would have hit voicemail becomes a booked job instead.",
+      },
+    ],
+
+    differentiatorsHeading: "Built for how HVAC actually runs.",
+    differentiatorsSubcopy:
+      "Generic answering services take a message. This one does the job your front desk does.",
+    differentiators: [
+      { title: "Speaks HVAC", description: "Knows no-heat calls, tune-ups, SEER ratings and maintenance plans." },
+      { title: "Books into dispatch", description: "Real calendar access, not a callback promise." },
+      { title: "Handles the 2 a.m. call", description: "Peak season does not have office hours." },
+      { title: "Live in two weeks", description: "On your existing number. No new hardware." },
+    ],
+
+    ctaHeading: "Stop missing jobs today.",
+    ctaSubcopy:
+      "Talk to the agent on this page — it is the same one that would answer your phone.",
+
+    testimonials: [],
+
+    video: {
+      url: "https://youtu.be/oTjgAVIQ1nE",
+      eyebrow: "See it work",
+      heading: "Watch the agent take a call.",
+      subheading:
+        "A real conversation, start to booked job — no slides, no script reading.",
+      title: "OnDuty Agent — HVAC demo",
+    },
+
+    compliance: null,
+
+    audience:
+      "HVAC business owners, general managers and office managers evaluating an answering service for their own company",
+    agentGuardrail:
+      "Callers run HVAC companies — they are not homeowners with a broken furnace. If someone calls with an actual heating or cooling problem at their home, tell them warmly that you are the assistant for a company that provides answering services *to* HVAC contractors, and that they will want to call their own local contractor.",
+
+    metaTitle: "AI Receptionist for HVAC Contractors | 24/7 Call Answering & Job Booking",
+    metaDescription:
+      "An AI receptionist built for HVAC companies. Answers every service call in one ring, triages no-heat emergencies and books jobs into your dispatch calendar — 24/7.",
+    keywords: [
+      "HVAC answering service",
+      "AI receptionist for HVAC",
+      "HVAC call answering",
+      "HVAC virtual receptionist",
+      "after hours HVAC answering service",
+      "HVAC dispatch booking",
+    ],
+  },
+
+  // -------------------------------------------------------------- law firms
+  {
+    slug: "law-firms",
+    name: "Law Firms",
+    shortName: "Law Firms",
+    eyebrow: "For law firms",
+    headline: "The case goes to whoever answers.",
+    subcopy:
+      "Potential clients call three firms and retain the first one that picks up. Your AI receptionist answers every one of them, screens the matter, and books the consultation before your competitor's voicemail beeps.",
+    proofPoints: ["Answers every intake call", "Screens by practice area", "Books the consultation"],
+
+    servicesHeading: "Intake that never goes to voicemail.",
+    servicesSubcopy:
+      "The average firm misses a third of its intake calls. Each one was a signed matter somewhere else.",
+    services: [
+      {
+        name: "24/7 Intake",
+        description:
+          "Accident calls come in at night and on weekends. The agent answers all of them with the same patience as your best intake coordinator.",
+      },
+      {
+        name: "Matter Screening",
+        description:
+          "Qualifies by practice area, jurisdiction and timeline, so partners only see the calls that are actually worth their hour.",
+      },
+      {
+        name: "Consultation Booking",
+        description:
+          "Checks the attorney's calendar and books the consult on the call — while the caller is still motivated.",
+      },
+      {
+        name: "Conflict-Check Prep",
+        description:
+          "Captures opposing-party and matter details in a clean summary so your team can run the conflict check before the meeting.",
+      },
+    ],
+
+    differentiatorsHeading: "Careful about what it says.",
+    differentiatorsSubcopy:
+      "An intake line for a law firm has to be disciplined. This one is built that way on purpose.",
+    differentiators: [
+      { title: "Never gives legal advice", description: "It captures and books. It does not opine on your caller's matter." },
+      { title: "Screens before it books", description: "Wrong jurisdiction and wrong practice area get filtered out early." },
+      { title: "Calm with distressed callers", description: "People call lawyers on the worst day of their year." },
+      { title: "Clean intake summaries", description: "Every call arrives written up, not as a two-line message." },
+    ],
+
+    ctaHeading: "Stop losing cases to voicemail.",
+    ctaSubcopy:
+      "Talk to the agent on this page — it is the same one that would handle your intake.",
+
+    testimonials: [],
+    video: null,
+    compliance: NO_LEGAL_ADVICE,
+
+    audience:
+      "managing partners, attorneys and firm administrators evaluating an intake and answering service for their own firm",
+    agentGuardrail:
+      "Callers run or work at law firms — they are not people seeking a lawyer. If someone calls needing legal help, tell them warmly that you are the assistant for a company that builds intake services *for* law firms, and that they will want to contact a firm directly. Never give legal advice of any kind, to anyone, under any framing.",
+
+    metaTitle: "AI Receptionist for Law Firms | 24/7 Legal Intake & Consultation Booking",
+    metaDescription:
+      "An AI intake receptionist built for law firms. Answers every potential-client call, screens by practice area and jurisdiction, and books consultations 24/7. Never gives legal advice.",
+    keywords: [
+      "legal intake service",
+      "AI receptionist for law firms",
+      "law firm answering service",
+      "24/7 legal intake",
+      "attorney virtual receptionist",
+      "law firm call answering",
+    ],
+  },
+
+  // ----------------------------------------------------------------- dental
+  {
+    slug: "dental",
+    name: "Dental Practices",
+    shortName: "Dental",
+    eyebrow: "For dental practices",
+    headline: "Your front desk is already busy.",
+    subcopy:
+      "Every call that rings out while your team is chairside is a new patient who books somewhere else. Your AI receptionist answers all of them, fills the cancellation, and books the appointment straight into your schedule.",
+    proofPoints: ["Answers while you're chairside", "Fills cancellations", "Books 24/7"],
+
+    servicesHeading: "Every call answered, every chair filled.",
+    servicesSubcopy:
+      "Front desks miss calls for good reasons. The schedule does not care about the reason.",
+    services: [
+      {
+        name: "24/7 Appointment Booking",
+        description:
+          "Checks your practice-management schedule and books the appointment on the call, including evenings and weekends.",
+      },
+      {
+        name: "New Patient Capture",
+        description:
+          "Takes a name, a callback number and the reason for the visit, then books — the highest-value call your practice gets, never sent to voicemail.",
+      },
+      {
+        name: "Recall & Rescheduling",
+        description:
+          "Handles the reschedule calls that eat your front desk's morning, and offers the open slot a cancellation just created.",
+      },
+      {
+        name: "After-Hours Emergency Routing",
+        description:
+          "Recognises a dental emergency and follows your on-call protocol instead of leaving a message nobody hears until Monday.",
+      },
+    ],
+
+    differentiatorsHeading: "Designed around a busy operatory.",
+    differentiatorsSubcopy: "It does the front-desk job, without adding to the front desk's workload.",
+    differentiators: [
+      { title: "Never puts a patient on hold", description: "Every caller gets a person-shaped answer immediately." },
+      { title: "Books into your schedule", description: "Real availability, not a callback promise." },
+      { title: "Keeps PHI out of the call", description: "Takes the reason for the visit, not the medical history." },
+      { title: "Works past closing", description: "Most new-patient calls come in outside office hours." },
+    ],
+
+    ctaHeading: "Stop sending new patients to voicemail.",
+    ctaSubcopy: "Talk to the agent on this page — it is the same one that would answer your front desk.",
+
+    testimonials: [],
+    video: null,
+    compliance: NO_PHI,
+
+    audience:
+      "dentists, practice owners and office managers evaluating a receptionist service for their own practice",
+    agentGuardrail:
+      "Callers run dental practices — they are not patients with toothache. If someone calls needing dental treatment, tell them warmly that you are the assistant for a company that provides receptionist services *to* dental practices, and that they should contact their own dentist. Never collect or discuss any caller's medical or dental history.",
+
+    metaTitle: "AI Receptionist for Dental Practices | 24/7 Appointment Booking",
+    metaDescription:
+      "An AI receptionist built for dental practices. Answers every call while your team is chairside, fills cancellations and books new patients 24/7 — without collecting PHI.",
+    keywords: [
+      "dental answering service",
+      "AI receptionist for dentists",
+      "dental appointment booking service",
+      "dental office virtual receptionist",
+      "24/7 dental call answering",
+      "new patient phone calls dental",
+    ],
+  },
+
+  // ---------------------------------------------------------------- med spa
+  {
+    slug: "medspa",
+    name: "Med Spas",
+    shortName: "Med Spas",
+    eyebrow: "For med spas & aesthetic clinics",
+    headline: "They booked at 11 p.m. Someone had to answer.",
+    subcopy:
+      "Aesthetic enquiries arrive late, from a phone, on impulse — and go cold by morning. Your AI receptionist answers in that moment, talks them through your treatment menu, and books the consultation before the impulse fades.",
+    proofPoints: ["Answers the 11 p.m. enquiry", "Knows your treatment menu", "Books the consult"],
+
+    servicesHeading: "Catch the enquiry while it's warm.",
+    servicesSubcopy:
+      "Aesthetic demand is impulsive. A callback tomorrow is a booking you already lost.",
+    services: [
+      {
+        name: "Consultation Booking",
+        description:
+          "Books the consult directly into your calendar at the moment of interest, day or night.",
+      },
+      {
+        name: "Treatment Enquiries",
+        description:
+          "Answers questions about the treatments you offer, what is involved and what to expect — straight from your own service menu.",
+      },
+      {
+        name: "After-Hours Capture",
+        description:
+          "The majority of aesthetic enquiries land outside business hours. The agent treats 11 p.m. exactly like 11 a.m.",
+      },
+      {
+        name: "Rebooking & No-Show Recovery",
+        description:
+          "Follows up on cancellations and gaps so an empty room becomes a filled appointment.",
+      },
+    ],
+
+    differentiatorsHeading: "It sounds like your clinic.",
+    differentiatorsSubcopy: "Aesthetics is a discretionary purchase. The first impression is the sale.",
+    differentiators: [
+      { title: "Warm, never pushy", description: "Discretionary purchases do not respond to pressure." },
+      { title: "Knows your menu", description: "Trained on the treatments you actually offer." },
+      { title: "Discreet by design", description: "Takes the enquiry without prying into medical detail." },
+      { title: "Always awake", description: "Impulse enquiries do not wait for opening time." },
+    ],
+
+    ctaHeading: "Stop losing the late-night enquiry.",
+    ctaSubcopy: "Talk to the agent on this page — it is the same one that would answer your clinic.",
+
+    testimonials: [],
+    video: null,
+    compliance: NO_PHI,
+
+    audience:
+      "med spa owners, clinic directors and practice managers evaluating a receptionist service for their own clinic",
+    agentGuardrail:
+      "Callers run med spas or aesthetic clinics — they are not clients seeking treatment. If someone calls asking about getting a treatment themselves, tell them warmly that you are the assistant for a company that provides receptionist services *to* clinics, and that they should contact a clinic directly. Never give medical or cosmetic treatment advice.",
+
+    metaTitle: "AI Receptionist for Med Spas | 24/7 Consultation Booking",
+    metaDescription:
+      "An AI receptionist built for med spas and aesthetic clinics. Answers late-night enquiries, explains your treatment menu and books consultations 24/7.",
+    keywords: [
+      "med spa answering service",
+      "AI receptionist for med spa",
+      "aesthetic clinic booking service",
+      "medspa virtual receptionist",
+      "24/7 med spa call answering",
+      "medical spa lead capture",
+    ],
+  },
+
+  // ----------------------------------------------------- behavioral health
+  {
+    slug: "behavioral-health",
+    name: "Behavioral Health Providers",
+    shortName: "Behavioral Health",
+    eyebrow: "For behavioral health providers",
+    headline: "Someone finally worked up the courage to call.",
+    subcopy:
+      "It can take months for a person to make that call, and one voicemail to undo it. Your AI receptionist answers with patience every time, recognises a crisis when it hears one, and books the intake appointment.",
+    proofPoints: ["Answers with patience", "Crisis-aware routing", "Books the intake"],
+
+    servicesHeading: "Answer the call that took months to make.",
+    servicesSubcopy:
+      "In behavioral health, the cost of a missed call is not a lost booking. It is a person who does not try again.",
+    services: [
+      {
+        name: "24/7 Intake Line",
+        description:
+          "Answers every call with the same unhurried patience, at any hour, without the caller ever hitting a queue.",
+      },
+      {
+        name: "Crisis Recognition & Routing",
+        description:
+          "Trained to notice crisis language and respond immediately — surfacing the 988 Suicide & Crisis Lifeline and following your on-call protocol rather than continuing a booking flow.",
+      },
+      {
+        name: "New Client Scheduling",
+        description:
+          "Books the intake appointment into your calendar while the person is still on the phone and still ready.",
+      },
+      {
+        name: "Availability & Insurance Questions",
+        description:
+          "Answers general questions about whether you are accepting clients and which plans you take — without collecting clinical detail.",
+      },
+    ],
+
+    differentiatorsHeading: "Built with the stakes in mind.",
+    differentiatorsSubcopy:
+      "This is the niche where a generic answering bot is genuinely the wrong tool. Here is what is different.",
+    differentiators: [
+      { title: "Crisis protocol first", description: "Distress signals stop the booking flow and surface 988 immediately." },
+      { title: "Never rushes a caller", description: "No hold music, no queue, no scripted pace." },
+      { title: "Minimal collection", description: "A name, a number and a reason. Clinical detail waits for a clinician." },
+      { title: "Warm handoff to on-call", description: "Follows your escalation protocol, not a generic one." },
+    ],
+
+    ctaHeading: "Make sure the next call gets answered.",
+    ctaSubcopy: "Talk to the agent on this page — it is the same one that would answer your line.",
+
+    testimonials: [],
+    video: null,
+    compliance: NO_PHI,
+
+    audience:
+      "practice owners, clinical directors and office managers at behavioral health practices evaluating an intake service for their own practice",
+    agentGuardrail:
+      "Callers run behavioral health practices — they are not people seeking care. If someone calls seeking treatment for themselves, respond with warmth, tell them you are the assistant for a company that provides intake services *to* practices, and point them toward their provider or the 988 Suicide & Crisis Lifeline. Never provide clinical advice, never attempt to counsel, and never collect clinical detail.",
+
+    metaTitle: "AI Receptionist for Behavioral Health | 24/7 Intake & Crisis-Aware Routing",
+    metaDescription:
+      "An AI intake receptionist built for behavioral health providers. Answers every call with patience, recognises crisis language and routes to 988, and books intake appointments 24/7.",
+    keywords: [
+      "behavioral health answering service",
+      "mental health practice intake service",
+      "AI receptionist for therapists",
+      "therapy practice virtual receptionist",
+      "24/7 behavioral health intake",
+      "counseling practice call answering",
+    ],
+  },
+]
+
+// ------------------------------------------------------------------ helpers
+
+export const nicheSlugs = niches.map((n) => n.slug)
+
+export function getNiche(slug: string): Niche | undefined {
+  return niches.find((n) => n.slug === slug)
+}

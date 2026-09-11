@@ -1,4 +1,5 @@
 import { Mail, MapPin, Phone, Radio } from "lucide-react"
+import Link from "next/link"
 
 import {
   business,
@@ -9,11 +10,16 @@ import {
   phoneLabel,
 } from "@/lib/business"
 
-const NAV_LINKS = [
-  { label: "Services", href: "#services" },
-  { label: "Why Us", href: "#why-us" },
-  { label: "Reviews", href: "#reviews" },
-  { label: "Hours", href: "#hours" },
+import { niches } from "@/lib/niches"
+
+/**
+ * Real page links rather than on-page anchors: every page linking to every
+ * niche page is the internal linking that helps them rank, and the old anchors
+ * pointed at sections that no longer exist on every page.
+ */
+const PAGE_LINKS = [
+  ...niches.map((niche) => ({ label: niche.name, href: `/${niche.slug}` })),
+  { label: "Marketing & SEO", href: "/marketing" },
 ]
 
 export function Footer() {
@@ -32,16 +38,16 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold text-white">Explore</h3>
+            <h3 className="text-sm font-semibold text-white">What we do</h3>
             <ul className="mt-4 space-y-2.5">
-              {NAV_LINKS.map((link) => (
+              {PAGE_LINKS.map((link) => (
                 <li key={link.href}>
-                  <a
+                  <Link
                     href={link.href}
                     className="text-sm text-white/50 transition-colors hover:text-brand-accent"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

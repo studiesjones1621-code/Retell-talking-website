@@ -110,7 +110,18 @@ async function ensureMicrophone(): Promise<CallError | null> {
   }
 }
 
-export function VoiceAgentProvider({ children }: { children: ReactNode }) {
+/**
+ * `niche` tells the server which industry page this call started from, so the
+ * agent can greet and qualify in the right context. It is optional — the agent
+ * prompt handles an unknown niche by simply asking.
+ */
+export function VoiceAgentProvider({
+  children,
+  niche,
+}: {
+  children: ReactNode
+  niche?: string
+}) {
   const [isOpen, setIsOpen] = useState(false)
   const [status, setStatus] = useState<CallStatus>("idle")
   const [error, setError] = useState<CallError | null>(null)
@@ -147,7 +158,11 @@ export function VoiceAgentProvider({ children }: { children: ReactNode }) {
     setStatus("connecting")
 
     try {
-      const res = await fetch("/api/retell/web-call", { method: "POST" })
+      const res = await fetch("/api/retell/web-call", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ niche }),
+      })
       const data = (await res.json()) as { accessToken?: string; message?: string }
 
       if (!res.ok || !data.accessToken) {
@@ -198,7 +213,7 @@ export function VoiceAgentProvider({ children }: { children: ReactNode }) {
       })
       setStatus("error")
     }
-  }, [])
+  }, [niche])
 
   const toggleMute = useCallback(() => {
     const client = clientRef.current

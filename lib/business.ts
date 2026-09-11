@@ -1,21 +1,16 @@
 /**
- * SINGLE SOURCE OF TRUTH for every business fact on this site and in the voice agent.
+ * SHARED brand facts — the things that are true no matter which niche page a
+ * visitor lands on.
  *
- * Everything the site renders — and the prompt the Retell agent is provisioned with
- * (see scripts/provision-retell.mjs) — reads from this file. Change it here, and the
- * page copy, the SEO tags, the click-to-call links and the AI agent all update together.
+ * Anything that changes per industry (headline, services, proof, video, and the
+ * voice agent's audience) lives in `lib/niches.ts` instead. Marketing-side
+ * services live in `lib/marketing.ts`. Between the three, every word on the site
+ * and every line of the agent prompt is editable without touching a component.
  *
- * Fields tagged `VERIFY` below could not be confirmed from a live source at build time
- * (ondutyagent.com was unreachable from the build environment). Confirm them before
- * going to production.
+ * Fields tagged `VERIFY` could not be confirmed from a live source at build time
+ * (ondutyagent.com was unreachable from the build environment). Confirm them
+ * before going to production.
  */
-
-export type Service = {
-  name: string
-  description: string
-  price: string
-  priceNote?: string
-}
 
 export type Testimonial = {
   quote: string
@@ -32,25 +27,18 @@ export const business = {
   // ---------------------------------------------------------------- identity
   name: "OnDuty Agent",
   legalName: "OnDuty Agent",
-  /** Used in the SEO title: "{name} | {type} in {city}, {state}" */
-  type: "AI Receptionist for HVAC Contractors",
-  tagline: "Never miss another service call.",
-  /** One sentence. Used for the meta description and the agent's self-introduction. */
+  /** Used in the SEO title on the general pages. Niche pages set their own. */
+  type: "AI Receptionist & Growth Partner for Local Business",
+  tagline: "Never miss another call.",
+  /** One sentence. Meta description for the general pages. */
   shortDescription:
-    "OnDuty Agent is an AI receptionist built for HVAC contractors — it answers every service call, books jobs into your dispatch calendar and captures leads 24 hours a day.",
-
-  /**
-   * Who the voice agent is actually talking to. Callers here are prospective
-   * customers (contractors), not the homeowners their own techs serve.
-   */
-  audience:
-    "HVAC business owners, general managers and office managers evaluating an answering service for their own company",
+    "OnDuty Agent builds AI receptionists that answer every call, book the appointment and capture the lead 24 hours a day — for HVAC companies, law firms, dental practices, med spas and behavioral health providers.",
 
   // ------------------------------------------------------------------ contact
   /**
-   * VERIFY — set the real business phone number in full E.164 form.
-   * Leave as an empty string and every click-to-call CTA gracefully falls back
-   * to "Talk to our AI agent" instead of rendering a dead tel: link.
+   * VERIFY — set the real business phone in full E.164 form.
+   * Left empty, every click-to-call CTA falls back to the voice agent rather
+   * than rendering a dead tel: link.
    */
   phone: "",
   /** Human-readable version of `phone`, e.g. "(555) 123-4567". Optional. */
@@ -58,11 +46,19 @@ export const business = {
   email: "hello@ondutyagent.com", // VERIFY
   website: "https://ondutyagent.com",
 
+  /**
+   * VERIFY — public booking link (Cal.com, Calendly, etc). Every CTA on the site
+   * is a book-a-call CTA, so this is the single highest-value field in this file.
+   * While it is empty the buttons fall back to opening the voice agent, which
+   * can still book — but a direct link converts better for visitors who would
+   * rather not talk.
+   */
+  bookingUrl: "",
+
   // ----------------------------------------------------------------- location
   /**
-   * VERIFY — fill in to enable the embedded Google Map and the LocalBusiness
-   * address schema. While `street` is empty the Location card renders as a
-   * "we work with businesses anywhere" service-area block instead of a map,
+   * VERIFY — fill in to enable the embedded map and the address schema. While
+   * `street` is empty the Location card renders a service-area block instead,
    * so nothing ever points at the wrong pin.
    */
   address: {
@@ -75,7 +71,7 @@ export const business = {
   },
 
   /** Shown when no street address is set. */
-  serviceArea: "Serving HVAC contractors across the United States",
+  serviceArea: "Working with practices and contractors across the United States",
 
   // -------------------------------------------------------------------- hours
   hours: [
@@ -86,116 +82,14 @@ export const business = {
 
   /** The whole point of the product: the AI never closes. */
   afterHoursNote:
-    "Your AI receptionist answers 24/7 — nights, weekends, holidays and cold snaps.",
+    "Those are our office hours. Your AI receptionist keeps its own — 24/7, nights, weekends and holidays included.",
 
   // ----------------------------------------------------------------------- cta
   cta: {
-    /** Primary conversion action for this business. */
     label: "Book a Demo",
     /** Spoken by the voice agent and shown in the rotating launcher bubble. */
     spoken: "Would you like to book a demo?",
-    /** What actually happens on the call. */
     goal: "book a 15-minute demo call",
-  },
-
-  // ------------------------------------------------------------------ services
-  services: [
-    {
-      name: "24/7 Call Answering",
-      description: "Every service call answered in one ring. No voicemail, no lost job.",
-      price: "$297",
-      priceNote: "per month",
-    },
-    {
-      name: "Job Booking",
-      description: "Checks your dispatch calendar, offers real windows, books the job on the call.",
-      price: "$397",
-      priceNote: "per month",
-    },
-    {
-      name: "Emergency Triage",
-      description: "Sorts no-heat and no-cool emergencies from routine calls. Escalates fast.",
-      price: "$447",
-      priceNote: "per month",
-    },
-    {
-      name: "After-Hours Overflow",
-      description: "Picks up when your CSRs go home. Voicemail sends that homeowner to a competitor.",
-      price: "$197",
-      priceNote: "per month",
-    },
-    {
-      name: "Talking Website",
-      description: "A voice agent on your site. Homeowners talk, it answers, it books the visit.",
-      price: "$1,497",
-      priceNote: "one-time build",
-    },
-    {
-      name: "Custom Voice Agent",
-      description: "Built around your service areas, dispatch software and pricing. Live in two weeks.",
-      price: "Custom",
-      priceNote: "quoted per build",
-    },
-  ] as Service[],
-
-  // ------------------------------------------------------------- why choose us
-  differentiators: [
-    {
-      title: "Answers in one ring",
-      description: "Every call picked up instantly, day or night.",
-    },
-    {
-      title: "Books into dispatch",
-      description: "Real calendar access, not a callback promise.",
-    },
-    {
-      title: "Speaks HVAC",
-      description: "Knows no-heat calls, tune-ups and maintenance plans.",
-    },
-    {
-      title: "Live in two weeks",
-      description: "On your existing number. No new hardware.",
-    },
-  ],
-
-  // -------------------------------------------------------------- testimonials
-  /**
-   * Kept per the owner's instruction. Quotes are unattributed role-level
-   * summaries rather than named customers — swap in named, verifiable reviews
-   * when you have permission to publish them.
-   */
-  testimonials: [
-    {
-      quote: "We stopped losing after-hours calls in week one. It books straight into our calendar.",
-      name: "Operations Manager",
-      role: "Residential HVAC company",
-    },
-    {
-      quote: "Callers genuinely cannot tell. It handles pricing questions better than our old service.",
-      name: "Owner",
-      role: "Heating & cooling contractor",
-    },
-    {
-      quote: "Setup took days, not months. It paid for itself in the first month of bookings.",
-      name: "Founder",
-      role: "HVAC service company",
-    },
-  ] as Testimonial[],
-
-  // --------------------------------------------------------------------- video
-  /**
-   * Demo video shown on the home page. Paste any normal YouTube link —
-   * `youtu.be/ID`, `watch?v=ID`, `/embed/ID` and `/shorts/ID` all parse.
-   * Set `url` to an empty string and the whole section disappears.
-   */
-  video: {
-    url: "https://youtu.be/oTjgAVIQ1nE",
-    eyebrow: "See it work",
-    heading: "Watch the agent take a call.",
-    subheading:
-      "Two minutes. A real conversation, start to booked job — no slides, no script reading.",
-    /** Shown to screen readers and used as the iframe title. */
-    title: "OnDuty Agent demo",
   },
 
   // --------------------------------------------------------------------- brand
@@ -211,11 +105,11 @@ export const business = {
 
 export const hasPhone = business.phone.trim().length > 0
 export const hasAddress = business.address.street.trim().length > 0
+export const hasBooking = business.bookingUrl.trim().length > 0
 
 export const phoneHref = hasPhone ? `tel:${business.phone.replace(/[^\d+]/g, "")}` : null
 
-export const phoneLabel =
-  business.phoneDisplay.trim() || business.phone.trim() || null
+export const phoneLabel = business.phoneDisplay.trim() || business.phone.trim() || null
 
 export const cityState = [business.address.city, business.address.state]
   .filter(Boolean)
@@ -225,7 +119,7 @@ export const fullAddress = hasAddress
   ? [business.address.street, cityState, business.address.zip].filter(Boolean).join(", ")
   : null
 
-/** "OnDuty Agent | AI Answering Service in Austin, TX" — falls back cleanly with no city. */
+/** Falls back cleanly with no city configured. */
 export const seoTitle = cityState
   ? `${business.name} | ${business.type} in ${cityState}`
   : `${business.name} | ${business.type}`
@@ -240,11 +134,20 @@ export const mapLinkHref = fullAddress
 
 // -------------------------------------------------------------------- video
 
+export type VideoConfig = {
+  url: string
+  eyebrow: string
+  heading: string
+  subheading: string
+  /** Read to screen readers and used as the iframe title. */
+  title: string
+}
+
 /**
  * Pull the 11-character video id out of any common YouTube URL shape:
  * `youtu.be/ID`, `watch?v=ID`, `/embed/ID`, `/live/ID`, `/shorts/ID`.
- * Returns null for anything it does not recognise, which switches the
- * video section off rather than rendering a broken player.
+ * Returns null for anything unrecognised, which switches the video section
+ * off rather than rendering a broken player.
  */
 export function youTubeId(url: string): string | null {
   const match = url
@@ -253,20 +156,19 @@ export function youTubeId(url: string): string | null {
   return match ? match[1] : null
 }
 
-export const videoId = youTubeId(business.video.url)
-export const hasVideo = videoId !== null
-
 /** youtube-nocookie keeps the tracking cookie off the page until playback starts. */
-export const videoEmbedSrc = videoId
-  ? `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`
-  : null
+export function videoEmbedSrc(id: string) {
+  return `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&playsinline=1`
+}
 
-export const videoWatchHref = videoId ? `https://www.youtube.com/watch?v=${videoId}` : null
+export function videoWatchHref(id: string) {
+  return `https://www.youtube.com/watch?v=${id}`
+}
 
-/** maxres is not generated for every upload — the component falls back to hq on error. */
-export const videoThumbnails = videoId
-  ? {
-      max: `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`,
-      fallback: `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
-    }
-  : null
+/** maxres is not generated for every upload — the player falls back to hq on error. */
+export function videoThumbnails(id: string) {
+  return {
+    max: `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`,
+    fallback: `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
+  }
+}
