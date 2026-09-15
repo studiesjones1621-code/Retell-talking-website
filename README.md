@@ -36,6 +36,34 @@ launch**, in particular:
 
 ---
 
+## Images: where they come from matters
+
+Each niche can carry a hero photograph — set `heroImage` in `lib/niches.ts` to a
+path under `public/`, e.g. `"/images/hero-dental.jpg"`. Leave it `null` and the
+hero falls back to the gradient treatment, which is a finished look, not a
+placeholder. So niches can get photos one at a time.
+
+**Do not use images from a Google Images search.** Search results are not a
+stock library — the overwhelming majority are somebody's copyrighted work, and
+using one on a commercial site is infringement regardless of whether a credit is
+given or the file was "publicly available". Stock agencies run automated reverse
+image searches and send invoices; a single found photo routinely costs more than
+a year of legitimate stock.
+
+Three sources that are actually safe here:
+
+| Source | Cost | Notes |
+|---|---|---|
+| `npm run generate:images` | Gemini API usage | Generates one hero per niche, already prompted for this site's palette and composition. Output is yours to use commercially. |
+| Unsplash / Pexels | Free | Explicitly licensed for commercial use. Check the licence on the individual photo, not just the site. |
+| Your own photos | Free | Best option by far. Real shots of real work out-convert stock every time. |
+
+If a photo shows an identifiable person, a client's premises, or a patient
+setting, get written permission before it goes up — a licence covers the
+photographer's rights, not the subject's.
+
+---
+
 ## 2. Run it locally
 
 ```bash

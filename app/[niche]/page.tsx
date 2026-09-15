@@ -67,6 +67,7 @@ export default async function NichePage({ params }: Props) {
           headline={niche.headline}
           subcopy={niche.subcopy}
           proofPoints={niche.proofPoints}
+          image={niche.heroImage}
         />
         <VideoSection video={niche.video} />
         <ServicesSection

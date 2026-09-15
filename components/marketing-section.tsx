@@ -37,8 +37,12 @@ export function MarketingTeaser() {
             {marketing.services.map((service) => (
               <div key={service.name} className="bg-brand-800 p-8">
                 <h3 className="text-lg font-semibold text-white">{service.name}</h3>
-                <p className="mt-2 text-sm italic leading-relaxed text-white/45">
-                  &ldquo;{service.problem}&rdquo;
+                <p className="mt-3 flex gap-2.5 text-sm leading-relaxed text-white/50">
+                  <span
+                    aria-hidden="true"
+                    className="mt-1.5 h-px w-4 shrink-0 bg-brand-accent/60"
+                  />
+                  {service.problem}
                 </p>
                 <p className="mt-3 text-sm leading-relaxed text-white/60">{service.description}</p>
               </div>
@@ -61,10 +65,11 @@ export function MarketingServices() {
               key={service.name}
               className="flex flex-col rounded-2xl border border-white/10 bg-brand-800 p-8 md:p-10"
             >
-              <p className="text-sm italic leading-relaxed text-white/45">
-                &ldquo;{service.problem}&rdquo;
+              <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-brand-accent">
+                The problem
               </p>
-              <h2 className="mt-4 text-2xl font-semibold text-white">{service.name}</h2>
+              <p className="mt-3 text-base leading-relaxed text-white/55">{service.problem}</p>
+              <h2 className="mt-6 text-2xl font-semibold text-white">{service.name}</h2>
               <p className="mt-3 leading-relaxed text-white/60">{service.description}</p>
 
               <ul className="mt-7 space-y-3 border-t border-white/10 pt-7">

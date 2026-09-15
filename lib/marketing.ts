@@ -10,7 +10,12 @@
 
 export type MarketingService = {
   name: string
-  /** The problem, in the client's words. */
+  /**
+   * The symptom this service treats, addressed to the reader. Rendered as a
+   * labelled problem statement, never in quotation marks — quoting it made it
+   * read as a customer testimonial, which is the one thing on this site that
+   * must never be fabricated.
+   */
   problem: string
   description: string
   /** Concrete deliverables. Vague agency copy is why nobody trusts agencies. */

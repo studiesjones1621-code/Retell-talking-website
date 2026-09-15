@@ -1,15 +1,20 @@
 #!/usr/bin/env node
 /**
- * Generates the site's key visuals with Gemini (Nano Banana) image models.
+ * Generates one hero photograph per niche with Gemini image models.
  *
  *   npm run generate:images
  *
- * The site renders perfectly without these — the hero and section backgrounds
- * use CSS gradient/grid treatments by default. Run this to swap in photographic
- * artwork once you have Gemini image quota available.
+ * The site renders perfectly without these — every hero falls back to the
+ * gradient-and-grid treatment. Run this to swap in photographic artwork.
  *
- * Output lands in public/images/. To use a generated hero, set the background
- * image on the hero section in components/hero.tsx.
+ * Output lands in public/images/hero-{slug}.jpg. To actually use one, point the
+ * niche at it in lib/niches.ts:
+ *
+ *   heroImage: "/images/hero-dental.jpg",
+ *
+ * Generated images are yours to use commercially. Photographs pulled from a
+ * Google Images search are generally NOT — see the note in the README before
+ * putting any found image on a live commercial site.
  */
 
 import { mkdirSync, writeFileSync } from "node:fs"
@@ -18,6 +23,7 @@ import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 
 import { business } from "../lib/business.ts"
+import { niches } from "../lib/niches.ts"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const OUT_DIR = resolve(ROOT, "public/images")
@@ -26,26 +32,34 @@ const OUT_DIR = resolve(ROOT, "public/images")
 const MODELS = ["gemini-3-pro-image", "gemini-3.1-flash-image", "gemini-2.5-flash-image"]
 
 const PALETTE =
-  "deep midnight navy background, signal teal accent light, cool desaturated tones, premium editorial photography, dramatic low-key lighting, no text, no logos, no watermarks"
+  "near-black neutral background, a single electric lime-green accent light, otherwise desaturated, premium editorial photography, dramatic low-key lighting, deep shadows, no text, no logos, no watermarks, no visible faces"
 
-const IMAGES = [
-  {
-    file: "hero-bg.jpg",
-    prompt: `Cinematic wide photograph for the hero of an AI answering service website. A calm, modern, empty reception desk at night lit by a soft glowing teal waveform of light arcing through the dark air above it. ${PALETTE}. 16:9 aspect ratio.`,
-  },
-  {
-    file: "service-receptionist.jpg",
-    prompt: `Close-up photograph of a sleek modern desk phone and headset on a dark surface, softly rim-lit in teal, shallow depth of field. ${PALETTE}. Square aspect ratio.`,
-  },
-  {
-    file: "service-booking.jpg",
-    prompt: `Overhead photograph of a clean minimal calendar on a tablet screen glowing softly on a dark desk, one appointment slot highlighted in teal. ${PALETTE}. Square aspect ratio.`,
-  },
-  {
-    file: "why-us.jpg",
-    prompt: `Abstract photograph of concentric sound waves rendered as thin glowing teal rings expanding through dark space, elegant and minimal. ${PALETTE}. Wide 16:9 aspect ratio.`,
-  },
-]
+/**
+ * Hero photographs, one per niche.
+ *
+ * Composition matters more than subject here: the headline sits over the left
+ * third of the image and the copy is white, so every prompt asks for the
+ * left side to stay dark and uncluttered. Anything busy there will fight the
+ * type no matter how good the photo is.
+ */
+const HERO_SHOTS = {
+  hvac: "A rooftop HVAC condenser unit at blue hour, technician's service light glowing lime-green against the dark metal, city skyline far behind, empty dark sky filling the left third of the frame",
+  "law-firms":
+    "A quiet law office at night, one desk lamp throwing lime-green light across a closed case file and a silent desk phone, tall dark shelves receding into shadow, the left third of the frame in near-darkness",
+  dental:
+    "A modern empty dental operatory at night, the overhead lamp off, a single lime-green accent light tracing the chair's edge, clinical surfaces clean and dark, the left third of the frame falling into shadow",
+  medspa:
+    "A serene empty aesthetic treatment room at night, soft lime-green light grazing a treatment bed and glass shelving, calm and expensive, the left third of the frame in deep shadow",
+  "behavioral-health":
+    "A calm empty therapy room at dusk, two facing armchairs, warm low light with a faint lime-green glow from a lamp, soft textures, reassuring rather than clinical, the left third of the frame quiet and dark",
+}
+
+const IMAGES = niches
+  .filter((niche) => HERO_SHOTS[niche.slug])
+  .map((niche) => ({
+    file: `hero-${niche.slug}.jpg`,
+    prompt: `Cinematic wide photograph for the hero of a website selling an AI receptionist to ${niche.name}. ${HERO_SHOTS[niche.slug]}. ${PALETTE}. 16:9 aspect ratio, shot on a full-frame camera at f/2.0.`,
+  }))
 
 function loadKey() {
   if (process.env.GEMINI_API_KEY) return process.env.GEMINI_API_KEY
@@ -100,7 +114,7 @@ async function generate(prompt) {
 
 async function main() {
   mkdirSync(OUT_DIR, { recursive: true })
-  console.log(`\nGenerating imagery for ${business.name}…\n`)
+  console.log(`\nGenerating ${IMAGES.length} niche heroes for ${business.name}…\n`)
 
   let ok = 0
   for (const image of IMAGES) {

@@ -11,18 +11,42 @@ export function Hero({
   subcopy,
   proofPoints,
   badge = "On duty 24/7",
+  image = null,
 }: {
   eyebrow?: string
   headline: string
   subcopy: string
   proofPoints: readonly string[]
   badge?: string
+  /** Optional hero photograph. Falls back to the gradient treatment when null. */
+  image?: string | null
 }) {
   return (
     <section className="relative flex min-h-[100svh] w-full flex-col overflow-hidden bg-brand-950">
-      {/* Layered gradient + grid treatment stands in for a hero photograph. */}
-      <div className="absolute inset-0 brand-grid opacity-70" />
-      <div className="absolute inset-0 brand-glow" />
+      {image ? (
+        <>
+          {/*
+            A photograph has to survive white text at every viewport, so it gets
+            a three-part scrim rather than a single flat overlay: a base wash for
+            overall contrast, a left-weighted gradient under the copy column, and
+            the usual bottom fade into the next section.
+          */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${image})` }}
+          />
+          <div className="absolute inset-0 bg-brand-950/70" />
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-950 via-brand-950/80 to-transparent" />
+          <div className="absolute inset-0 brand-grid opacity-25" />
+        </>
+      ) : (
+        <>
+          {/* Layered gradient + grid treatment stands in for a hero photograph. */}
+          <div className="absolute inset-0 brand-grid opacity-70" />
+          <div className="absolute inset-0 brand-glow" />
+        </>
+      )}
       <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-brand-900 to-transparent" />
 
       <SiteHeader />

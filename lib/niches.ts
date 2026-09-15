@@ -91,6 +91,16 @@ export type Niche = {
   /** Null when no video has been shot for this niche — the section disappears. */
   video: VideoConfig | null
 
+  /**
+   * Optional hero photograph, as a path under `public/` (e.g.
+   * "/images/hero-dental.jpg"). Null falls back to the gradient-and-grid
+   * treatment, so a niche without a photo still looks deliberate rather than
+   * unfinished. The image is darkened and the text sits on a scrim, so choose
+   * for composition and mood rather than detail — anything busy behind the
+   * headline will fight it.
+   */
+  heroImage: string | null
+
   /** Null for unregulated niches. Renders a trust strip when present. */
   compliance: ComplianceProfile | null
 
@@ -160,6 +170,7 @@ export const niches: Niche[] = [
 
     testimonials: [],
 
+    heroImage: null,
     video: {
       url: "https://youtu.be/oTjgAVIQ1nE",
       eyebrow: "See it work",
@@ -241,6 +252,7 @@ export const niches: Niche[] = [
       "Talk to the agent on this page — it is the same one that would handle your intake.",
 
     testimonials: [],
+    heroImage: null,
     video: null,
     compliance: NO_LEGAL_ADVICE,
 
@@ -312,6 +324,7 @@ export const niches: Niche[] = [
     ctaSubcopy: "Talk to the agent on this page — it is the same one that would answer your front desk.",
 
     testimonials: [],
+    heroImage: null,
     video: null,
     compliance: NO_PHI,
 
@@ -383,6 +396,7 @@ export const niches: Niche[] = [
     ctaSubcopy: "Talk to the agent on this page — it is the same one that would answer your clinic.",
 
     testimonials: [],
+    heroImage: null,
     video: null,
     compliance: NO_PHI,
 
@@ -455,6 +469,7 @@ export const niches: Niche[] = [
     ctaSubcopy: "Talk to the agent on this page — it is the same one that would answer your line.",
 
     testimonials: [],
+    heroImage: null,
     video: null,
     compliance: NO_PHI,
 
