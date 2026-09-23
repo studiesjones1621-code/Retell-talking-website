@@ -75,7 +75,6 @@ export default async function NichePage({ params }: Props) {
           subcopy={niche.servicesSubcopy}
           services={niche.services}
         />
-        <ComplianceStrip compliance={niche.compliance} />
         <WhyChooseUs
           heading={niche.differentiatorsHeading}
           subcopy={niche.differentiatorsSubcopy}
@@ -83,6 +82,14 @@ export default async function NichePage({ params }: Props) {
         />
         <TestimonialsSection testimonials={niche.testimonials} />
         <HowItWorks />
+        {/*
+          Compliance sits here, not up by the services grid: it answers an
+          objection, and an objection only lands once the reader wants the
+          thing. Leading with it makes the page about risk instead of about
+          the value, and it is the last thing a buyer checks before they ask
+          about price.
+        */}
+        <ComplianceStrip compliance={niche.compliance} />
         <MarketingTeaser />
         <CtaSection heading={niche.ctaHeading} subcopy={niche.ctaSubcopy} />
       </main>
