@@ -195,6 +195,16 @@ export const niches: Niche[] = [
         description:
           "Picks up the moment your CSRs go home. Every call that would have hit voicemail becomes a booked job instead.",
       },
+      {
+        name: "Live Transfer When It Matters",
+        description:
+          "Trained on your roster, so it knows who handles what. A gas smell, a commercial account down, a callback on a job already open — it puts those straight through to whoever is on call instead of taking a message.",
+      },
+      {
+        name: "Job Details Before the Truck Rolls",
+        description:
+          "Captures make, model, symptom and access notes, then sends the write-up to dispatch so your tech arrives knowing what they are walking into.",
+      },
     ],
 
     differentiatorsHeading: "Built for how HVAC actually runs.",
@@ -278,6 +288,16 @@ export const niches: Niche[] = [
         description:
           "Captures opposing-party and matter details in a clean summary so your team can run the conflict check before the meeting.",
       },
+      {
+        name: "Transfers to the Right Person",
+        description:
+          "Trained on who does what at your firm. Urgent matters and existing clients go straight to the attorney or intake coordinator you nominate, rather than into a callback queue.",
+      },
+      {
+        name: "Intake Paperwork, Started on the Call",
+        description:
+          "Collects the administrative intake — contact details, matter type, key dates, opposing parties — sends your retainer or questionnaire link while they are still engaged, and follows up on the ones that come back blank.",
+      },
     ],
 
     differentiatorsHeading: "Careful about what it says.",
@@ -352,6 +372,16 @@ export const niches: Niche[] = [
         description:
           "Recognises a dental emergency and follows your on-call protocol instead of leaving a message nobody hears until Monday.",
       },
+      {
+        name: "Transfers to Your Team",
+        description:
+          "Trained on your staff and who covers what. An anxious patient, a question only the doctor can answer, a case that needs the treatment coordinator — the agent hands the call over rather than taking a message.",
+      },
+      {
+        name: "New Patient Paperwork",
+        description:
+          "Takes the administrative details, texts your new-patient and insurance forms while the patient is still on the phone, and chases the ones that come back empty.",
+      },
     ],
 
     differentiatorsHeading: "Designed around a busy operatory.",
@@ -424,6 +454,16 @@ export const niches: Niche[] = [
         description:
           "Follows up on cancellations and gaps so an empty room becomes a filled appointment.",
       },
+      {
+        name: "Transfers to Your Team",
+        description:
+          "Trained on your providers and what each one treats. Clinical questions about a treatment go to a person who can actually answer them, never to an agent guessing.",
+      },
+      {
+        name: "Consult Paperwork, Sent Ahead",
+        description:
+          "Collects what the booking needs, then sends your intake and consent forms straight after — so the client arrives prepared instead of filling in a clipboard in reception.",
+      },
     ],
 
     differentiatorsHeading: "It sounds like your clinic.",
@@ -495,6 +535,16 @@ export const niches: Niche[] = [
         name: "Availability & Insurance Questions",
         description:
           "Answers general questions about whether you are accepting clients and which plans you take — without collecting clinical detail.",
+      },
+      {
+        name: "Warm Transfer to Your On-Call Clinician",
+        description:
+          "Trained on your team and your escalation protocol. When that protocol says a person should take this call, the agent hands it over warmly and stays on the line until someone picks up — no queue, no callback promise, no starting over.",
+      },
+      {
+        name: "Intake Paperwork, Not Clinical Assessment",
+        description:
+          "Collects the administrative intake — contact details, insurance, availability, referral source — and sends your clinical forms for the client to complete themselves. Screening questions and risk instruments stay with your clinicians, where they belong.",
       },
     ],
 
