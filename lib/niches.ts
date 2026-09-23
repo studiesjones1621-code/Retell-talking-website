@@ -545,9 +545,9 @@ export const niches: Niche[] = [
           "Books the intake appointment into your calendar while the person is still on the phone and still ready.",
       },
       {
-        name: "Availability & Insurance Questions",
+        name: "Waitlist & Availability",
         description:
-          "Answers general questions about whether you are accepting clients and which plans you take — without collecting clinical detail.",
+          "Most practices are full, and \"we are not taking clients right now\" ends the call for good. The agent says who is accepting, who takes their plan and how long the wait is — and puts them on the waitlist instead of letting them leave with nothing.",
       },
       {
         name: "Warm Transfer to Your On-Call Clinician",
@@ -561,14 +561,29 @@ export const niches: Niche[] = [
       },
     ],
 
-    differentiatorsHeading: "Built with the stakes in mind.",
+    differentiatorsHeading: "Why not the answering service you have?",
     differentiatorsSubcopy:
-      "This is the niche where a generic answering bot is genuinely the wrong tool. Here is what is different.",
+      "Because in this field the first thirty seconds decide whether there is ever a second call.",
     differentiators: [
-      { title: "Crisis protocol first", description: "Distress signals stop the booking flow and surface 988 immediately." },
-      { title: "Never rushes a caller", description: "No hold music, no queue, no scripted pace." },
-      { title: "You set the collection line", description: "Take an intake or take a name — and clinical depth still waits for a clinician." },
-      { title: "Warm handoff to on-call", description: "Follows your escalation protocol, not a generic one." },
+      {
+        title: "Every caller gets your best version",
+        description:
+          "A front desk at 4:55 on a Friday is not the same front desk as 9 a.m. Monday. This one does not have an off day.",
+      },
+      {
+        title: "It does not take the call home",
+        description:
+          "Absorbing distress all day is why front-desk turnover in this field is what it is. The agent takes that volume so your people do not.",
+      },
+      {
+        title: "A referral spike changes nothing",
+        description: "Three people calling at once is three calls answered, not two voicemails.",
+      },
+      {
+        title: "Sometimes easier to talk to",
+        description:
+          "In a small town the person answering the practice phone might be a neighbour. Some callers say more to something that plainly is not.",
+      },
     ],
 
     ctaHeading: "Make sure the next call gets answered.",
