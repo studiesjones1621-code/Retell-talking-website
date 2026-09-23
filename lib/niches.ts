@@ -207,14 +207,29 @@ export const niches: Niche[] = [
       },
     ],
 
-    differentiatorsHeading: "Built for how HVAC actually runs.",
+    differentiatorsHeading: "Why not an answering service?",
     differentiatorsSubcopy:
-      "Generic answering services take a message. This one does the job your front desk does.",
+      "Because a message pad has never yet installed a furnace, and the homeowner is already dialling the next number on the list.",
     differentiators: [
-      { title: "Speaks HVAC", description: "Knows no-heat calls, tune-ups, SEER ratings and maintenance plans." },
-      { title: "Books into dispatch", description: "Real calendar access, not a callback promise." },
-      { title: "Handles the 2 a.m. call", description: "Peak season does not have office hours." },
-      { title: "Live in two weeks", description: "On your existing number. No new hardware." },
+      {
+        title: "It speaks HVAC",
+        description:
+          "Knows a no-heat call from a tune-up, what a SEER rating is, and why the first cold snap doubles your phones.",
+      },
+      {
+        title: "Peak season does not overwhelm it",
+        description: "The week your volume triples is the week nothing at all changes on your end.",
+      },
+      {
+        title: "Your CSRs stop doing triage",
+        description:
+          "Reschedules and are-you-open calls stop reaching your team, so they work the ones that pay.",
+      },
+      {
+        title: "You find out what voicemail cost",
+        description:
+          "Every after-hours ring and abandoned call lands in a log. Most owners are surprised by the number.",
+      },
     ],
 
     ctaHeading: "Stop missing jobs today.",
@@ -397,13 +412,29 @@ export const niches: Niche[] = [
       },
     ],
 
-    differentiatorsHeading: "Designed around a busy operatory.",
-    differentiatorsSubcopy: "It does the front-desk job, without adding to the front desk's workload.",
+    differentiatorsHeading: "Why not another front-desk hire?",
+    differentiatorsSubcopy:
+      "One more person still cannot answer two lines at once, and still goes home at five.",
     differentiators: [
-      { title: "Never puts a patient on hold", description: "Every caller gets a person-shaped answer immediately." },
-      { title: "Books into your schedule", description: "Real availability, not a callback promise." },
-      { title: "Handles PHI properly", description: "Under a signed BAA, with retention and storage set by you." },
-      { title: "Works past closing", description: "Most new-patient calls come in outside office hours." },
+      {
+        title: "It answers while the last caller is still talking",
+        description: "Two lines ringing is two patients booked, not one of them on hold.",
+      },
+      {
+        title: "It does not call in sick in flu season",
+        description:
+          "The week your front desk is short-staffed is the week the schedule most needs filling.",
+      },
+      {
+        title: "No training week, no turnover",
+        description:
+          "Front-desk churn means teaching your scripts again every few months. This learns your practice once.",
+      },
+      {
+        title: "Patient with the nervous ones",
+        description:
+          "Plenty of adults put off the dentist out of fear. Whoever picks up decides whether they book.",
+      },
     ],
 
     ctaHeading: "Stop sending new patients to voicemail.",
@@ -479,13 +510,29 @@ export const niches: Niche[] = [
       },
     ],
 
-    differentiatorsHeading: "It sounds like your clinic.",
-    differentiatorsSubcopy: "Aesthetics is a discretionary purchase. The first impression is the sale.",
+    differentiatorsHeading: "Why not call them back in the morning?",
+    differentiatorsSubcopy:
+      "Because aesthetics is a discretionary purchase, and the first voice they hear is most of the sale.",
     differentiators: [
-      { title: "Warm, never pushy", description: "Discretionary purchases do not respond to pressure." },
-      { title: "Knows your menu", description: "Trained on the treatments you actually offer." },
-      { title: "Discreet by design", description: "Asks what the booking needs, nothing more — and stores only what you allow." },
-      { title: "Always awake", description: "Impulse enquiries do not wait for opening time." },
+      {
+        title: "Warm, never pushy",
+        description: "Discretionary purchases do not respond to pressure, and people can hear a script.",
+      },
+      {
+        title: "Your providers stay in the room",
+        description:
+          "Nobody steps out of a treatment to catch a ringing phone, and nobody loses the enquiry either.",
+      },
+      {
+        title: "Every enquiry gets the same answer",
+        description:
+          "What a treatment involves should not depend on which member of staff happened to pick up.",
+      },
+      {
+        title: "Nobody has to explain themselves",
+        description:
+          "People are often self-conscious about why they are calling. The agent books them without making them justify it.",
+      },
     ],
 
     ctaHeading: "Stop losing the late-night enquiry.",
