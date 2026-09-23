@@ -1,9 +1,11 @@
+import { homeVideo } from "@/lib/business"
 import { CtaSection } from "@/components/cta-section"
 import { Footer } from "@/components/footer"
 import { Hero } from "@/components/hero"
 import { HowItWorks } from "@/components/how-it-works"
 import { MarketingTeaser } from "@/components/marketing-section"
 import { NichePicker } from "@/components/niche-picker"
+import { VideoSection } from "@/components/video-section"
 import { VoiceAgentProvider } from "@/components/voice-agent/voice-agent-provider"
 import { VoiceAgentWidget } from "@/components/voice-agent/voice-agent-widget"
 
@@ -20,6 +22,7 @@ export default function Home() {
           subcopy="An AI receptionist that answers every call in one ring, books the appointment and captures the lead — 24 hours a day, in the language of your industry."
           proofPoints={["Answers in one ring", "Books into your calendar", "Live in two weeks"]}
         />
+        <VideoSection video={homeVideo} />
         <NichePicker />
         <HowItWorks />
         <MarketingTeaser />

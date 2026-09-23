@@ -172,3 +172,21 @@ export function videoThumbnails(id: string) {
     fallback: `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
   }
 }
+
+/**
+ * Demo video for the general homepage. Niche pages carry their own in
+ * `lib/niches.ts`; this is the one a visitor sees before they have told us
+ * anything about their industry, so it should demonstrate something true of
+ * every build rather than one trade's workflow.
+ *
+ * Leave `url` empty and the section does not render at all — same behaviour as
+ * a niche with no video yet. Paste any normal YouTube link to switch it on.
+ */
+export const homeVideo: VideoConfig = {
+  url: "",
+  eyebrow: "Hear it",
+  heading: "Forty seconds: listen to it read your details back.",
+  subheading:
+    "The part people actually worry about is not whether it can talk — it is whether it heard you correctly. This is the agent confirming a caller's information back to them, unedited.",
+  title: "OnDuty Agent — details readback",
+}
