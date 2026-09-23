@@ -27,6 +27,31 @@ tool schemas with it.
 
 ## Knowledge base
 
+**One agent, one knowledge base, eight documents inside it.** Not eight knowledge
+bases and not eight agents. Splitting is about chunking, not architecture: a
+knowledge base retrieves by semantic similarity, and a single large file gets cut
+at arbitrary points, so a chunk can straddle the end of the dental section and
+the start of med spa. A dentist's question then pulls half the wrong industry.
+Separate documents make chunk boundaries land on topic boundaries.
+
+## How the agent handles the different industries
+
+Three layers, deliberately:
+
+1. **`{{niche}}`** arrives with every web call from the site, so a visitor on the
+   dental page is already known to be dental before they speak.
+2. **The INDUSTRY CUE CARD in the prompt** gives one framing line and one lead
+   question per industry. This lives in the prompt rather than the KB because
+   framing is needed on every call, while facts are only needed when asked — and
+   retrieval only fires on a question.
+3. **The per-industry KB document** carries the real depth, pulled the moment the
+   industry is known rather than only when a question is asked.
+
+An industry not on the list gets its own section: no bluffing, no borrowed pain
+point, and the honest test — does the business run on booked appointments, and do
+missed calls cost real money. Everything in the product and capabilities
+documents still applies to them; only trade-specific detail does not.
+
 Eight files in `kb/`. Upload each as a separate document — do not paste them into
 the prompt, that is the point of them. Retell settings: **top_k 3-5**,
 **filter_score 0.5-0.6**.
