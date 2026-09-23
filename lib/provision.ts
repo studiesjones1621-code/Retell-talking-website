@@ -190,6 +190,13 @@ You cannot access the calendar directly.
 3. Confirm the details back to them.
 4. Tell them the office will call to confirm shortly. Do not promise a specific confirmed slot.`
 
+  /*
+   * Note on the PHI rule in the Rules section below: it stays even though a BAA
+   * is in place. That BAA governs the agents we build FOR clients, which talk to
+   * patients. This agent sells to practice owners — it has no reason to hear
+   * clinical detail, so collecting none keeps this marketing site out of scope
+   * entirely rather than merely compliant within it.
+   */
   return `You are the virtual receptionist for ${business.name}${cityState ? `, serving ${cityState}` : ""}.
 ${business.shortDescription}
 

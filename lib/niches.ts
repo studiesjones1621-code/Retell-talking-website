@@ -20,37 +20,80 @@ import type { Testimonial, VideoConfig } from "./business"
 /**
  * What the site may truthfully say about handling regulated information.
  *
- * The current posture across every regulated niche is `no-phi`: the agent takes
- * a name, a callback number and a general reason for the call, then books or
- * routes. It does not collect symptoms, diagnoses, treatment history or
- * insurance identifiers, so no protected health information enters the system
- * and no Business Associate Agreement is required to operate this way.
+ * The healthcare niches run on `HIPAA_BAA`: a Business Associate Agreement is
+ * signed with the voice infrastructure provider, so protected health
+ * information may lawfully flow through the agents we build for clients.
  *
- * >>> UPGRADE POINT <<<
- * Do NOT change these strings to say "HIPAA compliant" until a signed BAA is in
- * place with the telephony/LLM vendor AND your own safeguards are documented.
- * Claiming compliance without one is the kind of thing that fails a procurement
- * review and voids insurance. When the BAA exists, add a `hipaa` profile here
- * and switch the affected niches over — the copy is centralised for exactly
- * that reason.
+ * Note what this copy deliberately does NOT say: "HIPAA compliant", flat. That
+ * phrase is unverifiable, every competitor claims it, and compliance is a
+ * property of the whole arrangement — our safeguards, the client's, and a BAA
+ * at each hop — not of one signed agreement. The specific controls below are
+ * both true and far more convincing to the person who actually evaluates this,
+ * who is usually a practice administrator with a checklist.
+ *
+ * >>> BEFORE STRENGTHENING THIS FURTHER <<<
+ * Any blanket compliance badge needs all of: BAAs executed downstream with
+ * client practices, a documented Security Rule risk analysis, written policies
+ * and workforce training, breach notification procedures, and a BAA with EVERY
+ * subprocessor that touches PHI — the booking calendar included, since patient
+ * names and visit reasons land there too.
  */
 export type ComplianceProfile = {
   /** Short label on the trust strip. */
   label: string
   /** One or two sentences. Must describe what is TRUE today. */
   detail: string
+  /**
+   * Named, checkable controls. A vague assurance convinces nobody who has been
+   * burned; a list someone can take to their compliance officer does.
+   */
+  controls?: { title: string; description: string }[]
 }
 
-const NO_PHI: ComplianceProfile = {
-  label: "Built to keep PHI out of the conversation",
+const HIPAA_BAA: ComplianceProfile = {
+  label: "PHI handled under a signed BAA",
   detail:
-    "The agent takes a name, a callback number and a general reason for the call, then books or routes. It never asks for symptoms, diagnoses, treatment history or insurance identifiers — so the sensitive part of the conversation happens with your staff, where it belongs.",
+    "A Business Associate Agreement is in place with the voice infrastructure your agent runs on, and we sign one with your practice too. So the agent can take what it genuinely needs to book the appointment, rather than dancing around it — and you can show your compliance officer exactly where the data goes.",
+  controls: [
+    {
+      title: "You choose what is stored",
+      description:
+        "Per agent: full transcripts and recordings, PII excluded, or basic call attributes only.",
+    },
+    {
+      title: "You choose how long",
+      description:
+        "Retention is set per agent, anywhere from a single day to two years. Not one blanket default you inherit.",
+    },
+    {
+      title: "Recordings are not just sitting on a URL",
+      description:
+        "Access to call recordings goes through signed, expiring links rather than a guessable address.",
+    },
+    {
+      title: "A BAA with you, not just upstream",
+      description:
+        "We execute a Business Associate Agreement with your practice before a single call is taken.",
+    },
+  ],
 }
 
 const NO_LEGAL_ADVICE: ComplianceProfile = {
   label: "Never gives legal advice",
   detail:
     "The agent captures who is calling, what kind of matter it is and when they are free — then books the consultation. It does not answer substantive legal questions, quote outcomes or discuss case merits, so nothing it says can be mistaken for advice from your firm.",
+  controls: [
+    {
+      title: "Screens, never advises",
+      description:
+        "Practice area, jurisdiction and timeline. No opinion on the caller's matter, under any framing.",
+    },
+    {
+      title: "Privileged detail stays with you",
+      description:
+        "Intake summaries carry what your team needs to run a conflict check, and nothing it was not asked for.",
+    },
+  ],
 }
 
 export type NicheService = {
@@ -316,7 +359,7 @@ export const niches: Niche[] = [
     differentiators: [
       { title: "Never puts a patient on hold", description: "Every caller gets a person-shaped answer immediately." },
       { title: "Books into your schedule", description: "Real availability, not a callback promise." },
-      { title: "Keeps PHI out of the call", description: "Takes the reason for the visit, not the medical history." },
+      { title: "Handles PHI properly", description: "Under a signed BAA, with retention and storage set by you." },
       { title: "Works past closing", description: "Most new-patient calls come in outside office hours." },
     ],
 
@@ -326,7 +369,7 @@ export const niches: Niche[] = [
     testimonials: [],
     heroImage: null,
     video: null,
-    compliance: NO_PHI,
+    compliance: HIPAA_BAA,
 
     audience:
       "dentists, practice owners and office managers evaluating a receptionist service for their own practice",
@@ -388,7 +431,7 @@ export const niches: Niche[] = [
     differentiators: [
       { title: "Warm, never pushy", description: "Discretionary purchases do not respond to pressure." },
       { title: "Knows your menu", description: "Trained on the treatments you actually offer." },
-      { title: "Discreet by design", description: "Takes the enquiry without prying into medical detail." },
+      { title: "Discreet by design", description: "Asks what the booking needs, nothing more — and stores only what you allow." },
       { title: "Always awake", description: "Impulse enquiries do not wait for opening time." },
     ],
 
@@ -398,7 +441,7 @@ export const niches: Niche[] = [
     testimonials: [],
     heroImage: null,
     video: null,
-    compliance: NO_PHI,
+    compliance: HIPAA_BAA,
 
     audience:
       "med spa owners, clinic directors and practice managers evaluating a receptionist service for their own clinic",
@@ -461,7 +504,7 @@ export const niches: Niche[] = [
     differentiators: [
       { title: "Crisis protocol first", description: "Distress signals stop the booking flow and surface 988 immediately." },
       { title: "Never rushes a caller", description: "No hold music, no queue, no scripted pace." },
-      { title: "Minimal collection", description: "A name, a number and a reason. Clinical detail waits for a clinician." },
+      { title: "You set the collection line", description: "Take an intake or take a name — and clinical depth still waits for a clinician." },
       { title: "Warm handoff to on-call", description: "Follows your escalation protocol, not a generic one." },
     ],
 
@@ -471,7 +514,7 @@ export const niches: Niche[] = [
     testimonials: [],
     heroImage: null,
     video: null,
-    compliance: NO_PHI,
+    compliance: HIPAA_BAA,
 
     audience:
       "practice owners, clinical directors and office managers at behavioral health practices evaluating an intake service for their own practice",
