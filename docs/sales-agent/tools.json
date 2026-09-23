@@ -1,0 +1,76 @@
+{
+  "_comment": "Custom tool schemas for the OnDuty Agent sales receptionist. All POST, args_at_root true, timeout 120000. Replace every [BRACKET] before importing. After ANY change here, diff the parameter lists against docs/sales-agent/PROMPT.txt — prompt/schema drift is the most common bug in these builds.",
+
+  "book_demo": {
+    "type": "custom",
+    "name": "book_demo",
+    "url": "[N8N_BASE]/webhook/ondutyagent-booking",
+    "method": "POST",
+    "args_at_root": true,
+    "timeout_ms": 120000,
+    "speak_during_execution": true,
+    "execution_message_description": "Okay, I'm booking that for you now.",
+    "parameters": {
+      "type": "object",
+      "required": ["startTime", "endTime", "summary", "description", "caller_name", "caller_email", "caller_phone", "business_name", "industry"],
+      "properties": {
+        "startTime": { "type": "string", "description": "ISO8601 with offset taken from current_time, e.g. 2026-10-02T14:00:00-04:00. Never hardcode the offset." },
+        "endTime": { "type": "string", "description": "startTime plus 15 minutes, same ISO8601 format and offset." },
+        "summary": { "type": "string", "description": "Demo - [Business Name] - [Industry]" },
+        "description": { "type": "string", "description": "Pipe delimited in exactly this order: +1XXXXXXXXXX | email | business name | industry | what they said their phone problem is" },
+        "caller_name": { "type": "string", "description": "Full name of the person booking." },
+        "caller_email": { "type": "string", "description": "lowercase name@domain.com, confirmed with the caller before sending." },
+        "caller_phone": { "type": "string", "description": "+1XXXXXXXXXX, 12 characters, never 1+XXXXXXXXXX." },
+        "business_name": { "type": "string", "description": "The company they run." },
+        "industry": { "type": "string", "enum": ["HVAC", "Law Firm", "Dental", "Med Spa", "Behavioral Health", "Other"], "description": "Their industry. Use Other for anything not on the list." }
+      }
+    }
+  },
+
+  "call_summary": {
+    "type": "custom",
+    "name": "call_summary",
+    "url": "[N8N_BASE]/webhook/ondutyagent-call-summary",
+    "method": "POST",
+    "args_at_root": true,
+    "timeout_ms": 120000,
+    "speak_during_execution": false,
+    "parameters": {
+      "type": "object",
+      "required": ["caller_name", "caller_phone", "caller_email", "business_name", "industry", "current_setup", "pain_point", "objections_raised", "demo_booked", "urgency", "one_line_summary", "detailed_summary"],
+      "properties": {
+        "caller_name": { "type": "string", "description": "Unknown if never given." },
+        "caller_phone": { "type": "string", "description": "+1XXXXXXXXXX, or Unknown." },
+        "caller_email": { "type": "string", "description": "lowercase, or Unknown." },
+        "business_name": { "type": "string", "description": "Unknown if never given." },
+        "industry": { "type": "string", "enum": ["HVAC", "Law Firm", "Dental", "Med Spa", "Behavioral Health", "Other", "Unknown"] },
+        "current_setup": { "type": "string", "description": "Who answers their phone today, and what happens after hours. Unknown if not discussed." },
+        "pain_point": { "type": "string", "description": "The problem in their own words. None if they never named one." },
+        "objections_raised": { "type": "string", "description": "What they pushed back on: price, robot concerns, timing, incumbent vendor. None if no objection." },
+        "demo_booked": { "type": "string", "enum": ["Yes", "No"] },
+        "urgency": { "type": "string", "enum": ["High", "Medium", "Low"], "description": "High if they are actively losing calls now or shopping vendors this week." },
+        "one_line_summary": { "type": "string", "description": "One sentence a human can scan in a list." },
+        "detailed_summary": { "type": "string", "description": "Enough for whoever takes the demo to prep without listening to the recording." }
+      }
+    }
+  },
+
+  "check_availability_cal": {
+    "type": "built-in Cal.com",
+    "note": "Retell's built-in Cal.com check. Needs the Cal.com API key, event_type_id [CAL_EVENT_TYPE_ID] for a 15-minute demo, and timezone America/New_York. Must be OnDuty Agent's OWN event type — do not reuse a client build's. Connect that Cal.com event to the same Google Calendar the n8n booking flow writes to, or availability will be wrong.",
+    "parameters": "none"
+  },
+
+  "transfer_call": {
+    "type": "built-in",
+    "transfer_to": "[TRANSFER_NUMBER_E164]",
+    "transfer_type": "warm",
+    "handoff_prompt": "Say hello to the team member and briefly summarize who is calling, what business they run, and what they need.",
+    "note": "BLOCKED — OnDuty Agent publishes no phone number, so there is no transfer destination configured. Either supply a number or delete this tool and remove the TRANSFERS section from the prompt. Do not ship a transfer tool that dials nowhere."
+  },
+
+  "end_call": {
+    "type": "built-in",
+    "note": "Invoked last, after the single goodbye line. Never before call_summary."
+  }
+}
