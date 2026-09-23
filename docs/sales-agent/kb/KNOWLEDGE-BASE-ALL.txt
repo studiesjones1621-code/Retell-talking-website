@@ -1,0 +1,491 @@
+# OnDuty Agent — complete knowledge base
+#
+# All eight sections in one document, for when uploading separate files is not
+# practical. Uploading them separately is better: retrieval scores each document
+# on its own, so a dental caller is less likely to pull a paragraph about law
+# firms. Use this single file only if the platform forces it.
+#
+# Sections:
+#   1. Product and setup
+#   2. Capabilities that can be configured
+#   3. Law firms FAQ
+#   4. HVAC contractors FAQ
+#   5. Dental practices FAQ
+#   6. Med spas FAQ
+#   7. Behavioral health FAQ
+#   8. Proof, numbers and how to make the case
+#
+# ============================================================================
+
+
+# ============================================================================
+# OnDuty Agent — product, setup and ownership
+
+## What we build
+AI receptionists that answer every call, book the appointment, capture the lead
+and route to the right person — 24/7. Built per industry: HVAC contractors, law
+firms, dental practices, med spas, behavioral health providers. We also build
+websites and do local SEO / Google Business Profile for the same clients.
+
+## How long does setup take?
+About two weeks from the first call to going live. That covers learning the
+business, building the agent, and a test number the client can call and try to
+break before anything touches their real line.
+
+## How do changes work once it is live?
+Most adjustments are made the same day. The client says what they want changed —
+a phrase, a routing rule, how an emergency is handled, what gets asked at intake —
+and it is updated without them sitting in another meeting. They do not need to
+learn a dashboard or wait for a release cycle.
+(Mention this when someone worries about being locked into a script, or about
+how much of their time this will take. Do not lead with it.)
+
+## Does it use our existing phone number?
+Yes. It sits on the existing line by forwarding. No new hardware, no number
+change, no porting required. Forwarding can be all calls, after-hours only,
+overflow when the team is busy, or any mix.
+
+## Do I own my custom agent logic?
+Yes. The prompt, the flows, the routing rules and the logic built for a client
+belong to that client. It is built for their practice, not rented from a
+template.
+
+## What platform is it built on?
+Retell AI for the voice and language layer. Retell offers a Business Associate
+Agreement for HIPAA-covered work, and a Data Processing Addendum including EU
+Standard Contractual Clauses for GDPR. Those are signed agreements, not marketing
+claims.
+
+## Can data NOT be stored?
+Yes. Storage is set per agent, three ways: store everything (transcripts and
+recordings), exclude PII, or keep basic call attributes only. Retention is set
+separately, anywhere from one day to two years. A practice that wants nothing
+retained beyond a day can have exactly that.
+
+## Who can access call recordings?
+Access goes through signed, expiring links rather than a fixed URL anyone with
+the address could open.
+
+## Will it pretend to be human?
+No. It never claims to be human. Asked directly, it says it is an AI receptionist.
+In practice most callers do not ask.
+
+## What happens when it does not know something?
+It says so and takes a message, or transfers, according to the client's rules. It
+does not guess, invent a price, or make up a policy. Every call arrives written
+up afterwards.
+
+## Is there a contract / can we stop?
+Terms are covered on the demo call. Do not quote contract length, notice periods
+or cancellation terms — that is not yours to state.
+
+## Pricing
+Not published anywhere, and never quoted on this line. It depends on call volume
+and scope, which is what the demo call establishes.
+
+
+# ============================================================================
+# What can be configured
+
+Everything below is adjustable per client. These answer "can it also…" questions.
+Do not recite this list unprompted — answer the capability actually asked about.
+
+## Spam and robocall filtering
+Yes. Known spam patterns and robocalls can be filtered so they never reach the
+client or their team, and never generate a notification. This is a real running
+cost for busy lines and is worth confirming when someone complains about junk
+calls.
+
+## Appointment reminders
+Yes. Automatic reminders before the appointment, by text or call, on the
+client's schedule. This is usually the single cheapest way to cut no-shows.
+
+## Review requests after the appointment
+Yes. Once the appointment window has passed, the customer can be invited to
+leave a review, routed to whichever platform the client wants — Google Business
+Profile most often. It runs automatically off the booking, so nobody on staff
+has to remember.
+
+## Live transfer to the right person
+Yes. The agent is trained on the client's roster and who covers what, so it
+transfers to the correct person rather than a general line. Warm transfer — it
+briefs whoever picks up.
+
+## Booking, rescheduling and cancelling
+Yes, all three, against the client's real calendar availability.
+
+## Completed intake handed to staff
+The agent works through the client's intake questions during the call and routes
+a finished intake to the person who needs it, so the callback starts informed
+rather than from a name and number.
+
+## After-hours only / overflow only
+Yes. It can take every call, only the ones after closing, or only the ones the
+team cannot pick up.
+
+## Multiple locations or providers
+Yes — routing by location, provider or service is configured per client.
+
+## Does it integrate with [specific software]?
+Do NOT promise a named integration. The honest answer: "It books against your
+calendar. For [their software] specifically, that's a setup question — tell the
+team which system you're on and they'll confirm exactly how it connects on the
+call." Never claim compatibility you have not confirmed.
+
+## What it will never do
+- Collect payment details, card numbers or SSNs
+- Give medical, legal or clinical advice
+- Quote a price the client has not approved
+- Promise a response time the client has not committed to
+
+
+# ============================================================================
+# Law firms — real questions, real answers
+
+## Do I own my own custom agent logic?
+Yes. The prompt, the intake flows, the screening rules and the routing built for
+the firm belong to the firm. It is built around their practice areas and their
+attorneys, not rented from a generic template.
+
+## Is what a caller tells the receptionist privileged?
+The receptionist operates as an extension of the firm, and we sign an agreement
+stating exactly that — it acts as the firm's agent, on the same footing as the
+intake staff the firm already employs. That is the arrangement that matters when
+privilege extends to non-lawyer staff.
+How privilege applies to a specific matter in a specific jurisdiction is the
+firm's call, not ours, and the team will hand over the contract language for
+their own review. What can be stated flatly: the agent never gives legal advice,
+and the data handling runs under a signed BAA and DPA.
+NEVER assert that a caller's conversation "is privileged" as settled fact. That
+is a legal conclusion, and the person asking is a lawyer who will test it.
+
+## Will it give legal advice?
+No, and that is deliberate rather than a limitation. It captures and books. It
+will not answer substantive legal questions, quote case value, predict outcomes,
+state a statute of limitations as fact, or say whether the firm will take a case.
+Nothing it says can be mistaken for advice from the firm.
+
+## Can it screen out cases we don't want?
+Yes. It qualifies by practice area, jurisdiction and timeline, so partners only
+see calls worth their hour. Out-of-scope matters get a polite close and a logged
+referral note rather than a consult on the calendar.
+
+## What about conflict checks?
+It captures opposing-party and matter details during intake so the firm's team
+can run the check before the meeting. The agent does not run the check itself.
+
+## What if opposing counsel calls?
+It takes a message and never discusses a matter. Professional callers are handled
+as messages, not intake.
+
+## Can it handle existing clients?
+Yes — existing clients are routed to the attorney or coordinator the firm
+nominates rather than pushed through new-matter intake.
+
+## What happens with an urgent case — someone with a deadline this week?
+Urgency tiers are configured by the firm. A caller with a statute running out, a
+severance to sign, or someone in custody gets flagged and transferred
+immediately rather than booked for next week.
+
+## Can it do intake in Spanish?
+Ask what languages they need and take it to the demo. Do not promise a language
+without confirming it.
+
+## Data — can you keep nothing?
+Yes. Storage is set per agent: everything, PII excluded, or basic attributes
+only. Retention runs from one day to two years. Recording access is through
+signed, expiring links.
+
+## What platform is this built on?
+Retell AI, which provides a signed BAA for HIPAA-covered work and a DPA with EU
+Standard Contractual Clauses for GDPR.
+
+
+# ============================================================================
+# HVAC contractors — real questions, real answers
+
+## Does it work with my dispatch software?
+It books against the calendar. For a named system — ServiceTitan, Housecall Pro,
+Jobber, FieldEdge — that is a setup question: ask which one they run and say the
+team will confirm exactly how it connects on the call. Never claim a specific
+integration works before it has been confirmed.
+
+## Can it tell a real emergency from a routine call?
+Yes. Triage rules are written with the contractor: a no-heat call in January, a
+gas smell, a commercial account down, water coming from the air handler. Each
+tier gets its own handling — advise 911 and transfer, transfer to on-call, or
+book a visit.
+
+## Who does it transfer to at 2am?
+Whoever is on the roster for that night. It is trained on who covers what, so it
+reaches the right tech rather than a general line.
+
+## Can it quote prices?
+Only what the contractor approves. It can give a diagnostic fee and approved
+ranges, and it always says the tech confirms the final price on site. If the
+contractor prefers no numbers at all, it gives none.
+
+## What about the first cold snap when the phones triple?
+Concurrent calls all get answered. There is no queue and no hold music, so a
+volume spike does not produce voicemails.
+
+## Does it know our service area?
+Yes — cities, neighbourhoods and the places the contractor does not travel to
+are configured. Out-of-area callers get told plainly rather than booked and
+cancelled later.
+
+## What does the tech actually receive?
+A completed job sheet from the call: make, model, symptom, history and access
+notes. The tech rolls knowing what they are walking into rather than phoning the
+customer back to ask.
+
+## Can it just cover after hours?
+Yes. All calls, after-hours only, or overflow when the CSRs are tied up.
+
+## Will it annoy my customers?
+It answers on the first ring, does not put anyone on hold, and hands off to a
+person whenever the contractor's rules say it should. The usual surprise is how
+few callers ask whether it is a person.
+
+## Can it stop the spam calls?
+Yes, known spam and robocall patterns can be filtered so they never reach the
+shop.
+
+## Reminders and reviews?
+Yes to both — appointment reminders before the visit, and a review request once
+the appointment window has passed, routed to Google Business Profile or wherever
+the contractor wants them.
+
+
+# ============================================================================
+# Dental practices — real questions, real answers
+
+## Is it HIPAA compliant?
+A Business Associate Agreement is in place with the voice infrastructure the
+agent runs on, and OnDuty Agent signs a BAA with the practice as well. The
+practice controls what is stored — everything, PII excluded, or basic call
+attributes only — and retention from one day to two years. Recording access is
+through signed, expiring links.
+Do NOT say "we are HIPAA compliant" as a flat badge. Say what is actually in
+place, which is more convincing to the person who evaluates this.
+
+## Does it work with Dentrix / Eaglesoft / Open Dental / Curve?
+It books against the schedule. For a named practice-management system, ask which
+one they run and say the team confirms exactly how it connects on the call. Do
+not claim a specific integration before it is confirmed.
+
+## Can it verify insurance?
+It captures carrier and plan during the call so the front desk has it. Actual
+eligibility verification is a setup question — take it to the demo rather than
+promising it.
+
+## What happens with a dental emergency after hours?
+It follows the practice's own on-call protocol: recognise the emergency, reach
+the on-call clinician, or give the practice's instructions. It does not leave a
+message nobody hears until Monday.
+
+## Will it handle reschedules and cancellations?
+Yes, and it offers the slot a cancellation just opened to the next caller, which
+is where most of the recovered revenue comes from.
+
+## What about recall and reactivation calls?
+Yes — the practice sets who gets contacted and when.
+
+## Can it answer treatment or clinical questions?
+No. Anything clinical routes to a person. It handles scheduling, insurance
+capture at the administrative level, hours, location and new-patient intake.
+
+## Our front desk is already good. Why would we need this?
+Not a replacement question — a coverage one. The calls it catches are the ones
+ringing while the team is chairside, the ones after closing, and the second line
+when the first is busy. Ask what happens to a call at 5:40pm on a Friday right
+now.
+
+## What does the front desk actually get?
+A completed new-patient record from the call — contact, carrier and plan, reason
+for the visit — instead of a name on a message pad.
+
+## Reminders and reviews?
+Yes. Appointment reminders before the visit, and an automatic review request
+once the appointment window passes, routed to Google Business Profile.
+
+## Can it block spam calls?
+Yes — filtered before they reach the practice.
+
+
+# ============================================================================
+# Med spas and aesthetic clinics — real questions, real answers
+
+## Can it answer questions about our treatments?
+Yes, from the clinic's own service menu — what a treatment involves, what to
+expect, roughly how long it takes. Anything clinical, including suitability and
+contraindications, routes to a provider. It never assesses whether someone is a
+candidate.
+
+## Can it take a deposit to hold the appointment?
+No. The agent never collects payment details, card numbers or anything similar.
+Deposits are handled by the clinic's own system after booking. This is a hard
+rule, not a configuration option.
+
+## Can it send consent and intake forms?
+Yes. The consult details are collected on the call and routed to the provider,
+and forms needing a signature go out by text straight after.
+
+## Is it HIPAA compliant?
+A BAA is in place with the voice infrastructure, and OnDuty Agent signs one with
+the clinic. Storage and retention are set by the clinic. Say what is in place
+rather than claiming a badge.
+
+## We're a single-room clinic — I am the front desk.
+That is the strongest case for it. Nobody steps out of a treatment to catch a
+ringing phone, and the enquiry is not lost either. Ask what happens to a call
+while they are with a client right now.
+
+## Most of our enquiries come in at night.
+That is the pattern across the industry — aesthetic interest is impulsive and
+arrives outside business hours. The agent treats 11pm the same as 11am and books
+at the moment of interest rather than calling back the next day.
+
+## Will it sound pushy? Our clients are sensitive about this.
+It is built warm and unhurried. Discretionary purchases do not respond to
+pressure, and people can hear a script. It also books people without making them
+explain why they are calling, which matters more in this field than most.
+
+## Can it handle no-shows and gaps?
+Yes — rebooking follow-up on cancellations, and reminders before the
+appointment, which is the cheapest way to cut no-shows.
+
+## Review requests?
+Yes, automatically once the appointment window has passed, routed wherever the
+clinic wants them.
+
+## Does it work with our booking software?
+Ask which one and take it to the demo. Do not claim a named integration.
+
+
+# ============================================================================
+# Behavioral health providers — real questions, real answers
+
+## How does it handle someone in crisis?
+Crisis language stops the booking flow immediately. The agent surfaces the 988
+Suicide and Crisis Lifeline, follows the practice's own on-call protocol, and
+directs anyone in immediate danger to 911. It does not continue scheduling, does
+not counsel, and does not ask for clinical detail.
+This is the first thing a clinical director wants to hear. Answer it fully and
+without hedging.
+
+## Will it do clinical screening — PHQ-9, GAD-7, risk assessment?
+No, and that is deliberate. Administering a validated instrument is a clinical
+act, not paperwork. Somebody endorsing suicidal ideation midway through a form,
+to software, is exposure no practice should take on. Formal instruments stay
+with clinicians.
+It takes the administrative intake: contact details, carrier and plan, what is
+going on in general terms, availability, referral source.
+
+## Is it HIPAA compliant?
+A BAA is in place with the voice infrastructure, and OnDuty Agent signs one with
+the practice. The practice sets what is stored — everything, PII excluded, or
+basic attributes only — and retention from one day to two years. Recording access
+is through signed, expiring links.
+
+## We treat substance use disorders. Does 42 CFR Part 2 apply?
+Flag it rather than answering. Part 2 is stricter than HIPAA for substance use
+treatment records, and the configuration for a Part 2 programme is not the same
+as for a general practice. Say: "That's a real distinction and it changes the
+setup — worth raising on the call so the team configures it correctly from the
+start rather than retrofitting."
+Do not claim Part 2 compliance on this line.
+
+## We're full and not taking new clients. What use is this?
+This is the most common situation in the field, and it is where the agent earns
+its place. "We're not taking clients right now" ends the call permanently. The
+agent instead says who is accepting, who takes that caller's plan, and how long
+the wait is, then puts them on the waitlist — so a caller who would have
+disappeared becomes a future client.
+
+## What does the clinician actually receive?
+A completed intake before the callback: who this is, their carrier and plan,
+what is going on in general terms, when they are free, who referred them. The
+return call starts informed instead of starting from a name and a number.
+
+## Will it transfer to a clinician?
+Yes. When the practice's protocol says a person should take the call, it hands
+over warmly and stays on the line until someone picks up. No queue, no callback
+promise, no making the caller start over.
+
+## Our callers are vulnerable. Will this feel cold?
+It answers immediately with no hold music and no queue, and it does not rush. It
+also does not have an off day. A front desk at 4:55 on a Friday is not the same
+front desk as 9am Monday.
+
+## Can it handle insurance questions?
+General ones — whether the practice takes a plan, whether they are accepting
+clients. Anything requiring eligibility verification goes to staff.
+
+## Reminders and reviews?
+Reminders yes, which matter more here than most fields given no-show rates.
+Review requests are available but many behavioral health practices choose not to
+use them for privacy reasons — offer it as an option, never assume.
+
+
+# ============================================================================
+# Proof, numbers and how to make the case
+
+## The rule about statistics
+Do not cite a statistic you cannot source. A prospect who disproves one number
+stops believing the rest of the call, and a business owner who has heard vendor
+statistics all year is already discounting them.
+
+The strongest evidence in this conversation is not an industry figure. It is the
+caller's own arithmetic, in their own words. Their number cannot be wrong, they
+cannot argue with it, and they remember it after the call.
+
+## Get their numbers instead — the three questions
+Ask these naturally, one at a time, across the conversation. Never fire them off
+as a list.
+
+1. "Who's answering your phone right now — and what happens after you close?"
+2. "Roughly how many calls do you think go unanswered in a week?"
+3. "What's one booked [job / case / patient / consult] actually worth to you?"
+
+Then let them do the multiplication themselves. Do not do it for them and do not
+announce the total triumphantly. If they say four missed calls a week and eight
+hundred dollars a job, they have already made the argument. A quiet "that adds
+up" does more than a pitch.
+
+If they do not know how many they miss, that is itself the finding: "Most people
+don't — that's usually the first thing the call logs show."
+
+## Verified external references
+Only two things in this file are safe to say aloud as fact, and both should be
+re-checked before launch.
+
+- Speed of response matters enormously for inbound leads. The widely cited
+  research here is the Lead Response Management study written up in Harvard
+  Business Review ("The Short Life of Online Sales Leads", 2011), which found
+  that contacting a lead within the first few minutes dramatically outperformed
+  waiting even half an hour.
+  STATUS: VERIFY the exact multiplier before quoting a number. Safe phrasing
+  without a number: "There's well-known research on response time — the firm that
+  answers first usually gets the business."
+
+- For law firms specifically, Clio's annual Legal Trends Report covers client
+  intake and responsiveness and is the industry-standard reference.
+  STATUS: VERIFY the current year's figures before quoting any.
+
+## Numbers NOT to use
+Common figures circulating in this industry — the share of small-business calls
+that go unanswered, the percentage of callers who never call back, market-size
+forecasts for voice AI — trace back to vendor marketing rather than research.
+Do not say them. If a prospect quotes one at you, do not argue; move to their
+own numbers.
+
+## Ty: fill this in
+The section below is empty on purpose. Replace it before launch with real,
+attributable outcomes — named where you have permission, anonymised where you do
+not ("a twelve-chair dental group in Texas"). One real result outperforms every
+statistic above.
+
+REAL RESULTS:
+(none yet — leave empty rather than inventing)
+

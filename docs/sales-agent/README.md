@@ -8,8 +8,22 @@ how it handles the call is the strongest argument the site makes.
 | File | What it is |
 |---|---|
 | `PROMPT.txt` | The whole prompt. Copy the file, paste into Retell. |
-| `kb/*.txt` | Knowledge base. Upload each file as its own document. |
+| `agent.json` | Whole agent as JSON — prompt, tools, settings, post-call fields. For Retell's builder or a bulk import. |
+| `kb/*.txt` | Knowledge base, eight files. Upload each as its own document. |
+| `kb/KNOWLEDGE-BASE-ALL.txt` | All eight in one file, if separate uploads are not practical. |
 | `tools.json` | Custom tool schemas. Replace every `[BRACKET]` first. |
+
+## Which format to use
+
+- **`agent.json`** — hand to Retell's AI agent builder, or use for a bulk import.
+  Field names follow Retell's documented shape but were written without access to
+  their live API, so check them before relying on an import. If anything is
+  rejected, create the agent in the dashboard and paste `llm.general_prompt`
+  into the prompt field instead — that always works.
+- **`PROMPT.txt`** — the same prompt as plain text, for pasting by hand.
+
+The two contain the identical prompt. `agent.json` just carries the settings and
+tool schemas with it.
 
 ## Knowledge base
 
@@ -29,6 +43,12 @@ the prompt, that is the point of them. Retell settings: **top_k 3-5**,
 | `08-proof-and-numbers.txt` | How to build the case from their numbers, and which stats NOT to use |
 
 `08` has a REAL RESULTS section left empty on purpose. Fill it before launch.
+
+**Separate files beat one combined file.** Retrieval scores each document on its
+own, so a dental caller is less likely to pull a paragraph about law firms when
+the industries live in separate documents. `kb/KNOWLEDGE-BASE-ALL.txt` exists for
+when the platform will not take eight uploads — it is the fallback, not the
+default. Uploading files also sidesteps the character limit on the paste box.
 
 ---
 
