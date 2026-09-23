@@ -5,8 +5,13 @@ sells OnDuty Agent itself: it qualifies the visitor's industry, finds what their
 phone is costing them, and books a 15-minute demo. It is also the product demo —
 how it handles the call is the strongest argument the site makes.
 
+**Start at `DEPLOY.md`** — it is the click-by-click for getting this live today.
+
 | File | What it is |
 |---|---|
+| `DEPLOY.md` | Step by step, in order. Read this first. |
+| `agent-day1.json` | Day-one build: no Cal.com, no n8n, no transfer number needed. |
+| `PROMPT-DAY1.txt` | The day-one prompt as plain text. |
 | `PROMPT.txt` | The whole prompt. Copy the file, paste into Retell. |
 | `agent.json` | Whole agent as JSON — prompt, tools, settings, post-call fields. For Retell's builder or a bulk import. |
 | `kb/*.txt` | Knowledge base, eight files. Upload each as its own document. |
