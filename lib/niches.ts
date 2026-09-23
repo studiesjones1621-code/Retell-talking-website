@@ -284,9 +284,9 @@ export const niches: Niche[] = [
           "Checks the attorney's calendar and books the consult on the call — while the caller is still motivated.",
       },
       {
-        name: "Conflict-Check Prep",
+        name: "Consult Confirmations & Reminders",
         description:
-          "Captures opposing-party and matter details in a clean summary so your team can run the conflict check before the meeting.",
+          "A booked consultation is not a retained client. The agent confirms, reminds and reschedules, so the slot your attorney held is actually used.",
       },
       {
         name: "Transfers to the Right Person",
@@ -296,18 +296,31 @@ export const niches: Niche[] = [
       {
         name: "A Completed Intake, Not a Message",
         description:
-          "Works through your intake questions on the call — contact details, matter type, key dates, opposing parties, how they found you — and routes the finished sheet to the attorney or coordinator who should see it. They return the call already knowing the matter.",
+          "Works through your intake questions on the call — contact details, matter type, key dates, opposing parties, how they found you — and routes the finished sheet to the attorney or coordinator who should see it. Conflict check ready, and the callback starts with the matter already known.",
       },
     ],
 
-    differentiatorsHeading: "Careful about what it says.",
+    differentiatorsHeading: "Why not just an answering service?",
     differentiatorsSubcopy:
-      "An intake line for a law firm has to be disciplined. This one is built that way on purpose.",
+      "Because the call that becomes a case does not sound like the others, and a message pad cannot tell the difference.",
     differentiators: [
-      { title: "Never gives legal advice", description: "It captures and books. It does not opine on your caller's matter." },
-      { title: "Screens before it books", description: "Wrong jurisdiction and wrong practice area get filtered out early." },
-      { title: "Calm with distressed callers", description: "People call lawyers on the worst day of their year." },
-      { title: "Clean intake summaries", description: "Every call arrives written up, not as a two-line message." },
+      {
+        title: "It knows what a matter is",
+        description:
+          "Practice areas, jurisdictions, statutes of limitation. A general-purpose bot hears \"slip and fall\" and takes a message.",
+      },
+      {
+        title: "Three at once is three answered",
+        description: "No hold queue, no whoever-redials-fastest. Every caller gets a receptionist.",
+      },
+      {
+        title: "Calm with distressed callers",
+        description: "People call lawyers on the worst day of their year.",
+      },
+      {
+        title: "The same intake at 2 a.m. as at 10 a.m.",
+        description: "An answering service has good nights and bad ones. This asks every question, every time.",
+      },
     ],
 
     ctaHeading: "Stop losing cases to voicemail.",
