@@ -201,9 +201,9 @@ export const niches: Niche[] = [
           "Trained on your roster, so it knows who handles what. A gas smell, a commercial account down, a callback on a job already open — it puts those straight through to whoever is on call instead of taking a message.",
       },
       {
-        name: "Job Details Before the Truck Rolls",
+        name: "The Job Sheet, Filled Out For You",
         description:
-          "Captures make, model, symptom and access notes, then sends the write-up to dispatch so your tech arrives knowing what they are walking into.",
+          "Captures make, model, symptom, history and access notes on the call, then sends a completed write-up to dispatch and the assigned tech. They roll knowing what they are walking into, instead of phoning the customer back to ask.",
       },
     ],
 
@@ -294,9 +294,9 @@ export const niches: Niche[] = [
           "Trained on who does what at your firm. Urgent matters and existing clients go straight to the attorney or intake coordinator you nominate, rather than into a callback queue.",
       },
       {
-        name: "Intake Paperwork, Started on the Call",
+        name: "A Completed Intake, Not a Message",
         description:
-          "Collects the administrative intake — contact details, matter type, key dates, opposing parties — sends your retainer or questionnaire link while they are still engaged, and follows up on the ones that come back blank.",
+          "Works through your intake questions on the call — contact details, matter type, key dates, opposing parties, how they found you — and routes the finished sheet to the attorney or coordinator who should see it. They return the call already knowing the matter.",
       },
     ],
 
@@ -378,9 +378,9 @@ export const niches: Niche[] = [
           "Trained on your staff and who covers what. An anxious patient, a question only the doctor can answer, a case that needs the treatment coordinator — the agent hands the call over rather than taking a message.",
       },
       {
-        name: "New Patient Paperwork",
+        name: "New Patient Forms, Already Filled In",
         description:
-          "Takes the administrative details, texts your new-patient and insurance forms while the patient is still on the phone, and chases the ones that come back empty.",
+          "Takes the new-patient details on the call — contact, carrier and plan, reason for the visit — and hands your front desk a completed record rather than a name on a message pad. Remaining forms go out by text straight after.",
       },
     ],
 
@@ -460,9 +460,9 @@ export const niches: Niche[] = [
           "Trained on your providers and what each one treats. Clinical questions about a treatment go to a person who can actually answer them, never to an agent guessing.",
       },
       {
-        name: "Consult Paperwork, Sent Ahead",
+        name: "The Consult Sheet, Ready Before They Arrive",
         description:
-          "Collects what the booking needs, then sends your intake and consent forms straight after — so the client arrives prepared instead of filling in a clipboard in reception.",
+          "Collects what the consult needs on the call — what they are interested in, what they have had done, carrier details where relevant — and routes it to the provider. Consent forms, which need a signature, go out by text straight after.",
       },
     ],
 
@@ -542,9 +542,9 @@ export const niches: Niche[] = [
           "Trained on your team and your escalation protocol. When that protocol says a person should take this call, the agent hands it over warmly and stays on the line until someone picks up — no queue, no callback promise, no starting over.",
       },
       {
-        name: "Intake Paperwork, Not Clinical Assessment",
+        name: "A Completed Intake, Before the Callback",
         description:
-          "Collects the administrative intake — contact details, insurance, availability, referral source — and sends your clinical forms for the client to complete themselves. Screening questions and risk instruments stay with your clinicians, where they belong.",
+          "Works through your intake questions on the call — contact details, carrier and plan, what is going on in general terms, when they are free, who referred them — and routes the finished intake to the clinician or coordinator who should see it. They call back already knowing who this is and whether you take the plan, instead of starting from a name and number. Formal screening instruments still belong to your clinicians.",
       },
     ],
 
