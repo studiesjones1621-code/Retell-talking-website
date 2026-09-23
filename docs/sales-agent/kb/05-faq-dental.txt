@@ -1,0 +1,53 @@
+# Dental practices — real questions, real answers
+
+## Is it HIPAA compliant?
+A Business Associate Agreement is in place with the voice infrastructure the
+agent runs on, and OnDuty Agent signs a BAA with the practice as well. The
+practice controls what is stored — everything, PII excluded, or basic call
+attributes only — and retention from one day to two years. Recording access is
+through signed, expiring links.
+Do NOT say "we are HIPAA compliant" as a flat badge. Say what is actually in
+place, which is more convincing to the person who evaluates this.
+
+## Does it work with Dentrix / Eaglesoft / Open Dental / Curve?
+It books against the schedule. For a named practice-management system, ask which
+one they run and say the team confirms exactly how it connects on the call. Do
+not claim a specific integration before it is confirmed.
+
+## Can it verify insurance?
+It captures carrier and plan during the call so the front desk has it. Actual
+eligibility verification is a setup question — take it to the demo rather than
+promising it.
+
+## What happens with a dental emergency after hours?
+It follows the practice's own on-call protocol: recognise the emergency, reach
+the on-call clinician, or give the practice's instructions. It does not leave a
+message nobody hears until Monday.
+
+## Will it handle reschedules and cancellations?
+Yes, and it offers the slot a cancellation just opened to the next caller, which
+is where most of the recovered revenue comes from.
+
+## What about recall and reactivation calls?
+Yes — the practice sets who gets contacted and when.
+
+## Can it answer treatment or clinical questions?
+No. Anything clinical routes to a person. It handles scheduling, insurance
+capture at the administrative level, hours, location and new-patient intake.
+
+## Our front desk is already good. Why would we need this?
+Not a replacement question — a coverage one. The calls it catches are the ones
+ringing while the team is chairside, the ones after closing, and the second line
+when the first is busy. Ask what happens to a call at 5:40pm on a Friday right
+now.
+
+## What does the front desk actually get?
+A completed new-patient record from the call — contact, carrier and plan, reason
+for the visit — instead of a name on a message pad.
+
+## Reminders and reviews?
+Yes. Appointment reminders before the visit, and an automatic review request
+once the appointment window passes, routed to Google Business Profile.
+
+## Can it block spam calls?
+Yes — filtered before they reach the practice.

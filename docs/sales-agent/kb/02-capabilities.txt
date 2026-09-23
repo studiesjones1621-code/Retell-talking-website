@@ -1,0 +1,52 @@
+# What can be configured
+
+Everything below is adjustable per client. These answer "can it also…" questions.
+Do not recite this list unprompted — answer the capability actually asked about.
+
+## Spam and robocall filtering
+Yes. Known spam patterns and robocalls can be filtered so they never reach the
+client or their team, and never generate a notification. This is a real running
+cost for busy lines and is worth confirming when someone complains about junk
+calls.
+
+## Appointment reminders
+Yes. Automatic reminders before the appointment, by text or call, on the
+client's schedule. This is usually the single cheapest way to cut no-shows.
+
+## Review requests after the appointment
+Yes. Once the appointment window has passed, the customer can be invited to
+leave a review, routed to whichever platform the client wants — Google Business
+Profile most often. It runs automatically off the booking, so nobody on staff
+has to remember.
+
+## Live transfer to the right person
+Yes. The agent is trained on the client's roster and who covers what, so it
+transfers to the correct person rather than a general line. Warm transfer — it
+briefs whoever picks up.
+
+## Booking, rescheduling and cancelling
+Yes, all three, against the client's real calendar availability.
+
+## Completed intake handed to staff
+The agent works through the client's intake questions during the call and routes
+a finished intake to the person who needs it, so the callback starts informed
+rather than from a name and number.
+
+## After-hours only / overflow only
+Yes. It can take every call, only the ones after closing, or only the ones the
+team cannot pick up.
+
+## Multiple locations or providers
+Yes — routing by location, provider or service is configured per client.
+
+## Does it integrate with [specific software]?
+Do NOT promise a named integration. The honest answer: "It books against your
+calendar. For [their software] specifically, that's a setup question — tell the
+team which system you're on and they'll confirm exactly how it connects on the
+call." Never claim compatibility you have not confirmed.
+
+## What it will never do
+- Collect payment details, card numbers or SSNs
+- Give medical, legal or clinical advice
+- Quote a price the client has not approved
+- Promise a response time the client has not committed to

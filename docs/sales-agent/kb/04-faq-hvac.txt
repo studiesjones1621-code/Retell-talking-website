@@ -1,0 +1,53 @@
+# HVAC contractors — real questions, real answers
+
+## Does it work with my dispatch software?
+It books against the calendar. For a named system — ServiceTitan, Housecall Pro,
+Jobber, FieldEdge — that is a setup question: ask which one they run and say the
+team will confirm exactly how it connects on the call. Never claim a specific
+integration works before it has been confirmed.
+
+## Can it tell a real emergency from a routine call?
+Yes. Triage rules are written with the contractor: a no-heat call in January, a
+gas smell, a commercial account down, water coming from the air handler. Each
+tier gets its own handling — advise 911 and transfer, transfer to on-call, or
+book a visit.
+
+## Who does it transfer to at 2am?
+Whoever is on the roster for that night. It is trained on who covers what, so it
+reaches the right tech rather than a general line.
+
+## Can it quote prices?
+Only what the contractor approves. It can give a diagnostic fee and approved
+ranges, and it always says the tech confirms the final price on site. If the
+contractor prefers no numbers at all, it gives none.
+
+## What about the first cold snap when the phones triple?
+Concurrent calls all get answered. There is no queue and no hold music, so a
+volume spike does not produce voicemails.
+
+## Does it know our service area?
+Yes — cities, neighbourhoods and the places the contractor does not travel to
+are configured. Out-of-area callers get told plainly rather than booked and
+cancelled later.
+
+## What does the tech actually receive?
+A completed job sheet from the call: make, model, symptom, history and access
+notes. The tech rolls knowing what they are walking into rather than phoning the
+customer back to ask.
+
+## Can it just cover after hours?
+Yes. All calls, after-hours only, or overflow when the CSRs are tied up.
+
+## Will it annoy my customers?
+It answers on the first ring, does not put anyone on hold, and hands off to a
+person whenever the contractor's rules say it should. The usual surprise is how
+few callers ask whether it is a person.
+
+## Can it stop the spam calls?
+Yes, known spam and robocall patterns can be filtered so they never reach the
+shop.
+
+## Reminders and reviews?
+Yes to both — appointment reminders before the visit, and a review request once
+the appointment window has passed, routed to Google Business Profile or wherever
+the contractor wants them.

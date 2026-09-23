@@ -1,0 +1,62 @@
+# Behavioral health providers — real questions, real answers
+
+## How does it handle someone in crisis?
+Crisis language stops the booking flow immediately. The agent surfaces the 988
+Suicide and Crisis Lifeline, follows the practice's own on-call protocol, and
+directs anyone in immediate danger to 911. It does not continue scheduling, does
+not counsel, and does not ask for clinical detail.
+This is the first thing a clinical director wants to hear. Answer it fully and
+without hedging.
+
+## Will it do clinical screening — PHQ-9, GAD-7, risk assessment?
+No, and that is deliberate. Administering a validated instrument is a clinical
+act, not paperwork. Somebody endorsing suicidal ideation midway through a form,
+to software, is exposure no practice should take on. Formal instruments stay
+with clinicians.
+It takes the administrative intake: contact details, carrier and plan, what is
+going on in general terms, availability, referral source.
+
+## Is it HIPAA compliant?
+A BAA is in place with the voice infrastructure, and OnDuty Agent signs one with
+the practice. The practice sets what is stored — everything, PII excluded, or
+basic attributes only — and retention from one day to two years. Recording access
+is through signed, expiring links.
+
+## We treat substance use disorders. Does 42 CFR Part 2 apply?
+Flag it rather than answering. Part 2 is stricter than HIPAA for substance use
+treatment records, and the configuration for a Part 2 programme is not the same
+as for a general practice. Say: "That's a real distinction and it changes the
+setup — worth raising on the call so the team configures it correctly from the
+start rather than retrofitting."
+Do not claim Part 2 compliance on this line.
+
+## We're full and not taking new clients. What use is this?
+This is the most common situation in the field, and it is where the agent earns
+its place. "We're not taking clients right now" ends the call permanently. The
+agent instead says who is accepting, who takes that caller's plan, and how long
+the wait is, then puts them on the waitlist — so a caller who would have
+disappeared becomes a future client.
+
+## What does the clinician actually receive?
+A completed intake before the callback: who this is, their carrier and plan,
+what is going on in general terms, when they are free, who referred them. The
+return call starts informed instead of starting from a name and a number.
+
+## Will it transfer to a clinician?
+Yes. When the practice's protocol says a person should take the call, it hands
+over warmly and stays on the line until someone picks up. No queue, no callback
+promise, no making the caller start over.
+
+## Our callers are vulnerable. Will this feel cold?
+It answers immediately with no hold music and no queue, and it does not rush. It
+also does not have an off day. A front desk at 4:55 on a Friday is not the same
+front desk as 9am Monday.
+
+## Can it handle insurance questions?
+General ones — whether the practice takes a plan, whether they are accepting
+clients. Anything requiring eligibility verification goes to staff.
+
+## Reminders and reviews?
+Reminders yes, which matter more here than most fields given no-show rates.
+Review requests are available but many behavioral health practices choose not to
+use them for privacy reasons — offer it as an option, never assume.

@@ -205,6 +205,11 @@ export const niches: Niche[] = [
         description:
           "Captures make, model, symptom, history and access notes on the call, then sends a completed write-up to dispatch and the assigned tech. They roll knowing what they are walking into, instead of phoning the customer back to ask.",
       },
+      {
+        name: "Reminders, Then the Review Ask",
+        description:
+          "Texts the reminder so the truck does not roll to an empty house, and once the appointment window has passed invites the customer to leave a review — straight to your Google profile, with nobody on the team having to remember.",
+      },
     ],
 
     differentiatorsHeading: "Why not an answering service?",
@@ -309,6 +314,11 @@ export const niches: Niche[] = [
           "Trained on who does what at your firm. Urgent matters and existing clients go straight to the attorney or intake coordinator you nominate, rather than into a callback queue.",
       },
       {
+        name: "Reviews, Asked For at the Right Moment",
+        description:
+          "Once the consultation has been and gone, the agent invites the client to review the firm — automatically, on your Google profile, at the one moment they are most likely to actually do it.",
+      },
+      {
         name: "A Completed Intake, Not a Message",
         description:
           "Works through your intake questions on the call — contact details, matter type, key dates, opposing parties, how they found you — and routes the finished sheet to the attorney or coordinator who should see it. Conflict check ready, and the callback starts with the matter already known.",
@@ -410,6 +420,11 @@ export const niches: Niche[] = [
         description:
           "Takes the new-patient details on the call — contact, carrier and plan, reason for the visit — and hands your front desk a completed record rather than a name on a message pad. Remaining forms go out by text straight after.",
       },
+      {
+        name: "Reminders, Then the Review Ask",
+        description:
+          "Reminders before the appointment, which is the cheapest no-show reduction there is — and once the visit is done, an automatic invitation to review the practice on Google.",
+      },
     ],
 
     differentiatorsHeading: "Why not another front-desk hire?",
@@ -508,6 +523,11 @@ export const niches: Niche[] = [
         description:
           "Collects what the consult needs on the call — what they are interested in, what they have had done, carrier details where relevant — and routes it to the provider. Consent forms, which need a signature, go out by text straight after.",
       },
+      {
+        name: "Reminders, Then the Review Ask",
+        description:
+          "Reminders before the appointment to protect the slot, and once the treatment window has passed, an invitation to review the clinic — on the platform where aesthetic clients actually look before booking.",
+      },
     ],
 
     differentiatorsHeading: "Why not call them back in the morning?",
@@ -600,6 +620,11 @@ export const niches: Niche[] = [
         name: "Warm Transfer to Your On-Call Clinician",
         description:
           "Trained on your team and your escalation protocol. When that protocol says a person should take this call, the agent hands it over warmly and stays on the line until someone picks up — no queue, no callback promise, no starting over.",
+      },
+      {
+        name: "Reminders, and Reviews Only If You Want Them",
+        description:
+          "Reminders before the intake appointment, where no-show rates are highest of any field we work in. Review requests are available too, but plenty of practices here decline them on privacy grounds — it stays switched off unless you ask for it.",
       },
       {
         name: "A Completed Intake, Before the Callback",

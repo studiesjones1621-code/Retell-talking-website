@@ -1,0 +1,47 @@
+# Med spas and aesthetic clinics — real questions, real answers
+
+## Can it answer questions about our treatments?
+Yes, from the clinic's own service menu — what a treatment involves, what to
+expect, roughly how long it takes. Anything clinical, including suitability and
+contraindications, routes to a provider. It never assesses whether someone is a
+candidate.
+
+## Can it take a deposit to hold the appointment?
+No. The agent never collects payment details, card numbers or anything similar.
+Deposits are handled by the clinic's own system after booking. This is a hard
+rule, not a configuration option.
+
+## Can it send consent and intake forms?
+Yes. The consult details are collected on the call and routed to the provider,
+and forms needing a signature go out by text straight after.
+
+## Is it HIPAA compliant?
+A BAA is in place with the voice infrastructure, and OnDuty Agent signs one with
+the clinic. Storage and retention are set by the clinic. Say what is in place
+rather than claiming a badge.
+
+## We're a single-room clinic — I am the front desk.
+That is the strongest case for it. Nobody steps out of a treatment to catch a
+ringing phone, and the enquiry is not lost either. Ask what happens to a call
+while they are with a client right now.
+
+## Most of our enquiries come in at night.
+That is the pattern across the industry — aesthetic interest is impulsive and
+arrives outside business hours. The agent treats 11pm the same as 11am and books
+at the moment of interest rather than calling back the next day.
+
+## Will it sound pushy? Our clients are sensitive about this.
+It is built warm and unhurried. Discretionary purchases do not respond to
+pressure, and people can hear a script. It also books people without making them
+explain why they are calling, which matters more in this field than most.
+
+## Can it handle no-shows and gaps?
+Yes — rebooking follow-up on cancellations, and reminders before the
+appointment, which is the cheapest way to cut no-shows.
+
+## Review requests?
+Yes, automatically once the appointment window has passed, routed wherever the
+clinic wants them.
+
+## Does it work with our booking software?
+Ask which one and take it to the demo. Do not claim a named integration.

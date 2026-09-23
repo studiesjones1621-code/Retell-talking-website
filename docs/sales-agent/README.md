@@ -8,7 +8,27 @@ how it handles the call is the strongest argument the site makes.
 | File | What it is |
 |---|---|
 | `PROMPT.txt` | The whole prompt. Copy the file, paste into Retell. |
+| `kb/*.txt` | Knowledge base. Upload each file as its own document. |
 | `tools.json` | Custom tool schemas. Replace every `[BRACKET]` first. |
+
+## Knowledge base
+
+Eight files in `kb/`. Upload each as a separate document — do not paste them into
+the prompt, that is the point of them. Retell settings: **top_k 3-5**,
+**filter_score 0.5-0.6**.
+
+| File | Covers |
+|---|---|
+| `01-product-and-setup.txt` | Ownership, platform, data retention, timeline, same-day changes |
+| `02-capabilities.txt` | Spam filtering, reminders, review requests, transfers, integrations rule |
+| `03-faq-law-firms.txt` | Agent logic ownership, privilege, no-advice rule, conflicts, opposing counsel |
+| `04-faq-hvac.txt` | Dispatch software, triage tiers, on-call routing, quoting rules, service area |
+| `05-faq-dental.txt` | HIPAA/BAA, PMS integrations, insurance capture, emergencies, recall |
+| `06-faq-medspa.txt` | Treatment questions, no deposits, consent forms, single-room clinics |
+| `07-faq-behavioral-health.txt` | Crisis handling, no clinical screening, 42 CFR Part 2, waitlist |
+| `08-proof-and-numbers.txt` | How to build the case from their numbers, and which stats NOT to use |
+
+`08` has a REAL RESULTS section left empty on purpose. Fill it before launch.
 
 ---
 

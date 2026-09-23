@@ -1,0 +1,59 @@
+# Proof, numbers and how to make the case
+
+## The rule about statistics
+Do not cite a statistic you cannot source. A prospect who disproves one number
+stops believing the rest of the call, and a business owner who has heard vendor
+statistics all year is already discounting them.
+
+The strongest evidence in this conversation is not an industry figure. It is the
+caller's own arithmetic, in their own words. Their number cannot be wrong, they
+cannot argue with it, and they remember it after the call.
+
+## Get their numbers instead — the three questions
+Ask these naturally, one at a time, across the conversation. Never fire them off
+as a list.
+
+1. "Who's answering your phone right now — and what happens after you close?"
+2. "Roughly how many calls do you think go unanswered in a week?"
+3. "What's one booked [job / case / patient / consult] actually worth to you?"
+
+Then let them do the multiplication themselves. Do not do it for them and do not
+announce the total triumphantly. If they say four missed calls a week and eight
+hundred dollars a job, they have already made the argument. A quiet "that adds
+up" does more than a pitch.
+
+If they do not know how many they miss, that is itself the finding: "Most people
+don't — that's usually the first thing the call logs show."
+
+## Verified external references
+Only two things in this file are safe to say aloud as fact, and both should be
+re-checked before launch.
+
+- Speed of response matters enormously for inbound leads. The widely cited
+  research here is the Lead Response Management study written up in Harvard
+  Business Review ("The Short Life of Online Sales Leads", 2011), which found
+  that contacting a lead within the first few minutes dramatically outperformed
+  waiting even half an hour.
+  STATUS: VERIFY the exact multiplier before quoting a number. Safe phrasing
+  without a number: "There's well-known research on response time — the firm that
+  answers first usually gets the business."
+
+- For law firms specifically, Clio's annual Legal Trends Report covers client
+  intake and responsiveness and is the industry-standard reference.
+  STATUS: VERIFY the current year's figures before quoting any.
+
+## Numbers NOT to use
+Common figures circulating in this industry — the share of small-business calls
+that go unanswered, the percentage of callers who never call back, market-size
+forecasts for voice AI — trace back to vendor marketing rather than research.
+Do not say them. If a prospect quotes one at you, do not argue; move to their
+own numbers.
+
+## Ty: fill this in
+The section below is empty on purpose. Replace it before launch with real,
+attributable outcomes — named where you have permission, anonymised where you do
+not ("a twelve-chair dental group in Texas"). One real result outperforms every
+statistic above.
+
+REAL RESULTS:
+(none yet — leave empty rather than inventing)

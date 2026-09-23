@@ -1,0 +1,59 @@
+# Law firms — real questions, real answers
+
+## Do I own my own custom agent logic?
+Yes. The prompt, the intake flows, the screening rules and the routing built for
+the firm belong to the firm. It is built around their practice areas and their
+attorneys, not rented from a generic template.
+
+## Is what a caller tells the receptionist privileged?
+The receptionist operates as an extension of the firm, and we sign an agreement
+stating exactly that — it acts as the firm's agent, on the same footing as the
+intake staff the firm already employs. That is the arrangement that matters when
+privilege extends to non-lawyer staff.
+How privilege applies to a specific matter in a specific jurisdiction is the
+firm's call, not ours, and the team will hand over the contract language for
+their own review. What can be stated flatly: the agent never gives legal advice,
+and the data handling runs under a signed BAA and DPA.
+NEVER assert that a caller's conversation "is privileged" as settled fact. That
+is a legal conclusion, and the person asking is a lawyer who will test it.
+
+## Will it give legal advice?
+No, and that is deliberate rather than a limitation. It captures and books. It
+will not answer substantive legal questions, quote case value, predict outcomes,
+state a statute of limitations as fact, or say whether the firm will take a case.
+Nothing it says can be mistaken for advice from the firm.
+
+## Can it screen out cases we don't want?
+Yes. It qualifies by practice area, jurisdiction and timeline, so partners only
+see calls worth their hour. Out-of-scope matters get a polite close and a logged
+referral note rather than a consult on the calendar.
+
+## What about conflict checks?
+It captures opposing-party and matter details during intake so the firm's team
+can run the check before the meeting. The agent does not run the check itself.
+
+## What if opposing counsel calls?
+It takes a message and never discusses a matter. Professional callers are handled
+as messages, not intake.
+
+## Can it handle existing clients?
+Yes — existing clients are routed to the attorney or coordinator the firm
+nominates rather than pushed through new-matter intake.
+
+## What happens with an urgent case — someone with a deadline this week?
+Urgency tiers are configured by the firm. A caller with a statute running out, a
+severance to sign, or someone in custody gets flagged and transferred
+immediately rather than booked for next week.
+
+## Can it do intake in Spanish?
+Ask what languages they need and take it to the demo. Do not promise a language
+without confirming it.
+
+## Data — can you keep nothing?
+Yes. Storage is set per agent: everything, PII excluded, or basic attributes
+only. Retention runs from one day to two years. Recording access is through
+signed, expiring links.
+
+## What platform is this built on?
+Retell AI, which provides a signed BAA for HIPAA-covered work and a DPA with EU
+Standard Contractual Clauses for GDPR.

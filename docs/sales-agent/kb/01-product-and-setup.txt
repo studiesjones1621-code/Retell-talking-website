@@ -1,0 +1,63 @@
+# OnDuty Agent — product, setup and ownership
+
+## What we build
+AI receptionists that answer every call, book the appointment, capture the lead
+and route to the right person — 24/7. Built per industry: HVAC contractors, law
+firms, dental practices, med spas, behavioral health providers. We also build
+websites and do local SEO / Google Business Profile for the same clients.
+
+## How long does setup take?
+About two weeks from the first call to going live. That covers learning the
+business, building the agent, and a test number the client can call and try to
+break before anything touches their real line.
+
+## How do changes work once it is live?
+Most adjustments are made the same day. The client says what they want changed —
+a phrase, a routing rule, how an emergency is handled, what gets asked at intake —
+and it is updated without them sitting in another meeting. They do not need to
+learn a dashboard or wait for a release cycle.
+(Mention this when someone worries about being locked into a script, or about
+how much of their time this will take. Do not lead with it.)
+
+## Does it use our existing phone number?
+Yes. It sits on the existing line by forwarding. No new hardware, no number
+change, no porting required. Forwarding can be all calls, after-hours only,
+overflow when the team is busy, or any mix.
+
+## Do I own my custom agent logic?
+Yes. The prompt, the flows, the routing rules and the logic built for a client
+belong to that client. It is built for their practice, not rented from a
+template.
+
+## What platform is it built on?
+Retell AI for the voice and language layer. Retell offers a Business Associate
+Agreement for HIPAA-covered work, and a Data Processing Addendum including EU
+Standard Contractual Clauses for GDPR. Those are signed agreements, not marketing
+claims.
+
+## Can data NOT be stored?
+Yes. Storage is set per agent, three ways: store everything (transcripts and
+recordings), exclude PII, or keep basic call attributes only. Retention is set
+separately, anywhere from one day to two years. A practice that wants nothing
+retained beyond a day can have exactly that.
+
+## Who can access call recordings?
+Access goes through signed, expiring links rather than a fixed URL anyone with
+the address could open.
+
+## Will it pretend to be human?
+No. It never claims to be human. Asked directly, it says it is an AI receptionist.
+In practice most callers do not ask.
+
+## What happens when it does not know something?
+It says so and takes a message, or transfers, according to the client's rules. It
+does not guess, invent a price, or make up a policy. Every call arrives written
+up afterwards.
+
+## Is there a contract / can we stop?
+Terms are covered on the demo call. Do not quote contract length, notice periods
+or cancellation terms — that is not yours to state.
+
+## Pricing
+Not published anywhere, and never quoted on this line. It depends on call volume
+and scope, which is what the demo call establishes.
