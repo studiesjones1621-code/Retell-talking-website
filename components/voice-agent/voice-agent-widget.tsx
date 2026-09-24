@@ -5,6 +5,7 @@ import { Loader2, Mic, MicOff, PhoneCall, PhoneOff, X } from "lucide-react"
 import { useEffect, useState } from "react"
 
 import { business, hasPhone, phoneHref, phoneLabel } from "@/lib/business"
+import { OrbLauncher } from "@/components/voice-agent/orb-launcher"
 import { useVoiceAgent } from "@/components/voice-agent/voice-agent-provider"
 
 /** Rotating prompts shown in the attention bubble. First one is the configured CTA. */
@@ -213,8 +214,18 @@ function CallPanel() {
 }
 
 export function VoiceAgentWidget() {
+  /*
+   * An orb share link takes over when one is configured. It needs no API key
+   * and no particular agent type, so it is the path that works when the
+   * token-minting route is being refused — which is worth having, because the
+   * launcher is this site's only conversion action.
+   */
+  const orbUrl = process.env.NEXT_PUBLIC_RETELL_ORB_URL?.trim()
+
   const { isOpen, open, hasEngaged, markEngaged } = useVoiceAgent()
   const { visible, message } = useRotatingBubble(!isOpen && !hasEngaged)
+
+  if (orbUrl) return <OrbLauncher url={orbUrl} />
 
   return (
     <div className="fixed bottom-5 right-5 z-[60] flex flex-col items-end gap-3 sm:bottom-6 sm:right-6">
