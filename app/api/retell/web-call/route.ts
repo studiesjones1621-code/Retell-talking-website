@@ -63,7 +63,21 @@ function dynamicVariables(niche: string | null) {
   }
 }
 
-async function createWebCall(apiKey: string, agentId: string, niche: string | null) {
+/**
+ * `withVariables: false` drops `retell_llm_dynamic_variables` from the body.
+ *
+ * That field is specific to Retell-LLM agents. An agent built with Retell's
+ * conversation-flow builder can reject a body carrying it, which fails the call
+ * outright — so a refusal is retried without it. The niche is then unknown to
+ * the agent, and the prompt handles that by simply asking, which is why losing
+ * the variables costs a question rather than the call.
+ */
+async function createWebCall(
+  apiKey: string,
+  agentId: string,
+  niche: string | null,
+  withVariables = true,
+) {
   return fetch("https://api.retellai.com/v2/create-web-call", {
     method: "POST",
     headers: {
@@ -72,7 +86,7 @@ async function createWebCall(apiKey: string, agentId: string, niche: string | nu
     },
     body: JSON.stringify({
       agent_id: agentId,
-      retell_llm_dynamic_variables: dynamicVariables(niche),
+      ...(withVariables ? { retell_llm_dynamic_variables: dynamicVariables(niche) } : {}),
     }),
   })
 }
@@ -125,6 +139,22 @@ export async function POST(request: Request) {
       const fallbackId = await findExistingAgent(apiKey)
       if (fallbackId && fallbackId !== agentId) {
         res = await createWebCall(apiKey, fallbackId, niche)
+      }
+    }
+
+    // A body Retell will not accept is retried without the dynamic variables,
+    // which is the only part of it that depends on the agent's response engine.
+    if (!res.ok && (res.status === 400 || res.status === 422)) {
+      console.error(
+        `create-web-call rejected with ${res.status}; retrying without dynamic variables.`,
+      )
+      const retried = await createWebCall(apiKey, agentId, niche, false)
+      if (retried.ok) {
+        console.error(
+          "Retry succeeded — this agent does not accept retell_llm_dynamic_variables, " +
+            "so the niche is not being passed and the agent will ask instead.",
+        )
+        res = retried
       }
     }
 
