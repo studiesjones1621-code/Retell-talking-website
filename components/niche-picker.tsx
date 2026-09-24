@@ -22,7 +22,7 @@ export function NichePicker() {
           </h2>
           <p className="mt-4 text-lg text-white/60">
             A no-heat call at 2 a.m. and someone who finally worked up the courage to call a
-            therapist are not the same phone call. Pick yours.
+            therapist are not the same phone call. Which one is your phone?
           </p>
         </div>
 
