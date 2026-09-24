@@ -13,6 +13,10 @@ import Script from "next/script"
  * To use this one instead, in app/page.tsx swap <VoiceAgentWidget /> for
  * <RetellOfficialWidget /> (the provider is then no longer required).
  *
+ * Prefer the custom launcher whenever the site is hosted somewhere you control:
+ * it needs only the private API key (which never leaves the server) and it is
+ * brand-matched. This one exists for the case where you cannot run a server.
+ *
  * NOTE: this path talks to Retell straight from the browser using the PUBLIC
  * key, so the site's domain — plus `localhost` for local testing — must be
  * listed under Allowed Domains in the Retell dashboard's Public Keys settings,
@@ -32,7 +36,7 @@ export function RetellOfficialWidget() {
       data-public-key={publicKey}
       data-voice-agent-id={agentId}
       data-title="Talk to us"
-      data-color="#5ee0d6"
+      data-color="#b6f23e"
     />
   )
 }
