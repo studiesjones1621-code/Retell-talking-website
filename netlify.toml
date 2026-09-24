@@ -1,0 +1,20 @@
+# Netlify build config for this Next.js site.
+#
+# Netlify usually detects Next.js on its own, but declaring it here removes the
+# guesswork: it pins the Node version the build runs on and names the runtime
+# explicitly, so a build cannot silently fall back to treating this as a static
+# site and publishing an empty directory.
+#
+# Environment variables go in the Netlify UI, not here — Site configuration →
+# Environment variables. Never commit keys to this file.
+
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  # Next 16 needs a modern Node. Netlify's default can lag behind.
+  NODE_VERSION = "22"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"

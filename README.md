@@ -190,6 +190,34 @@ This was not run during the build: the supplied Gemini key returned HTTP 429
 
 ---
 
+## Deploying on Netlify
+
+`netlify.toml` in the repo root configures the build, so connecting the repo is
+the whole job:
+
+1. Netlify → **Add new site → Import an existing project** → pick this repo.
+2. Branch to deploy: **claude/ondutyagent-talking-website-ev0b71** (this repo has
+   no `main`).
+3. Leave the build command and publish directory alone — `netlify.toml` sets
+   them, and Netlify installs the Next.js runtime named there.
+4. **Site configuration → Environment variables**, add whichever apply:
+
+   | Variable | Needed for |
+   |---|---|
+   | `NEXT_PUBLIC_RETELL_ORB_URL` | the voice launcher, using a Retell orb share link. No API key involved. |
+   | `RETELL_API_KEY` | the alternative launcher path, which mints a call token server-side |
+
+   Set the orb URL and it takes over the launcher; the agent id is already
+   committed in `lib/business.ts`.
+5. Deploy, then point the domain at this site under **Domain management**.
+
+**Snippet injection is not needed here.** That approach exists for a site hosted
+outside this repo — it injects a floating button into pages the repo does not
+control. This site has the launcher built in, so configuring both would put two
+buttons on the page.
+
+---
+
 ## 6. Deploy free on Vercel (no command line)
 
 **You can deploy before the agent exists.** The agent ID is just an environment
