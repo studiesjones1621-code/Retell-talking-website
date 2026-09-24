@@ -163,9 +163,21 @@ export function VoiceAgentProvider({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ niche }),
       })
-      const data = (await res.json()) as { accessToken?: string; message?: string }
+      const data = (await res.json()) as {
+        accessToken?: string
+        message?: string
+        diagnosis?: string
+        upstreamStatus?: number
+      }
 
       if (!res.ok || !data.accessToken) {
+        // The visitor gets the friendly line; whoever opens the console gets
+        // the actual cause, so a failure is diagnosable without server logs.
+        if (data.diagnosis) {
+          console.error(
+            `[voice agent] call refused (${data.upstreamStatus}): ${data.diagnosis}`,
+          )
+        }
         setError({
           kind: "service",
           message: data.message ?? "The voice assistant is unavailable right now.",

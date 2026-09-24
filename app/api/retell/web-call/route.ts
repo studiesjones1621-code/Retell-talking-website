@@ -130,9 +130,31 @@ export async function POST(request: Request) {
 
     if (!res.ok) {
       const detail = await res.text()
-      console.error("Retell create-web-call failed", res.status, detail)
+      console.error("Retell create-web-call failed", res.status, detail, `agent=${agentId}`)
+
+      /*
+       * "Please try again" is the right thing to tell a visitor and the wrong
+       * thing to tell the person who has to fix it — a retry never helps when
+       * the agent id is wrong. Retell's status says which it is, so map the
+       * ones with distinct causes. The upstream body stays in the server log;
+       * only the status reaches the browser.
+       */
+      const diagnosis =
+        res.status === 401 || res.status === 403
+          ? "the API key was rejected, or it belongs to a different Retell workspace than the agent"
+          : res.status === 404
+            ? `no agent with id ${agentId} exists on this Retell account`
+            : res.status === 400 || res.status === 422
+              ? "Retell rejected the request body — most often an agent that is still a draft, or one whose response engine does not accept dynamic variables"
+              : `Retell returned ${res.status}`
+
       return NextResponse.json(
-        { error: "retell_error", message: "Could not start the call. Please try again." },
+        {
+          error: "retell_error",
+          message: "Could not start the call. Please try again.",
+          diagnosis,
+          upstreamStatus: res.status,
+        },
         { status: 502 },
       )
     }
