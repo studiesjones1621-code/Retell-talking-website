@@ -47,6 +47,21 @@ export const business = {
   website: "https://ondutyagent.com",
 
   /**
+   * The Retell agent that answers on this site.
+   *
+   * Committed rather than left to an environment variable because it is not a
+   * secret: the NEXT_PUBLIC_ prefix on the override below means it ships to
+   * every visitor's browser anyway, and anyone can read it in the page source.
+   * Keeping it here means a deploy needs exactly one secret set by hand —
+   * RETELL_API_KEY — which removes the most common cause of a silently dead
+   * launcher, a mistyped or wrongly-scoped agent id.
+   *
+   * Override per environment with NEXT_PUBLIC_RETELL_AGENT_ID when you want a
+   * different agent on staging.
+   */
+  retellAgentId: "agent_f813587e4f8b9821fb307a1543",
+
+  /**
    * VERIFY — public booking link (Cal.com, Calendly, etc). Every CTA on the site
    * is a book-a-call CTA, so this is the single highest-value field in this file.
    * While it is empty the buttons fall back to opening the voice agent, which

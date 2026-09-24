@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 
+import { business } from "@/lib/business"
 import { findExistingAgent } from "@/lib/provision"
 import { getNiche } from "@/lib/niches"
 
@@ -17,20 +18,27 @@ export const dynamic = "force-dynamic"
 let discoveredAgentId: string | null = null
 
 /** Hosting dashboards happily store "  " or a leftover placeholder. */
-function configuredAgentId(): string | null {
+function envAgentId(): string | null {
   const raw = (process.env.NEXT_PUBLIC_RETELL_AGENT_ID ?? "").trim()
   return raw.length > 0 ? raw : null
 }
 
+/** The agent committed in lib/business.ts, if one has been set there. */
+function committedAgentId(): string | null {
+  const raw = business.retellAgentId.trim()
+  return raw.length > 0 ? raw : null
+}
+
 /**
- * Prefers the configured agent ID, but falls back to looking up the agent this
- * project created. That fallback is what lets the /setup page work end to end:
- * the agent starts answering immediately, with no environment variable to paste
- * and no redeploy.
+ * Resolution order:
+ *   1. NEXT_PUBLIC_RETELL_AGENT_ID — per-environment override, e.g. staging
+ *   2. business.retellAgentId — the live agent, committed to the repo
+ *   3. a lookup by agent name — only when neither of the above is set, which
+ *      is what lets the /setup page work end to end on a fresh install
  */
 async function resolveAgentId(apiKey: string): Promise<string | null> {
-  const configured = configuredAgentId()
-  if (configured) return configured
+  const pinned = envAgentId() ?? committedAgentId()
+  if (pinned) return pinned
 
   if (discoveredAgentId) return discoveredAgentId
 
@@ -105,10 +113,12 @@ export async function POST(request: Request) {
   try {
     let res = await createWebCall(apiKey, agentId, niche)
 
-    // A configured ID can be stale or mistyped — an easy mistake when pasting
-    // variables into a hosting dashboard. Rather than leaving the site broken,
-    // fall back to the agent this project actually created.
-    if (!res.ok && configuredAgentId()) {
+    // An ID pasted into a hosting dashboard can be stale or mistyped, so a
+    // rejected env override retries via name lookup. A committed ID gets no
+    // such retry: it is authoritative, and quietly swapping to a differently
+    // named older agent would answer callers with the wrong receptionist,
+    // which is worse than failing loudly.
+    if (!res.ok && envAgentId()) {
       console.error(
         `create-web-call rejected agent "${agentId}" (${res.status}); retrying with a looked-up agent.`,
       )
