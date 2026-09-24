@@ -21,8 +21,8 @@ export function NichePicker() {
             Built for your industry, not adapted to it.
           </h2>
           <p className="mt-4 text-lg text-white/60">
-            What counts as urgent, who it routes to, and what it must never say all change by
-            trade. Pick yours.
+            A no-heat call at 2 a.m. and someone who finally worked up the courage to dial are
+            not the same phone call. Pick yours.
           </p>
         </div>
 
