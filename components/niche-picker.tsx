@@ -21,8 +21,8 @@ export function NichePicker() {
             Built for your industry, not adapted to it.
           </h2>
           <p className="mt-4 text-lg text-white/60">
-            A receptionist that knows what a no-heat call is will not do for a law firm, and one
-            trained on intake will not do for a med spa. Pick yours.
+            What counts as urgent, who it routes to, and what it must never say all change by
+            trade. Pick yours.
           </p>
         </div>
 
