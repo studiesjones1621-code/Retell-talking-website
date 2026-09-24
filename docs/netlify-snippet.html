@@ -12,7 +12,7 @@
   Every class is prefixed `oda-` so it cannot collide with your site's CSS.
 
   ALL THE KNOBS ARE IN THE :root BLOCK BELOW — colour, size, corner, position.
-  To change the agent, edit ORB_URL near the bottom.
+  To change agents, edit the AGENTS map near the bottom — one entry per niche page.
 -->
 
 <style>
@@ -200,15 +200,70 @@
 
 <script>
 (function () {
-  // ---- EDIT THIS LINE to change the agent -----------------------------
-  var ORB_URL = "https://agent.retellai.com/orb/agent_62ce46e1c550774a94d48952dd?token=b01d29269efb9c8aa4aa021ef30e3ba9";
-  // ---------------------------------------------------------------------
+  // =====================================================================
+  //  AGENTS — one entry per niche page.
+  //
+  //  The key is matched against the start of the page's path, so "/plumbing"
+  //  covers /plumbing, /plumbing/pricing, and so on. The longest matching key
+  //  wins, and "default" catches everything else (home page, blog, contact).
+  //
+  //  Point several niches at the same URL until you have built their agents —
+  //  nothing breaks, they just share one. Copy the orb link for each agent
+  //  from its page in the Retell dashboard, including the ?token=... part.
+  //
+  //  `label` and `sub` are the two lines in the panel header. Both optional.
+  // =====================================================================
+  var AGENTS = {
+    "default": {
+      url:   "https://agent.retellai.com/orb/agent_62ce46e1c550774a94d48952dd?token=b01d29269efb9c8aa4aa021ef30e3ba9",
+      label: "OnDuty Agent",
+      sub:   "Answers instantly, 24/7"
+    },
 
-  var MESSAGES = [
-    "Would you like to book a demo?",
-    "Have a question? Just ask.",
-    "Talk to our AI agent — no hold music."
-  ];
+    // ---- one block per niche page; paths match this project's niche slugs ----
+    // Until each niche has its own agent, leave these pointing at the default
+    // url above — only the header text differs, and nothing breaks.
+    "/hvac": {
+      url:   "https://agent.retellai.com/orb/agent_62ce46e1c550774a94d48952dd?token=b01d29269efb9c8aa4aa021ef30e3ba9",
+      label: "OnDuty Agent",
+      sub:   "AI receptionist for HVAC"
+    }
+    // "/law-firms":         { url: "PASTE_ORB_URL", label: "OnDuty Agent", sub: "AI receptionist for law firms" },
+    // "/dental":            { url: "PASTE_ORB_URL", label: "OnDuty Agent", sub: "AI receptionist for dental practices" },
+    // "/medspa":            { url: "PASTE_ORB_URL", label: "OnDuty Agent", sub: "AI receptionist for med spas" },
+    // "/behavioral-health": { url: "PASTE_ORB_URL", label: "OnDuty Agent", sub: "AI receptionist for behavioral health" }
+  };
+
+  // Per-page CTA text. Same path rules. Optional — delete to use one set.
+  var MESSAGES_BY_PATH = {
+    "default": [
+      "Would you like to book a demo?",
+      "Have a question? Just ask.",
+      "Talk to our AI agent — no hold music."
+    ]
+  };
+  // =====================================================================
+
+  /** Longest path prefix wins, so "/hvac/pricing" beats a bare "/". */
+  function pick(map) {
+    var path = (window.location.pathname || "/").toLowerCase().replace(/\/+$/, "") || "/";
+    var best = null, bestLen = -1;
+    for (var key in map) {
+      if (key === "default" || !Object.prototype.hasOwnProperty.call(map, key)) continue;
+      var k = key.toLowerCase().replace(/\/+$/, "");
+      if ((path === k || path.indexOf(k + "/") === 0) && k.length > bestLen) {
+        best = map[key]; bestLen = k.length;
+      }
+    }
+    return best || map["default"];
+  }
+
+  var AGENT = pick(AGENTS) || {};
+  var ORB_URL = AGENT.url;
+  var MESSAGES = pick(MESSAGES_BY_PATH);
+
+  if (!ORB_URL) return;  // nothing configured for this page — stay out of the way
+
   var FIRST_DELAY = 5000, VISIBLE = 5000, HIDDEN = 5000;
 
   var root = document.getElementById("oda-root");
@@ -224,6 +279,8 @@
   var bubble = null, timer = null, idx = 0, engaged = false, loaded = false;
 
   newTab.href = ORB_URL;
+  if (AGENT.label) panel.querySelector(".oda-title").textContent = AGENT.label;
+  if (AGENT.sub) panel.querySelector(".oda-sub").textContent = AGENT.sub;
 
   function clearBubble() {
     if (bubble && bubble.parentNode) bubble.parentNode.removeChild(bubble);
