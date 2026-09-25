@@ -1,8 +1,8 @@
 import React from "react"
 import type { Metadata, Viewport } from "next"
 import { Host_Grotesk } from "next/font/google"
-import { Analytics } from "@vercel/analytics/next"
 
+import { Analytics } from "@/components/analytics"
 import {
   business,
   cityState,
