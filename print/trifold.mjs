@@ -172,12 +172,11 @@ const html = `<title>OnDuty Agent Trifold</title>
         <p class="body">Websites that book appointments, and the marketing that gets you found. <b style="color:#fff">Scan to see it.</b></p>
         <div class="tile" style="width:.82in;height:.82in">${qr.marketing}</div>
       </div>
-      <p class="punch">We answer the phone at the other end — so we can prove which marketing produced a booking, not just a click.</p>
+      <p class="punch">Marketing that makes you stand out, and keeps you consistently booked.</p>
       <ul class="rows" style="margin-top:.04in">
-        <li><b>Sites built around the call</b><span>Tap-to-call, booking above the fold, fast.</span></li>
-        <li><b>Google Business Profile</b><span>The listing most people find you through.</span></li>
-        <li><b>Local SEO</b><span>Service pages and map-pack work.</span></li>
-        <li><b>One invoice</b><span>Together with the receptionist, or on its own.</span></li>
+        <li><b>Websites that get you called</b><span>Works on a phone, easy to book from, and your number never more than a tap away.</span></li>
+        <li><b>Your Google listing</b><span>Usually the first thing they see. Photos, hours and services kept current, so it sends them to you.</span></li>
+        <li><b>Get found in your own town</b><span>So when someone nearby searches what you do, you come up — not the guy one town over.</span></li>
       </ul>
       <div class="spacer"></div>
       <div class="rule"></div>
@@ -185,7 +184,7 @@ const html = `<title>OnDuty Agent Trifold</title>
         <span style="color:var(--lime)">hello@ondutyagent.com</span>
         <span>ondutyagent.com</span>
       </div>
-      <p class="fineprint" style="margin:.16in 0 0">Practices and contractors across the United States. Every build runs under a signed BAA, and we sign one with your practice too.</p>
+      <p class="fineprint" style="margin:.16in 0 0">Marketing on its own, or alongside the receptionist — one invoice either way. Every build runs under a signed BAA, and we sign one with your practice too.</p>
     </div>
 
     <div class="panel glow">
