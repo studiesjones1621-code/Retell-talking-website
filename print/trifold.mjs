@@ -168,13 +168,16 @@ const html = `<title>OnDuty Agent Trifold</title>
       <div class="rule"></div>
       <p class="eyebrow">Also from us</p>
       <h3>Once the phone is handled, fill it.</h3>
-      <p class="body" style="margin-top:.13in">Websites built to book appointments. Local SEO that gets you into the map pack.</p>
+      <div style="display:grid;grid-template-columns:1fr .82in;gap:.16in;align-items:center;margin-top:.14in">
+        <p class="body">Websites that book appointments, and the local SEO that gets you found. <b style="color:#fff">Scan to see it.</b></p>
+        <div class="tile" style="width:.82in;height:.82in">${qr.marketing}</div>
+      </div>
       <p class="punch">We answer the phone at the other end — so we can prove which marketing produced a booking, not just a click.</p>
       <ul class="rows" style="margin-top:.04in">
-        <li><b>Sites built around the call</b><span>Tap-to-call everywhere, booking above the fold, fast on a phone.</span></li>
-        <li><b>Google Business Profile</b><span>The listing most people find you through, kept current.</span></li>
-        <li><b>Local SEO</b><span>Service pages and map-pack work for the towns you cover.</span></li>
-        <li><b>One invoice</b><span>Receptionist and marketing together, or either alone.</span></li>
+        <li><b>Sites built around the call</b><span>Tap-to-call, booking above the fold, fast.</span></li>
+        <li><b>Google Business Profile</b><span>The listing most people find you through.</span></li>
+        <li><b>Local SEO</b><span>Service pages and map-pack work.</span></li>
+        <li><b>One invoice</b><span>Together with the receptionist, or on its own.</span></li>
       </ul>
       <div class="spacer"></div>
       <div class="rule"></div>
@@ -249,16 +252,8 @@ const html = `<title>OnDuty Agent Trifold</title>
         <li><b>We build it, you break it</b><span>You get a number to call and test until it sounds like the person you would have hired.</span></li>
         <li><b>It goes live</b><span>All calls, after-hours only, or just the ones your team cannot get to.</span></li>
       </ol>
-      <p class="punch" style="margin-top:.24in">Month to month. If it is not earning its keep, you stop.</p>
       <div class="spacer"></div>
-      <div class="rule"></div>
-      <div style="display:grid;grid-template-columns:1fr .82in;gap:.14in;align-items:start">
-        <div>
-          <p class="eyebrow" style="margin-bottom:.06in">Marketing too</p>
-          <p class="body" style="font-size:.745rem">Websites that book, and local SEO that gets you found.</p>
-        </div>
-        <div class="tile" style="width:.82in;height:.82in">${qr.marketing}</div>
-      </div>
+      <p class="punch" style="margin:.24in 0 0">Month to month. If it is not earning its keep, you stop.</p>
     </div>
 
   </section>
