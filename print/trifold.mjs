@@ -169,7 +169,7 @@ const html = `<title>OnDuty Agent Trifold</title>
       <p class="eyebrow">Also from us</p>
       <h3>Once the phone is handled, fill it.</h3>
       <div style="display:grid;grid-template-columns:1fr .82in;gap:.16in;align-items:center;margin-top:.14in">
-        <p class="body">Websites that book appointments, and the local SEO that gets you found. <b style="color:#fff">Scan to see it.</b></p>
+        <p class="body">Websites that book appointments, and the marketing that gets you found. <b style="color:#fff">Scan to see it.</b></p>
         <div class="tile" style="width:.82in;height:.82in">${qr.marketing}</div>
       </div>
       <p class="punch">We answer the phone at the other end — so we can prove which marketing produced a booking, not just a click.</p>
