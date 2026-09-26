@@ -185,7 +185,7 @@ const html = `<title>OnDuty Agent Trifold</title>
         <span style="color:var(--lime)">hello@ondutyagent.com</span>
         <span>ondutyagent.com</span>
       </div>
-      <p class="fineprint" style="margin:.16in 0 0">Practices and contractors across the United States. Healthcare builds run under a signed BAA.</p>
+      <p class="fineprint" style="margin:.16in 0 0">Practices and contractors across the United States. Every build runs under a signed BAA, and we sign one with your practice too.</p>
     </div>
 
     <div class="panel glow">
