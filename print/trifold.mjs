@@ -229,9 +229,9 @@ const html = `<title>OnDuty Agent Trifold</title>
       <h3>A message is not a booked appointment.</h3>
       <p class="punch">Three people calling at once is three calls answered — not two voicemails.</p>
       <ul class="rows">
-        <li><b>It speaks your industry</b><span>A general-purpose bot hears "slip and fall" and takes a message.</span></li>
-        <li><b>It does not have an off day</b><span>A front desk at 4:55 on a Friday is not the same as 9 a.m. Monday.</span></li>
-        <li><b>It does not take the call home</b><span>It absorbs the volume your people should not have to.</span></li>
+        <li><b>It answers the question</b><span>What it costs, whether you take their insurance, how soon you can come. A message taker can’t answer any of it.</span></li>
+        <li><b>Every caller gets your best</b><span>No bad mornings, no rushing out at five. The hundredth call sounds like the first.</span></li>
+        <li><b>You stop being the backup</b><span>Nobody is carrying the after-hours phone or picking it up at dinner.</span></li>
       </ul>
       <div class="rule"></div>
       <p class="eyebrow">And it stays yours</p>
