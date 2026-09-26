@@ -252,7 +252,7 @@ const html = `<title>OnDuty Agent Trifold</title>
       <p class="punch" style="margin-top:.24in">Month to month. If it is not earning its keep, you stop.</p>
       <div class="spacer"></div>
       <div class="rule"></div>
-      <div style="display:grid;grid-template-columns:1fr .82in;gap:.14in;align-items:center">
+      <div style="display:grid;grid-template-columns:1fr .82in;gap:.14in;align-items:start">
         <div>
           <p class="eyebrow" style="margin-bottom:.06in">Marketing too</p>
           <p class="body" style="font-size:.745rem">Websites that book, and local SEO that gets you found.</p>
