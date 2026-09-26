@@ -100,18 +100,18 @@ const html = `<title>OnDuty Agent Trifold</title>
   .steps b{ display:block; font-size:.88rem; font-weight:700; letter-spacing:-.018em; }
   .steps span{ display:block; margin-top:.035in; font-size:.735rem; line-height:1.4; color:var(--on-dark-soft); }
 
-  .niches{ list-style:none; margin:0; padding:0; display:grid; gap:.105in; }
-  .niches li{ display:grid; grid-template-columns:1fr .68in; gap:.13in; align-items:center;
-              border-top:1px solid rgba(255,255,255,.13); padding-top:.105in; }
+  .niches{ list-style:none; margin:0; padding:0; display:grid; gap:.075in; }
+  .niches li{ display:grid; grid-template-columns:1fr .80in; gap:.13in; align-items:center;
+              border-top:1px solid rgba(255,255,255,.13); padding-top:.075in; }
   .niches li:first-child{ border-top:0; padding-top:0; }
-  .niches b{ display:block; font-size:.9rem; font-weight:700; letter-spacing:-.022em; }
-  .niches span{ display:block; margin-top:.03in; font-size:.685rem; line-height:1.3; color:var(--on-dark-soft); }
+  .niches b{ display:block; font-size:.86rem; font-weight:700; letter-spacing:-.022em; }
+  .niches span{ display:block; margin-top:.025in; font-size:.655rem; line-height:1.26; color:var(--on-dark-soft); }
 
   /* QR tiles are white blocks on dark — they read as the brightest thing on
      the panel, which is exactly where the eye should land. */
   .tile{ background:#fff; padding:.07in; border-radius:2px; }
   .tile svg{ width:100%; height:100%; display:block; }
-  .niches .tile{ width:.68in; height:.68in; }
+  .niches .tile{ width:.80in; height:.80in; }
   .tile-lg{ width:1.62in; height:1.62in; }
 
   .spacer{ flex:1; min-height:.08in; }
@@ -120,7 +120,7 @@ const html = `<title>OnDuty Agent Trifold</title>
         font-size:.63rem; color:var(--on-dark-soft); }
   .rule{ height:1px; background:rgba(255,255,255,.14); margin:.16in 0; }
   .contact{ display:grid; gap:.06in; font-size:.82rem; font-weight:600; }
-  .fineprint{ font-size:.63rem; line-height:1.36; color:var(--on-dark-soft); }
+  .fineprint{ font-size:.61rem; line-height:1.3; color:var(--on-dark-soft); }
 
   @media print{
     @page{ size:letter landscape; margin:0; }
@@ -149,8 +149,8 @@ const html = `<title>OnDuty Agent Trifold</title>
     <div class="panel alt">
       <span class="tag">Inner flap</span>
       <p class="eyebrow">Who it's for</p>
-      <h3>Five industries.<br>Five receptionists.</h3>
-      <p class="punch">Scan yours. Talk to the one built for it.</p>
+      <h3 style="font-size:1.46rem">Five industries.<br>Five receptionists.</h3>
+      <p class="punch" style="font-size:.86rem;margin:.13in 0 .12in">Scan yours. Talk to the one built for it.</p>
       <ul class="niches">
         ${NICHES.map(([slug,name,line]) => `<li>
           <div><b>${name}</b><span>${line}</span></div>
@@ -159,7 +159,7 @@ const html = `<title>OnDuty Agent Trifold</title>
       </ul>
       <div class="spacer"></div>
       <div class="rule"></div>
-      <p class="fineprint">No scanner? Go to <b style="color:#fff">ondutyagent.com</b> and pick your industry. Not on this list — plumbing, roofing, veterinary, any clinic — the same build works. Ask us.</p>
+      <p class="fineprint">No scanner? <b style="color:#fff">ondutyagent.com</b>. Not on this list — the same build works. Ask us.</p>
     </div>
 
     <div class="panel">

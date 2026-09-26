@@ -25,20 +25,26 @@ const targets = {
   ...Object.fromEntries(
     slugs.map((slug) => [
       slug,
-      `${ORIGIN}/${slug}?utm_source=trifold&utm_medium=print&utm_campaign=${slug}`,
+      `${ORIGIN}/${slug}?utm_source=trifold`,
     ]),
   ),
-  home: `${ORIGIN}?utm_source=trifold&utm_medium=print`,
-  marketing: `${ORIGIN}/marketing?utm_source=trifold&utm_medium=print`,
+  home: `${ORIGIN}?utm_source=trifold`,
+  marketing: `${ORIGIN}/marketing?utm_source=trifold`,
 }
 
-// Level H tolerates a fold crease or a scuff across roughly a third of the code,
-// which a pamphlet that lives in a van or a waiting room will collect.
+// Module size, not error correction, is what decides whether a phone can read
+// this. The niche codes print at 0.85in, so every extra character of URL shrinks
+// the modules. Level H plus the full UTM set gave 57 modules on the longest slug
+// — 0.38mm each, under the ~0.5mm a phone camera needs, and that code did not
+// scan. Level Q with a trimmed URL is 37 modules and 0.58mm, still 25% recovery.
+//
+// The dropped parameters cost nothing: utm_campaign only repeated the slug that
+// is already in the path, and utm_medium only repeated utm_source=trifold.
 const out = {}
 for (const [key, url] of Object.entries(targets)) {
   out[key] = await QRCode.toString(url, {
     type: "svg",
-    errorCorrectionLevel: "H",
+    errorCorrectionLevel: "Q",
     margin: 0,
     // Brand ink rather than pure black; against the white tile the contrast
     // ratio is still ~19:1, far beyond what any scanner needs.

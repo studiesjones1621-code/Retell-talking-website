@@ -166,9 +166,9 @@ export const niches: Niche[] = [
     name: "HVAC Contractors",
     shortName: "HVAC",
     eyebrow: "For HVAC contractors",
-    headline: "A missed call is a lost job.",
+    headline: "No heat at 2 a.m. Nobody waits until nine.",
     subcopy:
-      "Your AI receptionist answers every service call in one ring, sorts the no-heat emergencies from the tune-ups, and books the job into dispatch — at 2 a.m. on a Sunday if that is when the furnace dies.",
+      "Your AI receptionist answers every service call in one ring, sorts the no-heat emergencies from the tune-ups, and books the job into dispatch — on a Sunday night if that is when the furnace dies.",
     proofPoints: ["Answers in one ring", "Books into dispatch", "Live in two weeks"],
 
     servicesHeading: "Every service call handled.",
@@ -279,7 +279,7 @@ export const niches: Niche[] = [
     name: "Law Firms",
     shortName: "Law Firms",
     eyebrow: "For law firms",
-    headline: "The case goes to whoever answers.",
+    headline: "You were in court. They called the next firm.",
     subcopy:
       "Potential clients call three firms and retain the first one that picks up. Your AI receptionist answers every one of them, screens the matter, and books the consultation before your competitor's voicemail beeps.",
     proofPoints: ["Answers every intake call", "Screens by practice area", "Books the consultation"],
@@ -381,7 +381,7 @@ export const niches: Niche[] = [
     name: "Dental Practices",
     shortName: "Dental",
     eyebrow: "For dental practices",
-    headline: "Your front desk is already busy.",
+    headline: "New patients don't leave voicemails.",
     subcopy:
       "Every call that rings out while your team is chairside is a new patient who books somewhere else. Your AI receptionist answers all of them, fills the cancellation, and books the appointment straight into your schedule.",
     proofPoints: ["Answers while you're chairside", "Fills cancellations", "Books 24/7"],
@@ -484,9 +484,9 @@ export const niches: Niche[] = [
     name: "Med Spas",
     shortName: "Med Spas",
     eyebrow: "For med spas & aesthetic clinics",
-    headline: "They booked at 11 p.m. Someone had to answer.",
+    headline: "A booking form can’t answer “will it hurt?”",
     subcopy:
-      "Aesthetic enquiries arrive late, from a phone, on impulse — and go cold by morning. Your AI receptionist answers in that moment, talks them through your treatment menu, and books the consultation before the impulse fades.",
+      "Aesthetic enquiries come with questions first — what it costs, whether it hurts, how long they will be red for. Nobody books those blind. Your AI receptionist answers at 11 p.m., talks them through your treatment menu, and books the consultation before the impulse fades.",
     proofPoints: ["Answers the 11 p.m. enquiry", "Knows your treatment menu", "Books the consult"],
 
     servicesHeading: "Catch the enquiry while it's warm.",
