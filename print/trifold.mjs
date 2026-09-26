@@ -10,7 +10,7 @@ const qr = JSON.parse(fs.readFileSync(path.join(here, 'qr-trifold.json'), 'utf8'
 // an answer first, nerve. Two lines describing the same failure read as filler.
 const NICHES = [
   ['hvac','HVAC','No heat at 2 a.m. Nobody waits until nine.'],
-  ['law-firms','Law firms','You were in court. They called the next firm.'],
+  ['law-firms','Law firms','It happened Friday night. Your office opens Monday.'],
   ['dental','Dental','New patients don\u2019t leave voicemails.'],
   ['medspa','Med spas','A booking form can\u2019t answer \u201cwill it hurt?\u201d'],
   ['behavioral-health','Behavioral health','Someone finally worked up the courage to call.'],

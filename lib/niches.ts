@@ -279,9 +279,9 @@ export const niches: Niche[] = [
     name: "Law Firms",
     shortName: "Law Firms",
     eyebrow: "For law firms",
-    headline: "You were in court. They called the next firm.",
+    headline: "It happened Friday night. Your office opens Monday.",
     subcopy:
-      "Potential clients call three firms and retain the first one that picks up. Your AI receptionist answers every one of them, screens the matter, and books the consultation before your competitor's voicemail beeps.",
+      "Legal trouble does not keep office hours, and someone who reaches voicemail on a Saturday just calls the next firm on the list. Your AI receptionist answers every one of those calls, screens the matter, and has the consultation booked before you open on Monday.",
     proofPoints: ["Answers every intake call", "Screens by practice area", "Books the consultation"],
 
     servicesHeading: "Intake that never goes to voicemail.",
