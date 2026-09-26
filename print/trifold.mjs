@@ -230,8 +230,8 @@ const html = `<title>OnDuty Agent Trifold</title>
       <p class="punch">Three people calling at once is three calls answered — not two voicemails.</p>
       <ul class="rows">
         <li><b>It answers the question</b><span>What it costs, whether you take their insurance, how soon you can come. A message taker can’t answer any of it.</span></li>
-        <li><b>Every caller gets your best</b><span>No bad mornings, no rushing out at five. The hundredth call sounds like the first.</span></li>
-        <li><b>You stop being the backup</b><span>Nobody is carrying the after-hours phone or picking it up at dinner.</span></li>
+        <li><b>It never has an off day</b><span>The last call on Friday gets the same patience as the first on Monday.</span></li>
+        <li><b>Not your problem after hours</b><span>No after-hours phone to carry, no voicemail box to clear in the morning.</span></li>
       </ul>
       <div class="rule"></div>
       <p class="eyebrow">And it stays yours</p>
