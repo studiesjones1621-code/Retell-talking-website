@@ -25,12 +25,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-# keep the checked-in template
-!.env.example
-
-# client secrets
-.env
-.env.local
-clients/**/.env
-clients/**/.env.local
-clients/cleanrite/assets-src/
