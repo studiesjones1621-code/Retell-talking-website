@@ -115,6 +115,9 @@ const html = `<title>OnDuty Agent Trifold</title>
   .tile-lg{ width:1.62in; height:1.62in; }
 
   .spacer{ flex:1; min-height:.08in; }
+  /* Sits between the cover subcopy and the QR tile, where there was a gap. */
+  .wave{ width:100%; height:.95in; }
+  .wave svg{ width:100%; height:100%; display:block; }
   .scan{ margin:.18in 0 0; font-size:.86rem; font-weight:700; line-height:1.24; letter-spacing:-.022em; }
   .url{ margin:.06in 0 0; font-family:'JetBrains Mono',ui-monospace,monospace;
         font-size:.63rem; color:var(--on-dark-soft); }
@@ -192,6 +195,12 @@ const html = `<title>OnDuty Agent Trifold</title>
       <div class="brand"><span class="dot"></span>OnDuty Agent</div>
       <h2 class="cover">Never miss another call.</h2>
       <p class="sub">An AI receptionist that answers in one ring, books the appointment and captures the lead. 24 hours a day, in the language of your industry.</p>
+      <div class="spacer"></div>
+      <div class="wave" aria-hidden="true">
+        <svg viewBox="0 0 100 34" preserveAspectRatio="none" fill="var(--lime)">
+          <rect x="0.00" y="13.94" width="2.3" height="6.12" rx="1.15" opacity="0.45"/><rect x="3.76" y="9.59" width="2.3" height="14.81" rx="1.15" opacity="0.64"/><rect x="7.52" y="7.14" width="2.3" height="19.72" rx="1.15" opacity="0.72"/><rect x="11.27" y="7.04" width="2.3" height="19.92" rx="1.15" opacity="0.78"/><rect x="15.03" y="7.39" width="2.3" height="19.22" rx="1.15" opacity="0.82"/><rect x="18.79" y="3.96" width="2.3" height="26.09" rx="1.15" opacity="0.86"/><rect x="22.55" y="2.84" width="2.3" height="28.31" rx="1.15" opacity="0.90"/><rect x="26.30" y="4.86" width="2.3" height="24.28" rx="1.15" opacity="0.93"/><rect x="30.06" y="4.15" width="2.3" height="25.69" rx="1.15" opacity="0.95"/><rect x="33.82" y="1.03" width="2.3" height="31.95" rx="1.15" opacity="0.97"/><rect x="37.58" y="1.29" width="2.3" height="31.42" rx="1.15" opacity="0.98"/><rect x="41.33" y="4.78" width="2.3" height="24.43" rx="1.15" opacity="0.99"/><rect x="45.09" y="2.14" width="2.3" height="29.72" rx="1.15" opacity="1.00"/><rect x="48.85" y="0.01" width="2.3" height="33.98" rx="1.15" opacity="1.00"/><rect x="52.61" y="1.68" width="2.3" height="30.63" rx="1.15" opacity="1.00"/><rect x="56.37" y="5.38" width="2.3" height="23.23" rx="1.15" opacity="0.99"/><rect x="60.12" y="1.63" width="2.3" height="30.74" rx="1.15" opacity="0.98"/><rect x="63.88" y="0.90" width="2.3" height="32.20" rx="1.15" opacity="0.97"/><rect x="67.64" y="3.67" width="2.3" height="26.66" rx="1.15" opacity="0.95"/><rect x="71.40" y="5.36" width="2.3" height="23.28" rx="1.15" opacity="0.93"/><rect x="75.15" y="3.03" width="2.3" height="27.93" rx="1.15" opacity="0.90"/><rect x="78.91" y="3.76" width="2.3" height="26.49" rx="1.15" opacity="0.86"/><rect x="82.67" y="6.99" width="2.3" height="20.02" rx="1.15" opacity="0.82"/><rect x="86.43" y="7.35" width="2.3" height="19.31" rx="1.15" opacity="0.78"/><rect x="90.18" y="7.19" width="2.3" height="19.62" rx="1.15" opacity="0.72"/><rect x="93.94" y="9.46" width="2.3" height="15.08" rx="1.15" opacity="0.64"/><rect x="97.70" y="13.94" width="2.3" height="6.12" rx="1.15" opacity="0.45"/>
+        </svg>
+      </div>
       <div class="spacer"></div>
       <div class="tile tile-lg">${qr.home}</div>
       <p class="scan">Scan it. Talk to the receptionist yourself.</p>
