@@ -1,0 +1,395 @@
+{
+  "Maryland": [
+    {
+      "address": "4618 A Edmondson Avenue",
+      "city": "Baltimore",
+      "state": "MD",
+      "zip": "21229",
+      "phone": "667-210-2669",
+      "lat": "39.294353",
+      "lng": "-76.694823"
+    },
+    {
+      "address": "7017 Liberty Road",
+      "city": "Gwynn Oak",
+      "state": "MD",
+      "zip": "21207",
+      "phone": "443-551-3748",
+      "lat": "39.344309",
+      "lng": "-76.733972"
+    }
+  ],
+  "Pennsylvania": [
+    {
+      "address": "26 S 12th Street",
+      "city": "Allentown",
+      "state": "PA",
+      "zip": "18102",
+      "phone": "610-435-8080",
+      "lat": "40.598557",
+      "lng": "-75.481647"
+    }
+  ],
+  "New York City": [
+    {
+      "address": "1240 East Tremont Avenue",
+      "city": "Bronx",
+      "state": "NY",
+      "zip": "10460",
+      "phone": "718-931-5991",
+      "lat": "40.839402",
+      "lng": "-73.871907"
+    },
+    {
+      "address": "1253 Taylor Ave",
+      "city": "Bronx",
+      "state": "NY",
+      "zip": "10472",
+      "phone": "347-810-0090",
+      "lat": "40.831814",
+      "lng": "-73.86559"
+    },
+    {
+      "address": "1348 Southern Blvd",
+      "city": "Bronx",
+      "state": "NY",
+      "zip": "10459",
+      "phone": "917-688-1205",
+      "lat": "40.832115",
+      "lng": "-73.890466"
+    },
+    {
+      "address": "1452 Westchester Avenue",
+      "city": "Bronx",
+      "state": "NY",
+      "zip": "10472",
+      "phone": "917-473-6392",
+      "lat": "40.828005",
+      "lng": "-73.882197"
+    },
+    {
+      "address": "1578 E 233 Street",
+      "city": "Bronx",
+      "state": "NY",
+      "zip": "10466",
+      "phone": "347-346-5163",
+      "lat": "40.888909",
+      "lng": "-73.829914"
+    },
+    {
+      "address": "1968 Jerome Avenue",
+      "city": "Bronx",
+      "state": "NY",
+      "zip": "10453",
+      "phone": "718-583-2039",
+      "lat": "40.851886",
+      "lng": "-73.90863"
+    },
+    {
+      "address": "2241 Southern Blvd",
+      "city": "Bronx",
+      "state": "NY",
+      "zip": "10460",
+      "phone": "718-562-2437",
+      "lat": "40.849291",
+      "lng": "-73.883535"
+    },
+    {
+      "address": "2451 White Plains Road",
+      "city": "Bronx",
+      "state": "NY",
+      "zip": "10467",
+      "phone": "",
+      "lat": "40.863048",
+      "lng": "-73.867773"
+    },
+    {
+      "address": "2829 Edson Ave",
+      "city": "Bronx",
+      "state": "NY",
+      "zip": "10469",
+      "phone": "347-697-7788",
+      "lat": "40.86874",
+      "lng": "-73.833682"
+    },
+    {
+      "address": "302 Rider Avenue",
+      "city": "Bronx",
+      "state": "NY",
+      "zip": "10451",
+      "phone": "917-473-6397",
+      "lat": "40.812926",
+      "lng": "-73.926787"
+    },
+    {
+      "address": "3533 Boston Road",
+      "city": "Bronx",
+      "state": "NY",
+      "zip": "10469",
+      "phone": "347-947-3005",
+      "lat": "40.877937",
+      "lng": "-73.845181"
+    },
+    {
+      "address": "4352 Bronx Blvd",
+      "city": "Bronx",
+      "state": "NY",
+      "zip": "10466",
+      "phone": "347-326-8310",
+      "lat": "40.898286",
+      "lng": "-73.858438"
+    },
+    {
+      "address": "105-16 Flatlands Avenue",
+      "city": "Brooklyn",
+      "state": "NY",
+      "zip": "11236",
+      "phone": "347-326-8384",
+      "lat": "40.647714",
+      "lng": "-73.894063"
+    },
+    {
+      "address": "1205 Flatbush Avenue",
+      "city": "Brooklyn",
+      "state": "NY",
+      "zip": "11226",
+      "phone": "347-240-0336",
+      "lat": "40.640881",
+      "lng": "-73.955752"
+    },
+    {
+      "address": "1475 Flatbush Avenue",
+      "city": "Brooklyn",
+      "state": "NY",
+      "zip": "11210",
+      "phone": "917-893-8942",
+      "lat": "40.63465",
+      "lng": "-73.949185"
+    },
+    {
+      "address": "155 Utica Avenue",
+      "city": "Brooklyn",
+      "state": "NY",
+      "zip": "11213",
+      "phone": "718-771-7222",
+      "lat": "40.673552",
+      "lng": "-73.930505"
+    },
+    {
+      "address": "1760 Eastern Pkwy",
+      "city": "Brooklyn",
+      "state": "NY",
+      "zip": "11233",
+      "phone": "718-342-6597",
+      "lat": "40.673579",
+      "lng": "-73.909987"
+    },
+    {
+      "address": "1936 Atlantic Avenue",
+      "city": "Brooklyn",
+      "state": "NY",
+      "zip": "11233",
+      "phone": "347-529-1192",
+      "lat": "40.676779",
+      "lng": "-73.924338"
+    },
+    {
+      "address": "1950 Fulton Street",
+      "city": "Brooklyn",
+      "state": "NY",
+      "zip": "11233",
+      "phone": "347-789-9488",
+      "lat": "40.678434",
+      "lng": "-73.921207"
+    },
+    {
+      "address": "2958 Atlantic Avenue",
+      "city": "Brooklyn",
+      "state": "NY",
+      "zip": "11208",
+      "phone": "347-915-0005",
+      "lat": "40.67754",
+      "lng": "-73.884954"
+    },
+    {
+      "address": "314 McDonald Avenue",
+      "city": "Brooklyn",
+      "state": "NY",
+      "zip": "11218",
+      "phone": "347-240-4328",
+      "lat": "40.646293",
+      "lng": "-73.980386"
+    },
+    {
+      "address": "3720 Nostrand Avenue",
+      "city": "Brooklyn",
+      "state": "NY",
+      "zip": "11235",
+      "phone": "718-676-5140",
+      "lat": "40.592634",
+      "lng": "-73.940719"
+    },
+    {
+      "address": "442 39th Street",
+      "city": "Brooklyn",
+      "state": "NY",
+      "zip": "11232",
+      "phone": "718-437-8762",
+      "lat": "40.651626",
+      "lng": "-74.004902"
+    },
+    {
+      "address": "529 Utica Avenue",
+      "city": "Brooklyn",
+      "state": "NY",
+      "zip": "11203",
+      "phone": "347-789-9700",
+      "lat": "40.660493",
+      "lng": "-73.930701"
+    },
+    {
+      "address": "5616 Church Avenue",
+      "city": "Brooklyn",
+      "state": "NY",
+      "zip": "11203",
+      "phone": "347-663-2871",
+      "lat": "40.652347",
+      "lng": "-73.923952"
+    },
+    {
+      "address": "586 Coney Island Ave",
+      "city": "Brooklyn",
+      "state": "NY",
+      "zip": "11218",
+      "phone": "347-384-1845",
+      "lat": "40.642880",
+      "lng": "-73.970240"
+    },
+    {
+      "address": "621 4th Avenue",
+      "city": "Brooklyn",
+      "state": "NY",
+      "zip": "11232",
+      "phone": "718-832-2276",
+      "lat": "40.664849",
+      "lng": "-73.993847"
+    },
+    {
+      "address": "8211 Flatlands Avenue",
+      "city": "Brooklyn",
+      "state": "NY",
+      "zip": "11236",
+      "phone": "718-676-0766",
+      "lat": "40.636845",
+      "lng": "-73.911779"
+    },
+    {
+      "address": "8905 Flatlands Ave",
+      "city": "Brooklyn",
+      "state": "NY",
+      "zip": "11236",
+      "phone": "718-257-8080",
+      "lat": "40.640038",
+      "lng": "-73.906715"
+    },
+    {
+      "address": "270 W 145th St",
+      "city": "New York",
+      "state": "NY",
+      "zip": "10039",
+      "phone": "212-933-0799",
+      "lat": "40.822580",
+      "lng": "-73.941440"
+    },
+    {
+      "address": "112-05 Sutphin Blvd",
+      "city": "Queens",
+      "state": "NY",
+      "zip": "11435",
+      "phone": "718-641-2900",
+      "lat": "40.687357",
+      "lng": "-73.79409"
+    },
+    {
+      "address": "131-01 101st Ave",
+      "city": "Queens",
+      "state": "NY",
+      "zip": "11419",
+      "phone": "718-674-6300",
+      "lat": "40.694474",
+      "lng": "-73.810632"
+    },
+    {
+      "address": "168-04 Liberty Avenue",
+      "city": "Queens",
+      "state": "NY",
+      "zip": "11433",
+      "phone": "718-487-4005",
+      "lat": "40.702312",
+      "lng": "-73.790325"
+    },
+    {
+      "address": "214-50 Jamaica Ave",
+      "city": "Queens",
+      "state": "NY",
+      "zip": "11428",
+      "phone": "718-479-2860",
+      "lat": "40.716517",
+      "lng": "-73.741672"
+    },
+    {
+      "address": "48-03 69th Street",
+      "city": "Queens",
+      "state": "NY",
+      "zip": "11377",
+      "phone": "347-730-4375",
+      "lat": "40.738137",
+      "lng": "-73.895539"
+    },
+    {
+      "address": "50-14 Roosevelt Ave",
+      "city": "Queens",
+      "state": "NY",
+      "zip": "11377",
+      "phone": "718-335-1630",
+      "lat": "40.743349",
+      "lng": "-73.914259"
+    },
+    {
+      "address": "80-10 Rockaway Blvd",
+      "city": "Queens",
+      "state": "NY",
+      "zip": "11416",
+      "phone": "347-480-5917",
+      "lat": "40.684283",
+      "lng": "-73.860238"
+    },
+    {
+      "address": "1106 Bay Street",
+      "city": "Staten Island",
+      "state": "NY",
+      "zip": "10305",
+      "phone": "718-285-4926",
+      "lat": "40.615988",
+      "lng": "-74.067819"
+    },
+    {
+      "address": "1287 Castleton Avenue",
+      "city": "Staten Island",
+      "state": "NY",
+      "zip": "10310",
+      "phone": "718-556-0355",
+      "lat": "40.634033",
+      "lng": "-74.125702"
+    },
+    {
+      "address": "357 Port Richmond Avenue",
+      "city": "Staten Island",
+      "state": "NY",
+      "zip": "10302",
+      "phone": "718-556-2340",
+      "lat": "40.631157",
+      "lng": "-74.138677"
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 {
   "llm_id": "llm_5b4429070cd192dd94f5647cb01a",
   "agent_id": "agent_a0e686c747f8088c00f2970ffa",
+  "knowledge_base_id": "knowledge_base_77334bae6a227f58",
   "voice_id": "11labs-Marissa",
   "site": "https://cleanrite.vercel.app"
 }

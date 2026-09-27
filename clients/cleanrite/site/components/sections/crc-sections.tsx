@@ -1,6 +1,7 @@
 import Image from "next/image"
 import {
   business,
+  marylandStores,
   services,
   whyUs,
   amenities,
@@ -336,21 +337,44 @@ export function CrcLocations() {
               All five boroughs, and beyond.
             </h2>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
-              Stores across {business.boroughs.slice(0, -1).join(", ")} and{" "}
-              {business.boroughs.slice(-1)}, plus {business.regions.slice(1).join(", ")}.
-              Hours vary by store and many locations never close.
+              {business.totalStores} stores across New York City, the Baltimore
+              area and Allentown, PA. Hours vary by store and many locations
+              never close.
             </p>
 
             <ul className="mt-6 flex flex-wrap gap-2">
-              {business.boroughs.map((b) => (
+              {business.storeCounts.map((c) => (
                 <li
-                  key={b}
+                  key={c.place}
                   className="rounded-full bg-brand-tint px-3.5 py-1.5 text-xs font-semibold text-brand"
                 >
-                  {b}
+                  {c.place}
+                  <span className="ml-1.5 text-brand/50">{c.n}</span>
                 </li>
               ))}
             </ul>
+
+            {/* Baltimore gets its addresses on the page. Two stores is few
+                enough to list, and a local searching "laundromat Baltimore"
+                wants a street, not a chip. */}
+            <div className="mt-7 rounded-2xl border border-black/[0.07] p-5">
+              <h3 className="text-xs font-bold uppercase tracking-[0.16em] text-brand">
+                Maryland stores
+              </h3>
+              <ul className="mt-3 space-y-3">
+                {marylandStores.map((m) => (
+                  <li key={m.address} className="text-sm">
+                    <p className="font-semibold">{m.address}</p>
+                    <p className="text-muted-foreground">
+                      {m.city}, {m.state} {m.zip} ·{" "}
+                      <a href={`tel:${m.phone.replace(/[^0-9]/g, "")}`} className="text-brand hover:underline">
+                        {m.phone}
+                      </a>
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
             <div className="mt-7 flex flex-wrap gap-3">
               <a
@@ -405,8 +429,9 @@ export function CrcFooter() {
               <span className="text-base font-extrabold text-white">{business.name}</span>
             </div>
             <p className="mt-3 max-w-xs text-sm leading-relaxed">
-              {business.tagline}. 150+ washers and dryers across the New York Metro
-              area, New England, Ohio, Maryland and Pennsylvania.
+              {business.tagline}. {business.totalStores} stores with 150+ washers
+              and dryers each, across New York City, the Baltimore area and
+              Allentown, Pennsylvania.
             </p>
           </div>
 

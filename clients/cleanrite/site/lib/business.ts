@@ -31,8 +31,19 @@ export const business = {
   facebook: "https://www.facebook.com/cleanritecenter",
   instagram: "https://www.instagram.com/cleanritecenter/",
 
-  boroughs: ["Brooklyn", "The Bronx", "Queens", "Manhattan", "Staten Island"],
-  regions: ["New York Metro", "New England", "Ohio", "Maryland", "Pennsylvania"],
+  // Counts come from their own store locator feed, not from marketing copy.
+  // The homepage claims New England and Ohio; the locator lists no stores in
+  // either, so they are left off rather than promised.
+  storeCounts: [
+    { place: "Brooklyn", n: 17 },
+    { place: "The Bronx", n: 12 },
+    { place: "Queens", n: 7 },
+    { place: "Staten Island", n: 3 },
+    { place: "Manhattan", n: 1 },
+    { place: "Baltimore area", n: 2 },
+    { place: "Allentown, PA", n: 1 },
+  ],
+  totalStores: 43,
 
   pricing: {
     base: "$29.99",
@@ -138,4 +149,22 @@ export const steps = [
   { n: "02", title: "Bag it up", body: "Leave it at your door. A driver collects it and you get a text." },
   { n: "03", title: "We weigh and wash", body: "You confirm the total before anything is charged." },
   { n: "04", title: "Folded, back to you", body: "Delivered to your door with tracking the whole way." },
+] as const
+
+/** Real Maryland storefronts from the locator feed, with their own phone numbers. */
+export const marylandStores = [
+  {
+    address: "4618 A Edmondson Avenue",
+    city: "Baltimore",
+    state: "MD",
+    zip: "21229",
+    phone: "667-210-2669",
+  },
+  {
+    address: "7017 Liberty Road",
+    city: "Gwynn Oak",
+    state: "MD",
+    zip: "21207",
+    phone: "443-551-3748",
+  },
 ] as const
