@@ -25,10 +25,10 @@
           padding-block:1rem 3.5rem; padding-inline:16px; }
 
   .sheet{ width:11in; height:8.5in; flex:none; display:grid; background:#fff;
-          padding:0in; box-sizing:border-box;
+          padding:0.25in; box-sizing:border-box;
           box-shadow:0 14px 40px rgba(11,12,14,.3); transform-origin:top center; overflow:hidden; }
-  .sheet.outside{ grid-template-columns:3.625in 3.6875in 3.6875in; grid-template-rows:8.5in; }
-  .sheet.inside { grid-template-columns:3.6875in 3.6875in 3.625in; grid-template-rows:8.5in; }
+  .sheet.outside{ grid-template-columns:3.375in 3.6875in 3.4375in; grid-template-rows:8in; }
+  .sheet.inside { grid-template-columns:3.4375in 3.6875in 3.375in; grid-template-rows:8in; }
   @media (max-width:11.5in){ .sheet{ transform:scale(var(--fit,.62)); margin-bottom:calc(-8.5in * (1 - var(--fit,.62))); } }
   @media (max-width:760px){ .sheet{ --fit:.40; } }
 
@@ -109,6 +109,24 @@
   .fineprint{ font-size:.61rem; line-height:1.3; color:var(--on-dark-soft); }
 
   
+  /* No-bleed only: the white border supplies the breathing room, so the ink
+     panels pull their padding in and the lists tighten, recovering the half
+     inch of height the margin costs. The QR tiles are left alone — shrinking
+     those is what makes a code unscannable. */
+  .panel{ padding:.24in .26in .22in; }
+  .rows{ gap:.105in; }
+  .rows span{ line-height:1.34; margin-top:.028in; }
+  .niches{ gap:.035in; }
+  .niches li{ padding-top:.035in; }
+  .niches span{ font-size:.63rem; line-height:1.22; }
+  .steps{ gap:.17in; }
+  .punch{ margin:.14in 0 .13in; padding:.09in .13in; }
+  .rule{ margin:.13in 0; }
+  h3{ font-size:1.5rem; }
+  h2.cover{ font-size:2.5rem; }
+  .sub{ font-size:.82rem; }
+  .wave{ height:.7in; }
+
 
   @media print{
     @page{ size:letter landscape; margin:0; }

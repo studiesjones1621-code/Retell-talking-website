@@ -3,6 +3,35 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const here = path.dirname(fileURLToPath(import.meta.url))
+
+// node trifold.mjs --no-bleed   → white safety border, for printers without bleed
+const NO_BLEED = process.argv.includes('--no-bleed')
+const M = NO_BLEED ? 0.25 : 0            // inches of white on every edge
+const f = (n) => `${+n.toFixed(4)}in`
+// Fold lines are measured from the paper edge, so only the outer panels lose
+// width to the margin. The middle panel keeps its full size.
+const OUT_COLS = [3.625 - M, 3.6875, 3.6875 - M].map(f).join(' ')
+const IN_COLS  = [3.6875 - M, 3.6875, 3.625 - M].map(f).join(' ')
+const SHEET_H  = f(8.5 - 2 * M)
+const TIGHTEN = !NO_BLEED ? '' : `
+  /* No-bleed only: the white border supplies the breathing room, so the ink
+     panels pull their padding in and the lists tighten, recovering the half
+     inch of height the margin costs. The QR tiles are left alone — shrinking
+     those is what makes a code unscannable. */
+  .panel{ padding:.24in .26in .22in; }
+  .rows{ gap:.105in; }
+  .rows span{ line-height:1.34; margin-top:.028in; }
+  .niches{ gap:.035in; }
+  .niches li{ padding-top:.035in; }
+  .niches span{ font-size:.63rem; line-height:1.22; }
+  .steps{ gap:.17in; }
+  .punch{ margin:.14in 0 .13in; padding:.09in .13in; }
+  .rule{ margin:.13in 0; }
+  h3{ font-size:1.5rem; }
+  h2.cover{ font-size:2.5rem; }
+  .sub{ font-size:.82rem; }
+  .wave{ height:.7in; }
+`
 const qr = JSON.parse(fs.readFileSync(path.join(here, 'qr-trifold.json'), 'utf8'))
 
 // One line each, and each has to name a DIFFERENT way the call is lost —
@@ -42,10 +71,11 @@ const html = `<title>OnDuty Agent Trifold</title>
   .stack{ display:flex; flex-direction:column; align-items:center; gap:.6rem;
           padding-block:1rem 3.5rem; padding-inline:16px; }
 
-  .sheet{ width:11in; height:8.5in; flex:none; display:grid; background:var(--ink);
+  .sheet{ width:11in; height:8.5in; flex:none; display:grid; background:#fff;
+          padding:${f(M)}; box-sizing:border-box;
           box-shadow:0 14px 40px rgba(11,12,14,.3); transform-origin:top center; overflow:hidden; }
-  .sheet.outside{ grid-template-columns:3.625in 3.6875in 3.6875in; grid-template-rows:8.5in; }
-  .sheet.inside { grid-template-columns:3.6875in 3.6875in 3.625in; grid-template-rows:8.5in; }
+  .sheet.outside{ grid-template-columns:${OUT_COLS}; grid-template-rows:${SHEET_H}; }
+  .sheet.inside { grid-template-columns:${IN_COLS}; grid-template-rows:${SHEET_H}; }
   @media (max-width:11.5in){ .sheet{ transform:scale(var(--fit,.62)); margin-bottom:calc(-8.5in * (1 - var(--fit,.62))); } }
   @media (max-width:760px){ .sheet{ --fit:.40; } }
 
@@ -124,6 +154,8 @@ const html = `<title>OnDuty Agent Trifold</title>
   .rule{ height:1px; background:rgba(255,255,255,.14); margin:.16in 0; }
   .contact{ display:grid; gap:.06in; font-size:.82rem; font-weight:600; }
   .fineprint{ font-size:.61rem; line-height:1.3; color:var(--on-dark-soft); }
+
+  ${TIGHTEN}
 
   @media print{
     @page{ size:letter landscape; margin:0; }
@@ -267,5 +299,6 @@ const html = `<title>OnDuty Agent Trifold</title>
   </section>
 </div>
 `
-fs.writeFileSync(path.join(here, 'trifold.html'), html)
-console.log('rebuilt —', (html.length/1024).toFixed(0)+'kb')
+const outName = NO_BLEED ? 'trifold-nobleed.html' : 'trifold.html'
+fs.writeFileSync(path.join(here, outName), html)
+console.log(`rebuilt ${outName} —`, (html.length/1024).toFixed(0)+'kb', NO_BLEED ? `(${M}in safety border)` : '(full bleed)')

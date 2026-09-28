@@ -6,10 +6,29 @@ US Letter landscape, printed both sides.
 ## Rebuilding
 
 ```bash
-npm i --no-save qrcode   # only needed if the QR codes must be regenerated
-node print/qr.mjs        # writes print/qr-trifold.json
-node print/trifold.mjs   # writes print/trifold.html
+npm i --no-save qrcode            # only if the QR codes must be regenerated
+node print/qr.mjs                 # writes print/qr-trifold.json
+node print/trifold.mjs            # writes print/trifold.html          (full bleed)
+node print/trifold.mjs --no-bleed # writes print/trifold-nobleed.html  (white border)
 ```
+
+## Which file to print
+
+**Full bleed** (`trifold.html`) — ink runs to the paper edge. Needs a press that
+prints oversize and trims down. Most print shops can; most office printers and
+some in-store services cannot.
+
+**No bleed** (`trifold-nobleed.html`) — a 0.25in white border is built into the
+artwork. Use this whenever the printer cannot bleed, because otherwise their
+unprintable strip becomes a ragged, usually uneven white frame around a dark
+design and it looks like a mistake.
+
+The margin comes out of the **outer panels only**. Folds sit at fixed distances
+from the paper edge (3.625in and 7.3125in); take the margin off the middle panel
+too and the ink boundaries stop landing on the fold lines. The no-bleed build
+also tightens padding and list spacing to recover the half inch of height the
+margin costs — the QR tiles are deliberately left at full size, since shrinking
+those is what makes a code unscannable.
 
 Open `print/trifold.html` in a browser to print it. `qrcode` is deliberately not
 a project dependency — the site does not use it, and the codes only change when
