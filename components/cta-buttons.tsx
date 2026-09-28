@@ -3,6 +3,7 @@
 import { CalendarCheck, Mic, Phone } from "lucide-react"
 
 import { business, hasBooking, hasPhone, phoneHref, phoneLabel } from "@/lib/business"
+import { calTriggerProps } from "@/components/booking-section"
 import { useVoiceAgent } from "@/components/voice-agent/voice-agent-provider"
 import { cn } from "@/lib/utils"
 
@@ -29,7 +30,7 @@ export function CtaButtons({
 
   const primary = hasBooking ? (
     <a
-      href="#book"
+      {...calTriggerProps}
       className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-accent px-7 py-4 text-sm font-semibold text-brand-950 transition-opacity hover:opacity-90"
     >
       <CalendarCheck className="h-4 w-4" />

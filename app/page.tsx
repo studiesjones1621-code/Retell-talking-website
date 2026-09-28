@@ -1,4 +1,4 @@
-import { BookingSection } from "@/components/booking-section"
+import { CalPopupProvider } from "@/components/booking-section"
 import { CtaSection } from "@/components/cta-section"
 import { Footer } from "@/components/footer"
 import { Hero } from "@/components/hero"
@@ -15,6 +15,7 @@ import { VoiceAgentWidget } from "@/components/voice-agent/voice-agent-widget"
 export default function Home() {
   return (
     <VoiceAgentProvider>
+      <CalPopupProvider />
       <main>
         <Hero
           headline="Never miss another call."
@@ -24,7 +25,6 @@ export default function Home() {
         <NichePicker />
         <HowItWorks />
         <MarketingTeaser />
-        <BookingSection />
         <CtaSection
           heading="Hear it before you buy it."
           subcopy="Talk to the agent on this page — it is the same technology that would answer your phone."

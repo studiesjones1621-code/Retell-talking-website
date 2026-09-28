@@ -1,4 +1,4 @@
-import { BookingSection } from "@/components/booking-section"
+import { CalPopupProvider } from "@/components/booking-section"
 import type { Metadata } from "next"
 
 import { business } from "@/lib/business"
@@ -31,6 +31,7 @@ export const metadata: Metadata = {
 export default function MarketingPage() {
   return (
     <VoiceAgentProvider niche="marketing">
+      <CalPopupProvider />
       <main>
         <Hero
           eyebrow="Marketing"
@@ -40,7 +41,6 @@ export default function MarketingPage() {
         />
         <MarketingServices />
         <MarketingSynergy />
-        <BookingSection heading="Let us look at your setup." subcopy="Fifteen minutes. We will look at your site and your listing and tell you what is actually costing you calls." />
         <CtaSection heading={marketing.ctaHeading} subcopy={marketing.ctaSubcopy} note={null} />
       </main>
 

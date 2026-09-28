@@ -5,6 +5,7 @@ import Link from "next/link"
 import { useState } from "react"
 
 import { business, hasBooking, hasPhone, phoneHref, phoneLabel } from "@/lib/business"
+import { calTriggerProps } from "@/components/booking-section"
 import { niches } from "@/lib/niches"
 
 /**
@@ -74,7 +75,7 @@ export function SiteHeader() {
         <div className="flex items-center gap-4">
           {hasBooking ? (
             <a
-              href="#book"
+              {...calTriggerProps}
               className="hidden items-center gap-2 rounded-full bg-brand-accent px-5 py-2.5 text-sm font-semibold text-brand-950 transition-opacity hover:opacity-90 lg:inline-flex"
             >
               <CalendarCheck className="h-3.5 w-3.5" />
@@ -131,7 +132,7 @@ export function SiteHeader() {
 
             {hasBooking && (
               <a
-                href="#book"
+                {...calTriggerProps}
                 className="mt-3 inline-flex items-center justify-center gap-2 rounded-xl bg-brand-accent px-5 py-3.5 text-sm font-semibold text-brand-950"
               >
                 <CalendarCheck className="h-4 w-4" />

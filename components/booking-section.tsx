@@ -1,59 +1,58 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
-import { CalendarCheck, ExternalLink } from "lucide-react"
+import React, { useEffect } from "react"
 
 import { business } from "@/lib/business"
 
 /**
- * Real availability, on the page.
+ * Booking as a popup, opened from any CTA on the site.
  *
- * Every CTA used to fall through to a mailto: link, which asks the visitor to
- * compose an email and wait — the highest-friction ending possible for a site
- * whose whole argument is that waiting loses business. This embeds the live
- * calendar so they pick a time and are done.
+ * Every CTA used to fall through to a mailto: link — "compose an email and
+ * wait" is the highest-friction ending possible for a site whose whole argument
+ * is that waiting loses business. Now the button opens a calendar over the page
+ * and the visitor picks a slot without leaving.
  *
- * Availability comes from Google Calendar via Cal.com, so a busy slot is never
- * offered and nothing needs syncing by hand.
+ * Availability comes from Google Calendar through Cal.com, so a busy slot is
+ * never offered and nothing is kept in sync by hand.
+ *
+ * A popup rather than an embedded section, deliberately: a calendar sitting
+ * open on the homepage asks people to commit before they have read anything,
+ * and it takes a screenful of space on every page it appears on.
  */
-export function BookingSection({
-  heading = "Grab fifteen minutes.",
-  subcopy = "Pick a time that works. We will talk through how your calls come in today and what an agent would do with them.",
-}: {
-  heading?: string
-  subcopy?: string
-}) {
-  const mounted = useRef(false)
-  const [failed, setFailed] = useState(false)
 
+const NS = "onduty"
+const SRC = "https://app.cal.com/embed/embed.js"
+
+type CalFn = ((...a: unknown[]) => void) & {
+  q?: unknown[]
+  ns?: Record<string, (...a: unknown[]) => void>
+  loaded?: boolean
+}
+
+/**
+ * Mount once, near the root. It installs Cal's loader and theme; after that any
+ * element carrying `data-cal-link` opens the popup when clicked.
+ */
+export function CalPopupProvider() {
   useEffect(() => {
-    if (mounted.current) return
-    mounted.current = true
+    const w = window as unknown as { Cal?: CalFn }
 
-    // Cal's loader has to define window.Cal as a queueing stub BEFORE the
-    // script arrives; the script then drains that queue. Appending the script
-    // first and calling Cal() in onload leaves the init calls with nothing to
-    // queue into, which is why the embed silently never mounts.
-    const w = window as unknown as {
-      Cal?: ((...a: unknown[]) => void) & { q?: unknown[]; ns?: Record<string, (...a: unknown[]) => void>; loaded?: boolean }
-    }
-
-    const SRC = "https://app.cal.com/embed/embed.js"
-    const NS = "onduty"
-
+    // Cal's loader has to exist as a queueing stub BEFORE the script arrives,
+    // because the script drains that queue on load. Appending the script first
+    // and calling Cal() in onload leaves the init calls with nothing to queue
+    // into, and the popup silently never opens.
     if (!w.Cal) {
-      const push = (target: { q?: unknown[] }, args: unknown) => {
-        target.q = target.q || []
-        target.q.push(args)
+      const push = (t: { q?: unknown[] }, args: unknown) => {
+        t.q = t.q || []
+        t.q.push(args)
       }
-      const cal = function (...args: unknown[]) {
+      w.Cal = function (...args: unknown[]) {
         const c = w.Cal!
         if (!c.loaded) {
           c.ns = {}
           c.q = c.q || []
           const el = document.createElement("script")
           el.src = SRC
-          el.onerror = () => setFailed(true)
           document.head.appendChild(el)
           c.loaded = true
         }
@@ -72,19 +71,12 @@ export function BookingSection({
           return
         }
         push(c as unknown as { q?: unknown[] }, args)
-      } as NonNullable<typeof w.Cal>
-      w.Cal = cal
+      } as CalFn
     }
 
     const Cal = w.Cal!
-    Cal("init", NS, { origin: "https://app.cal.com" })
-    const ns = Cal.ns![NS]
-    ns("inline", {
-      elementOrSelector: "#onduty-cal",
-      config: { layout: "month_view" },
-      calLink: business.calLink,
-    })
-    ns("ui", {
+    Cal("init", { origin: "https://app.cal.com" })
+    Cal("ui", {
       theme: "dark",
       hideEventTypeDetails: false,
       layout: "month_view",
@@ -93,56 +85,35 @@ export function BookingSection({
         light: { "cal-brand": "#5f8a12" },
       },
     })
-
-    // If nothing has mounted after a reasonable wait, show the fallback rather
-    // than leaving an empty box on the page.
-    const timer = setTimeout(() => {
-      if (!document.querySelector("#onduty-cal iframe")) setFailed(true)
-    }, 8000)
-    return () => clearTimeout(timer)
   }, [])
 
-  return (
-    <section id="book" className="scroll-mt-20 bg-brand-950 py-20 sm:py-28">
-      <div className="mx-auto max-w-5xl px-5">
-        <p className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-brand-accent">
-          <CalendarCheck className="h-3.5 w-3.5" />
-          Book a call
-        </p>
-        <h2 className="max-w-xl text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-          {heading}
-        </h2>
-        <p className="mt-4 max-w-xl text-base leading-relaxed text-white/60">{subcopy}</p>
-
-        <div className="mt-10 overflow-hidden rounded-2xl border border-white/10 bg-brand-900">
-          {failed ? (
-            <div className="px-6 py-14 text-center">
-              <p className="text-sm text-white/70">
-                The calendar did not load. You can still book here:
-              </p>
-              <a
-                href={business.bookingUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 inline-flex items-center gap-2 rounded-xl bg-brand-accent px-6 py-3 text-sm font-semibold text-brand-950"
-              >
-                Open the booking page
-                <ExternalLink className="h-4 w-4" />
-              </a>
-            </div>
-          ) : (
-            <div id="onduty-cal" className="min-h-[38rem] w-full" />
-          )}
-        </div>
-
-        <p className="mt-5 text-xs text-white/40">
-          Rather not use the calendar?{" "}
-          <a href={`mailto:${business.email}`} className="underline hover:text-white/70">
-            Email us
-          </a>{" "}
-          or talk to the agent on this page.
-        </p>
-      </div>
-    </section>
-  )
+  return null
 }
+
+/**
+ * Props that turn any anchor into a popup trigger.
+ *
+ * Cal ships a delegated click handler for `data-cal-link`, but it does not fire
+ * reliably here, so the modal is opened explicitly. The `data-cal-link` stays
+ * on the element anyway — harmless, and it keeps working if their delegation
+ * starts binding.
+ *
+ * The href is the real booking page, not "#". preventDefault only happens once
+ * window.Cal exists, so a visitor whose script was blocked or who is offline
+ * still gets taken somewhere they can book instead of clicking a dead button.
+ */
+export const calTriggerProps = {
+  href: business.bookingUrl,
+  "data-cal-link": business.calLink,
+  onClick: (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const Cal = (window as unknown as { Cal?: CalFn }).Cal
+    if (!Cal || !Cal.loaded) return
+    e.preventDefault()
+    Cal("modal", {
+      calLink: business.calLink,
+      // Theme has to ride on the modal's own config; the Cal("ui") call above
+      // applies to embeds declared up front, not one opened on click.
+      config: { layout: "month_view", theme: "dark" },
+    })
+  },
+} as const
