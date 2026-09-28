@@ -68,7 +68,9 @@ export const business = {
    * can still book — but a direct link converts better for visitors who would
    * rather not talk.
    */
-  bookingUrl: "",
+  /** Cal.com, reading live availability from Google Calendar. */
+  calLink: "tye-wealth/onduty",
+  bookingUrl: "https://cal.com/tye-wealth/onduty",
 
   // ----------------------------------------------------------------- location
   /**

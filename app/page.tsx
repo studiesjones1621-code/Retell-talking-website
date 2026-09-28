@@ -1,3 +1,4 @@
+import { BookingSection } from "@/components/booking-section"
 import { CtaSection } from "@/components/cta-section"
 import { Footer } from "@/components/footer"
 import { Hero } from "@/components/hero"
@@ -23,6 +24,7 @@ export default function Home() {
         <NichePicker />
         <HowItWorks />
         <MarketingTeaser />
+        <BookingSection />
         <CtaSection
           heading="Hear it before you buy it."
           subcopy="Talk to the agent on this page — it is the same technology that would answer your phone."

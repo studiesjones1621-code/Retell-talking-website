@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 
 import { business } from "@/lib/business"
 import { getNiche, niches } from "@/lib/niches"
+import { BookingSection } from "@/components/booking-section"
 import { ComplianceStrip } from "@/components/compliance-strip"
 import { CtaSection } from "@/components/cta-section"
 import { Footer } from "@/components/footer"
@@ -91,6 +92,7 @@ export default async function NichePage({ params }: Props) {
         */}
         <ComplianceStrip compliance={niche.compliance} />
         <MarketingTeaser />
+        <BookingSection />
         <CtaSection heading={niche.ctaHeading} subcopy={niche.ctaSubcopy} />
       </main>
 

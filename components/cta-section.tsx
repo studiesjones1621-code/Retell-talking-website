@@ -15,7 +15,7 @@ export function CtaSection({
   note?: string | null
 }) {
   return (
-    <section id="book" className="relative overflow-hidden bg-brand-900 py-24 md:py-32">
+    <section id="hear-it" className="relative overflow-hidden bg-brand-900 py-24 md:py-32">
       <div className="absolute inset-0 brand-glow" />
 
       <div className="relative mx-auto max-w-3xl px-6 text-center md:px-12">
