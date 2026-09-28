@@ -4,16 +4,60 @@ import { fileURLToPath } from 'node:url'
 
 const here = path.dirname(fileURLToPath(import.meta.url))
 
-// node trifold.mjs --no-bleed   → white safety border, for printers without bleed
+// node trifold.mjs             → full bleed, ink to the paper edge
+// node trifold.mjs --no-bleed   → 0.25in white border, printed and kept as-is
+// node trifold.mjs --trim       → same border, but cut off: a 10.5x8in finished
+//                                 piece with crop marks
 const NO_BLEED = process.argv.includes('--no-bleed')
-const M = NO_BLEED ? 0.25 : 0            // inches of white on every edge
+const TRIM     = process.argv.includes('--trim')
+const TIGHT    = NO_BLEED || TRIM
+const M = TIGHT ? 0.25 : 0               // inches of white on every edge
 const f = (n) => `${+n.toFixed(4)}in`
-// Fold lines are measured from the paper edge, so only the outer panels lose
-// width to the margin. The middle panel keeps its full size.
-const OUT_COLS = [3.625 - M, 3.6875, 3.6875 - M].map(f).join(' ')
-const IN_COLS  = [3.6875 - M, 3.6875, 3.625 - M].map(f).join(' ')
-const SHEET_H  = f(8.5 - 2 * M)
-const TIGHTEN = !NO_BLEED ? '' : `
+
+// Fold geometry depends on what the FINISHED piece measures, because the folds
+// are placed relative to its edges.
+//
+//   full bleed / no-bleed kept  → finished sheet is the full 11in, and the
+//                                 margin comes off the outer panels only, so
+//                                 the folds stay where they were.
+//   trimmed                     → finished sheet is 10.5in, so the thirds are
+//                                 recomputed from scratch. Reusing the 11in
+//                                 widths here would put every fold a quarter
+//                                 inch off.
+const W = TRIM ? 11 - 2 * M : 11
+const THIRD  = W / 3
+const NARROW = THIRD - 0.0625            // the panel that tucks inside
+const WIDE   = (W - NARROW) / 2
+
+const OUT_COLS = TRIM
+  ? [NARROW, WIDE, WIDE].map(f).join(' ')
+  : [3.625 - M, 3.6875, 3.6875 - M].map(f).join(' ')
+const IN_COLS = TRIM
+  ? [WIDE, WIDE, NARROW].map(f).join(' ')
+  : [3.6875 - M, 3.6875, 3.625 - M].map(f).join(' ')
+const SHEET_H = f(8.5 - 2 * M)
+const MARK_LEN = 0.14                    // inches
+const MARK_GAP = 0.05                    // clear of the trim line, so the mark
+                                         // never prints inside the artwork
+const MARKS = !TRIM ? '' : `
+  /* Crop marks sit in the white margin and stop short of the trim line — that
+     is how a cutter lines up without a rule running across the design. */
+  .sheet{ position:relative; }
+  .cropmark{ position:absolute; background:#111; }
+`
+
+const cropMarks = !TRIM ? '' : ['top','bottom'].flatMap((v) =>
+  ['left','right'].flatMap((h) => {
+    const near = f(M - MARK_GAP - MARK_LEN < 0 ? 0 : M - MARK_GAP - MARK_LEN)
+    return [
+      // horizontal arm, level with the trim edge, out in the margin
+      `<div class="cropmark" style="${v}:${f(M)};${h}:${near};width:${f(MARK_LEN)};height:.7pt"></div>`,
+      // vertical arm
+      `<div class="cropmark" style="${h}:${f(M)};${v}:${near};height:${f(MARK_LEN)};width:.7pt"></div>`,
+    ]
+  })
+).join('')
+const TIGHTEN = !TIGHT ? '' : `
   /* No-bleed only: the white border supplies the breathing room, so the ink
      panels pull their padding in and the lists tighten, recovering the half
      inch of height the margin costs. The QR tiles are left alone — shrinking
@@ -156,6 +200,7 @@ const html = `<title>OnDuty Agent Trifold</title>
   .fineprint{ font-size:.61rem; line-height:1.3; color:var(--on-dark-soft); }
 
   ${TIGHTEN}
+  ${MARKS}
 
   @media print{
     @page{ size:letter landscape; margin:0; }
@@ -179,7 +224,7 @@ const html = `<title>OnDuty Agent Trifold</title>
 
 <p class="sheet-label">Sheet 1 — outside</p>
 <div class="stack">
-  <section class="sheet outside">
+  <section class="sheet outside">${cropMarks}
 
     <div class="panel alt">
       <span class="tag">Inner flap</span>
@@ -244,7 +289,7 @@ const html = `<title>OnDuty Agent Trifold</title>
 
 <p class="sheet-label">Sheet 2 — inside</p>
 <div class="stack">
-  <section class="sheet inside">
+  <section class="sheet inside">${cropMarks}
 
     <div class="panel glow">
       <span class="tag">Inside left</span>
@@ -299,6 +344,6 @@ const html = `<title>OnDuty Agent Trifold</title>
   </section>
 </div>
 `
-const outName = NO_BLEED ? 'trifold-nobleed.html' : 'trifold.html'
+const outName = TRIM ? 'trifold-trim.html' : NO_BLEED ? 'trifold-nobleed.html' : 'trifold.html'
 fs.writeFileSync(path.join(here, outName), html)
-console.log(`rebuilt ${outName} —`, (html.length/1024).toFixed(0)+'kb', NO_BLEED ? `(${M}in safety border)` : '(full bleed)')
+console.log(`rebuilt ${outName} —`, (html.length/1024).toFixed(0)+'kb', TRIM ? `(trims to ${f(W)} x ${f(8.5 - 2*M)})` : NO_BLEED ? `(${M}in border, kept)` : '(full bleed)')

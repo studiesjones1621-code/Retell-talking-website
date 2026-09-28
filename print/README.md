@@ -9,7 +9,8 @@ US Letter landscape, printed both sides.
 npm i --no-save qrcode            # only if the QR codes must be regenerated
 node print/qr.mjs                 # writes print/qr-trifold.json
 node print/trifold.mjs            # writes print/trifold.html          (full bleed)
-node print/trifold.mjs --no-bleed # writes print/trifold-nobleed.html  (white border)
+node print/trifold.mjs --no-bleed # writes print/trifold-nobleed.html  (white border kept)
+node print/trifold.mjs --trim     # writes print/trifold-trim.html     (border cut off)
 ```
 
 ## Which file to print
@@ -19,13 +20,23 @@ prints oversize and trims down. Most print shops can; most office printers and
 some in-store services cannot.
 
 **No bleed** (`trifold-nobleed.html`) — a 0.25in white border is built into the
-artwork. Use this whenever the printer cannot bleed, because otherwise their
-unprintable strip becomes a ragged, usually uneven white frame around a dark
-design and it looks like a mistake.
+artwork and stays on the finished piece. Use this whenever the printer cannot
+bleed and will not trim, because otherwise their unprintable strip becomes a
+ragged, usually uneven white frame around a dark design.
 
-The margin comes out of the **outer panels only**. Folds sit at fixed distances
-from the paper edge (3.625in and 7.3125in); take the margin off the middle panel
-too and the ink boundaries stop landing on the fold lines. The no-bleed build
+**Trim** (`trifold-trim.html`) — same border, but the shop cuts it off, leaving
+a **10.5 x 8in** finished piece with ink to the edge. Carries crop marks.
+
+The trim build recomputes the fold geometry from the *finished* size rather
+than reusing the 11in widths. This is the trap: folds are placed relative to
+the edges of the piece you end up with, so printing the no-bleed file and then
+cutting the border off would put every fold a quarter inch out of position.
+Panels for 10.5in are 3.4375in (the one that tucks in) and 3.53125in twice.
+
+For the untrimmed build the margin comes out of the **outer panels only**.
+Folds sit at fixed distances from the paper edge (3.625in and 7.3125in); take
+the margin off the middle panel too and the ink boundaries stop landing on the
+fold lines. Both tightened builds
 also tightens padding and list spacing to recover the half inch of height the
 margin costs — the QR tiles are deliberately left at full size, since shrinking
 those is what makes a code unscannable.
