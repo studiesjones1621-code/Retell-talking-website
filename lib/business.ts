@@ -69,8 +69,8 @@ export const business = {
    * rather not talk.
    */
   /** Cal.com, reading live availability from Google Calendar. */
-  calLink: "tye-wealth/onduty",
-  bookingUrl: "https://cal.com/tye-wealth/onduty",
+  calLink: "ondutyagent/20min",
+  bookingUrl: "https://cal.com/ondutyagent/20min",
 
   // ----------------------------------------------------------------- location
   /**
