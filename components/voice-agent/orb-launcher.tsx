@@ -1,7 +1,8 @@
 "use client"
 
 import { Mic, X } from "lucide-react"
-import { useState } from "react"
+
+import { useVoiceAgent } from "@/components/voice-agent/voice-agent-provider"
 
 /**
  * Launcher backed by Retell's hosted orb page in an iframe.
@@ -13,13 +14,18 @@ import { useState } from "react"
  *
  * It renders only when NEXT_PUBLIC_RETELL_ORB_URL is set, so the API-backed
  * launcher stays the default wherever that is working.
+ *
+ * Open/closed lives in VoiceAgentProvider rather than in local state, because
+ * the CTA buttons elsewhere on the page call that provider's open(). With a
+ * private useState here those buttons set a flag nothing reads, and clicking
+ * the hero's "Talk to our assistant" did nothing at all.
  */
 export function OrbLauncher({ url }: { url: string }) {
-  const [open, setOpen] = useState(false)
+  const { isOpen, open, close } = useVoiceAgent()
 
   return (
     <>
-      {open && (
+      {isOpen && (
         <div className="fixed bottom-24 right-5 z-50 w-[min(380px,calc(100vw-2.5rem))] overflow-hidden rounded-2xl border border-white/10 bg-brand-900 shadow-2xl shadow-black/60">
           <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
             <div>
@@ -27,7 +33,7 @@ export function OrbLauncher({ url }: { url: string }) {
               <p className="text-xs text-white/45">Answers instantly, 24/7</p>
             </div>
             <button
-              onClick={() => setOpen(false)}
+              onClick={close}
               aria-label="Close"
               className="rounded-lg p-1.5 text-white/50 transition-colors hover:bg-white/10 hover:text-white"
             >
@@ -44,11 +50,11 @@ export function OrbLauncher({ url }: { url: string }) {
       )}
 
       <button
-        onClick={() => setOpen((v) => !v)}
+        onClick={() => (isOpen ? close() : open())}
         className="fixed bottom-5 right-5 z-50 inline-flex items-center gap-2 rounded-full bg-brand-accent px-5 py-3.5 text-sm font-semibold text-brand-950 shadow-lg shadow-brand-accent/30 transition-transform hover:scale-105"
       >
         <Mic className="h-4 w-4" />
-        {open ? "Close" : "Talk to us"}
+        {isOpen ? "Close" : "Talk to us"}
       </button>
     </>
   )
