@@ -1,4 +1,6 @@
-import { Mail, MapPin, Phone, Radio } from "lucide-react"
+import { Mail, MapPin, Phone } from "lucide-react"
+
+import { Logo } from "@/components/logo"
 import Link from "next/link"
 
 import {
@@ -29,7 +31,7 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-3">
           <div>
             <div className="flex items-center gap-2.5">
-              <Radio className="h-5 w-5 text-brand-accent" />
+              <Logo className="h-6 w-6 text-brand-accent" />
               <span className="text-base font-semibold text-white">{business.name}</span>
             </div>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/50">

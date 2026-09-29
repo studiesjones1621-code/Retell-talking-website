@@ -1,6 +1,8 @@
 "use client"
 
-import { CalendarCheck, ChevronDown, Menu, Phone, Radio, X } from "lucide-react"
+import { CalendarCheck, ChevronDown, Menu, Phone, X } from "lucide-react"
+
+import { Logo } from "@/components/logo"
 import Link from "next/link"
 import { useState } from "react"
 
@@ -27,7 +29,7 @@ export function SiteHeader() {
     <header className="absolute inset-x-0 top-0 z-40">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 md:px-12">
         <Link href="/" className="flex items-center gap-2.5 text-white">
-          <Radio className="h-5 w-5 text-brand-accent" />
+          <Logo className="h-6 w-6 text-brand-accent" />
           <span className="text-base font-semibold tracking-tight">{business.name}</span>
         </Link>
 
