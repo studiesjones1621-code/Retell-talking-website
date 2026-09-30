@@ -70,6 +70,9 @@ export function SiteHeader() {
           <a href="#how" className="transition-colors hover:text-white">
             How it works
           </a>
+          <Link href="/contact" className="transition-colors hover:text-white">
+            Contact
+          </Link>
         </div>
 
         <div className="flex items-center gap-4">
@@ -128,6 +131,14 @@ export function SiteHeader() {
               className="mt-3 border-t border-white/10 py-3 text-base text-white/75 transition-colors hover:text-white"
             >
               Marketing
+            </Link>
+
+            <Link
+              href="/contact"
+              onClick={close}
+              className="py-3 text-base text-white/75 transition-colors hover:text-white"
+            >
+              Contact
             </Link>
 
             {hasBooking && (
