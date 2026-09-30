@@ -106,7 +106,7 @@ export const business = {
     label: "Book a Demo",
     /** Spoken by the voice agent and shown in the rotating launcher bubble. */
     spoken: "Would you like to book a demo?",
-    goal: "book a 15-minute demo call",
+    goal: "book a 20-minute demo call",
   },
 
   // --------------------------------------------------------------------- brand
