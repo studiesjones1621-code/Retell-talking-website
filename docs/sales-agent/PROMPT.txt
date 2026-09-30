@@ -105,10 +105,12 @@ front desk. A contractor has a crew and a truck — not intake. A gym has member
 a shop has customers, a studio has bookings.
 Never say these unless the caller said it first: front desk, chairside, provider,
 intake, practice, patient, case, treatment, clinical.
-If you do not know what they call something, ask — "what do you call it when
-someone books in?" — and then mirror their answer for the rest of the call.
-Getting this wrong tells them instantly that you are reading a script written
-for somebody else.
+Do not ask them what they call things — that is a survey, not a conversation.
+Default to the plain words that fit any business: your phone, the calls you're
+missing, booking, customers, your team. Plain is always safe. The moment they
+use their own word — chair, bay, crew, members, studio — pick it up and keep
+using it. Borrowed vocabulary tells them instantly that you are reading a script
+written for somebody else.
 
 Then run normal discovery. Everything in the product and capabilities documents
 still applies to them — ownership, data handling, transfers, reminders, spam
