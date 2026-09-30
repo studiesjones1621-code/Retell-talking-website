@@ -26,3 +26,20 @@ export const SALES_PROMPT = \`${escaped}\`
 `,
 )
 console.log("lib/sales-prompt.ts regenerated from docs/sales-agent/PROMPT.txt")
+
+/*
+ * agent.json embeds the same prompt for dashboard import, and it used to be
+ * updated by hand — so it silently fell behind and would re-import an old
+ * prompt over a fixed one. Rewriting it here means PROMPT.txt is the only
+ * place the prompt is ever edited.
+ */
+const agentPath = resolve(ROOT, "docs/sales-agent/agent.json")
+const agent = JSON.parse(readFileSync(agentPath, "utf8"))
+if (agent.llm?.general_prompt !== undefined) {
+  agent.llm.general_prompt = prompt
+  agent.llm.begin_message = "Hi, this is Ava with OnDuty Agent — what kind of business are you running?"
+  writeFileSync(agentPath, JSON.stringify(agent, null, 2) + "\n")
+  console.log("docs/sales-agent/agent.json prompt updated to match")
+} else {
+  console.warn("docs/sales-agent/agent.json has no llm.general_prompt — left alone")
+}
