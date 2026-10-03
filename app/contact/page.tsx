@@ -1,8 +1,9 @@
 import type { Metadata } from "next"
-import { CalendarCheck, Mail, MapPin, Mic } from "lucide-react"
+import { Mail, MapPin, Mic } from "lucide-react"
 
 import { business, hasPhone, phoneHref, phoneLabel } from "@/lib/business"
-import { CalPopupProvider, calTriggerProps } from "@/components/booking-section"
+import { CalPopupProvider } from "@/components/booking-section"
+import { BookCard, TalkCard } from "@/components/contact-cards"
 import { Footer } from "@/components/footer"
 import { SiteHeader } from "@/components/site-header"
 import { VoiceAgentProvider } from "@/components/voice-agent/voice-agent-provider"
@@ -55,21 +56,9 @@ export default function ContactPage() {
         </p>
 
         <div className="mt-12 space-y-4">
-          <a
-            {...calTriggerProps}
-            className="flex items-start gap-4 rounded-2xl border border-brand-accent/30 bg-brand-accent/[0.07] p-6 transition-colors hover:bg-brand-accent/[0.12]"
-          >
-            <CalendarCheck className="mt-0.5 h-5 w-5 shrink-0 text-brand-accent" />
-            <span>
-              <span className="block font-semibold text-white">Book a demo</span>
-              <span className="mt-1 block text-sm text-white/55">
-                Twenty minutes. We look at how your calls come in today and what should
-                happen to them instead. Nothing to prepare.
-              </span>
-            </span>
-          </a>
+          <BookCard />
 
-          <TalkTrigger />
+          <TalkCard />
 
           <a
             href={`mailto:${business.email}`}
@@ -120,24 +109,5 @@ export default function ContactPage() {
       <Footer />
       <VoiceAgentWidget />
     </VoiceAgentProvider>
-  )
-}
-
-/**
- * Split out because opening the voice panel needs the provider's context, and
- * the page itself is a server component.
- */
-function TalkTrigger() {
-  return (
-    <div className="flex items-start gap-4 rounded-2xl border border-white/10 p-6">
-      <Mic className="mt-0.5 h-5 w-5 shrink-0 text-brand-accent" />
-      <span>
-        <span className="block font-semibold text-white">Talk to the agent</span>
-        <span className="mt-1 block text-sm text-white/55">
-          Bottom right of this page. Ask it what it costs, or tell it what you run and
-          see whether it keeps up. It is the same technology we would put on your phone.
-        </span>
-      </span>
-    </div>
   )
 }
