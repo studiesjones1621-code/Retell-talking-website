@@ -215,7 +215,10 @@ const html = `<title>OnDuty Agent Trifold</title>
   ${MARKS}
 
   @media print{
-    @page{ size:letter landscape; margin:0; }
+    /* Must match the sheet exactly. A hardcoded letter-landscape here is
+       larger-than-page for the press build, so the sheet overflowed, broke
+       onto a third page and lost the bottom of the cover — with no warning. */
+    @page{ size:${SHEET_W} ${SHEET_H}; margin:0; }
     body{ background:#fff; }
     .intro,.sheet-label{ display:none; }
     .stack{ display:block; padding:0; }
