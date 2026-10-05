@@ -5,11 +5,20 @@ import { fileURLToPath } from 'node:url'
 const here = path.dirname(fileURLToPath(import.meta.url))
 
 // node trifold.mjs             → full bleed, ink to the paper edge
+// node trifold.mjs --press      → same, plus a 0.125in bleed every online
+//                                 printer asks for: an 11.25x8.75 page whose
+//                                 outer eighth is cut away
 // node trifold.mjs --no-bleed   → 0.25in white border, printed and kept as-is
 // node trifold.mjs --trim       → same border, but cut off: a 10.5x8in finished
 //                                 piece with crop marks
 const NO_BLEED = process.argv.includes('--no-bleed')
 const TRIM     = process.argv.includes('--trim')
+const PRESS    = process.argv.includes('--press')
+
+// Bleed sits OUTSIDE the trim, so the finished piece is still 11x8.5 and every
+// fold stays where it was. The outer panels grow by the bleed and take matching
+// extra padding, which keeps their content the same distance from the cut.
+const BL = PRESS ? 0.125 : 0
 const TIGHT    = NO_BLEED || TRIM
 const M = TIGHT ? 0.25 : 0               // inches of white on every edge
 const f = (n) => `${+n.toFixed(4)}in`
@@ -31,11 +40,12 @@ const WIDE   = (W - NARROW) / 2
 
 const OUT_COLS = TRIM
   ? [NARROW, WIDE, WIDE].map(f).join(' ')
-  : [3.625 - M, 3.6875, 3.6875 - M].map(f).join(' ')
+  : [3.625 - M + BL, 3.6875, 3.6875 - M + BL].map(f).join(' ')
 const IN_COLS = TRIM
   ? [WIDE, WIDE, NARROW].map(f).join(' ')
-  : [3.6875 - M, 3.6875, 3.625 - M].map(f).join(' ')
-const SHEET_H = f(8.5 - 2 * M)
+  : [3.6875 - M + BL, 3.6875, 3.625 - M + BL].map(f).join(' ')
+const SHEET_H = f(8.5 - 2 * M + 2 * BL)
+const SHEET_W = f(11 + 2 * BL)
 const MARK_LEN = 0.14                    // inches
 const MARK_GAP = 0.05                    // clear of the trim line, so the mark
                                          // never prints inside the artwork
@@ -115,7 +125,7 @@ const html = `<title>OnDuty Agent Trifold</title>
   .stack{ display:flex; flex-direction:column; align-items:center; gap:.6rem;
           padding-block:1rem 3.5rem; padding-inline:16px; }
 
-  .sheet{ width:11in; height:8.5in; flex:none; display:grid; background:#fff;
+  .sheet{ width:${SHEET_W}; height:${SHEET_H}; flex:none; display:grid; background:#fff;
           padding:${f(M)}; box-sizing:border-box;
           box-shadow:0 14px 40px rgba(11,12,14,.3); transform-origin:top center; overflow:hidden; }
   .sheet.outside{ grid-template-columns:${OUT_COLS}; grid-template-rows:${SHEET_H}; }
@@ -125,9 +135,11 @@ const html = `<title>OnDuty Agent Trifold</title>
 
   /* Every panel is dark. Alternating the two inks keeps the folds visible
      without a rule, so the piece reads as three panels, not one black slab. */
-  .panel{ padding:.4in .34in .34in; min-height:0; overflow:hidden; display:flex; flex-direction:column;
+  .panel{ padding:${f(0.4 + BL)} .34in ${f(0.34 + BL)}; min-height:0; overflow:hidden; display:flex; flex-direction:column;
           position:relative; isolation:isolate; color:#fff; background:var(--ink); }
   .panel.alt{ background:var(--ink-2); }
+  .sheet > .panel:first-child{ padding-left:${f(0.34 + BL)}; }
+  .sheet > .panel:last-child { padding-right:${f(0.34 + BL)}; }
   .panel::before{ content:""; position:absolute; inset:0; z-index:-2;
     background-image:
       linear-gradient(to right, rgba(182,242,62,.07) 1px, transparent 1px),
@@ -344,6 +356,6 @@ const html = `<title>OnDuty Agent Trifold</title>
   </section>
 </div>
 `
-const outName = TRIM ? 'trifold-trim.html' : NO_BLEED ? 'trifold-nobleed.html' : 'trifold.html'
+const outName = TRIM ? 'trifold-trim.html' : NO_BLEED ? 'trifold-nobleed.html' : PRESS ? 'trifold-press.html' : 'trifold.html'
 fs.writeFileSync(path.join(here, outName), html)
-console.log(`rebuilt ${outName} —`, (html.length/1024).toFixed(0)+'kb', TRIM ? `(trims to ${f(W)} x ${f(8.5 - 2*M)})` : NO_BLEED ? `(${M}in border, kept)` : '(full bleed)')
+console.log(`rebuilt ${outName} —`, (html.length/1024).toFixed(0)+'kb', TRIM ? `(trims to ${f(W)} x ${f(8.5 - 2*M)})` : NO_BLEED ? `(${M}in border, kept)` : PRESS ? `(${SHEET_W} x ${SHEET_H} page, ${BL}in bleed, trims to 11in x 8.5in)` : '(full bleed)')
