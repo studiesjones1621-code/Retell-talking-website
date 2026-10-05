@@ -24,21 +24,21 @@
   .stack{ display:flex; flex-direction:column; align-items:center; gap:.6rem;
           padding-block:1rem 3.5rem; padding-inline:16px; }
 
-  .sheet{ width:11.25in; height:8.75in; flex:none; display:grid; background:#fff;
+  .sheet{ width:11.125in; height:8.625in; flex:none; display:grid; background:#fff;
           padding:0in; box-sizing:border-box;
           box-shadow:0 14px 40px rgba(11,12,14,.3); transform-origin:top center; overflow:hidden; }
-  .sheet.outside{ grid-template-columns:3.75in 3.6875in 3.8125in; grid-template-rows:8.75in; }
-  .sheet.inside { grid-template-columns:3.8125in 3.6875in 3.75in; grid-template-rows:8.75in; }
+  .sheet.outside{ grid-template-columns:3.6875in 3.6875in 3.75in; grid-template-rows:8.625in; }
+  .sheet.inside { grid-template-columns:3.75in 3.6875in 3.6875in; grid-template-rows:8.625in; }
   @media (max-width:11.5in){ .sheet{ transform:scale(var(--fit,.62)); margin-bottom:calc(-8.5in * (1 - var(--fit,.62))); } }
   @media (max-width:760px){ .sheet{ --fit:.40; } }
 
   /* Every panel is dark. Alternating the two inks keeps the folds visible
      without a rule, so the piece reads as three panels, not one black slab. */
-  .panel{ padding:0.525in .34in 0.465in; min-height:0; overflow:hidden; display:flex; flex-direction:column;
+  .panel{ padding:0.4625in .34in 0.4025in; min-height:0; overflow:hidden; display:flex; flex-direction:column;
           position:relative; isolation:isolate; color:#fff; background:var(--ink); }
   .panel.alt{ background:var(--ink-2); }
-  .sheet > .panel:first-child{ padding-left:0.465in; }
-  .sheet > .panel:last-child { padding-right:0.465in; }
+  .sheet > .panel:first-child{ padding-left:0.4025in; }
+  .sheet > .panel:last-child { padding-right:0.4025in; }
   .panel::before{ content:""; position:absolute; inset:0; z-index:-2;
     background-image:
       linear-gradient(to right, rgba(182,242,62,.07) 1px, transparent 1px),
@@ -117,7 +117,7 @@
     /* Must match the sheet exactly. A hardcoded letter-landscape here is
        larger-than-page for the press build, so the sheet overflowed, broke
        onto a third page and lost the bottom of the cover — with no warning. */
-    @page{ size:11.25in 8.75in; margin:0; }
+    @page{ size:11.125in 8.625in; margin:0; }
     body{ background:#fff; }
     .intro,.sheet-label{ display:none; }
     .stack{ display:block; padding:0; }

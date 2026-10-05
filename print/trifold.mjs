@@ -18,7 +18,11 @@ const PRESS    = process.argv.includes('--press')
 // Bleed sits OUTSIDE the trim, so the finished piece is still 11x8.5 and every
 // fold stays where it was. The outer panels grow by the bleed and take matching
 // extra padding, which keeps their content the same distance from the cut.
-const BL = PRESS ? 0.125 : 0
+// GotPrint's prepress states the size with bleed as 8.625 x 11.125 for an
+// 8.5 x 11 trifold — that is 1/16in per side, not the 1/8in per side most
+// printers ask for. Their stated finished dimension wins over the generic
+// convention; match it exactly or their check fails again.
+const BL = PRESS ? 0.0625 : 0
 const TIGHT    = NO_BLEED || TRIM
 const M = TIGHT ? 0.25 : 0               // inches of white on every edge
 const f = (n) => `${+n.toFixed(4)}in`
