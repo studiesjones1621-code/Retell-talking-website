@@ -9,11 +9,38 @@ US Letter landscape, printed both sides.
 npm i --no-save qrcode            # only if the QR codes must be regenerated
 node print/qr.mjs                 # writes print/qr-trifold.json
 node print/trifold.mjs            # writes print/trifold.html          (full bleed)
+node print/trifold.mjs --press    # writes print/trifold-press.html    (bleed for a trade printer)
 node print/trifold.mjs --no-bleed # writes print/trifold-nobleed.html  (white border kept)
 node print/trifold.mjs --trim     # writes print/trifold-trim.html     (border cut off)
 ```
 
-## Which file to print
+## Which file to send
+
+For an online printer, send the PDFs — one page each, already split the way
+their upload form asks for it:
+
+| File | What it is |
+| --- | --- |
+| `OnDutyAgent-trifold-FRONT-outside.pdf` | the face you see folded: cover, niche QRs, marketing |
+| `OnDutyAgent-trifold-BACK-inside.pdf` | the three inside panels |
+| `OnDutyAgent-trifold-8.5x11-with-bleed.pdf` | both pages in one file, for a shop that wants that |
+
+All three are 11.25 x 8.75in and trim to 11 x 8.5in.
+
+Before sending a rebuilt file, check it the way that actually catches errors:
+extract the text of each PDF page and diff it against the previous version. A
+scrollHeight check reads zero even while a flex child is being clipped, and a
+PDF can report the right page count and size while having silently dropped a
+panel onto a page you never look at.
+
+## Which HTML build to print
+
+**Press** (`trifold-press.html`) — what the PDFs above come from. An
+11.25 x 8.75in page carrying 0.125in of bleed on every side, trimming back to
+11 x 8.5in. Online printers reject a file without it, and a cutter that drifts
+leaves white slivers down the edge of a near-black design. The bleed sits
+*outside* the trim: the outer panels grow by it and take matching extra
+padding, so the finished piece and every fold are unchanged.
 
 **Full bleed** (`trifold.html`) — ink runs to the paper edge. Needs a press that
 prints oversize and trims down. Most print shops can; most office printers and
