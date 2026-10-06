@@ -37,3 +37,5 @@ clients/cleanrite/assets-src/
 
 # Press TIFFs — 3MB each and regenerable from the PDFs with print/tiff.mjs
 print/*.tif
+print/social/*.png
+print/social/*.html
