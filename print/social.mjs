@@ -68,9 +68,12 @@ const page = (eyebrow, headline, proof, size, qr, lede) => `<!doctype html><html
   /* Centred between the lockup and the footer bar: with the bullets pinned to
      the top the poster read as half-empty on a phone. */
   .body{flex:1;display:flex;flex-direction:column;justify-content:center;padding-bottom:30px}
-  .eyebrow{color:#b6f23e;font-weight:600;font-size:25px;
-           letter-spacing:.2em;text-transform:uppercase}
-  h1{margin-top:26px;font-weight:700;font-size:${size}px;line-height:1.04;letter-spacing:-.025em;text-wrap:balance}
+  /* The industry name is what makes someone in a trade group stop scrolling —
+     it should read before the headline does, so it is set large. Tracking comes
+     down as the size goes up; .2em is for small caps, not for 46px. */
+  .eyebrow{color:#b6f23e;font-weight:700;font-size:46px;line-height:1.1;
+           letter-spacing:.06em;text-transform:uppercase}
+  h1{margin-top:22px;font-weight:700;font-size:${size}px;line-height:1.04;letter-spacing:-.025em;text-wrap:balance}
   .lede{margin-top:26px;font-size:34px;line-height:1.38;color:#9aa1aa;max-width:860px}
   ul{margin-top:46px;list-style:none;display:grid;gap:26px}
   li{display:grid;grid-template-columns:16px 1fr;gap:22px;align-items:start;
