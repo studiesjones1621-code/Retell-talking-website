@@ -34,3 +34,6 @@ next-env.d.ts
 clients/**/.env
 clients/**/.env.local
 clients/cleanrite/assets-src/
+
+# Press TIFFs — 3MB each and regenerable from the PDFs with print/tiff.mjs
+print/*.tif

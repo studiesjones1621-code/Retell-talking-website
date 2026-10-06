@@ -25,7 +25,20 @@ their upload form asks for it:
 | `OnDutyAgent-trifold-BACK-inside.pdf` | the three inside panels |
 | `OnDutyAgent-trifold-8.5x11-with-bleed.pdf` | both pages in one file, for a shop that wants that |
 
-All three are 11.25 x 8.75in and trim to 11 x 8.5in.
+All three are 11.125 x 8.625in and trim to 11 x 8.5in. GotPrint's prepress
+stated that bleed size in writing; their own template graphic says 0.125in per
+side, which would be 11.25 x 8.75. Follow the written dimension.
+
+If the printer reports a trapping issue or missing text and asks for raster:
+
+```bash
+node print/tiff.mjs   # 350dpi RGB TIFFs beside the PDFs, gitignored
+```
+
+The PDFs come out of a browser, so they carry transparency groups from the CSS
+gradients behind each panel, and an older RIP drops what it cannot flatten.
+TIFF has nothing left to misinterpret. **Re-decode every QR code out of the
+TIFF afterwards** — rasterising is the one step that can quietly ruin them.
 
 Before sending a rebuilt file, check it the way that actually catches errors:
 extract the text of each PDF page and diff it against the previous version. A
