@@ -38,6 +38,7 @@ export const metadata: Metadata = {
     description: business.shortDescription,
     url: business.website,
     locale: "en_US",
+    images: [{ url: `${business.website}/og/default.png`, width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",

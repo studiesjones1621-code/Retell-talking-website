@@ -39,3 +39,4 @@ clients/cleanrite/assets-src/
 print/*.tif
 print/social/*.png
 print/social/*.html
+public/og/*.html

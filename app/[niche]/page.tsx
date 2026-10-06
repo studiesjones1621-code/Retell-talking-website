@@ -46,11 +46,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: niche.metaDescription,
       url,
       locale: "en_US",
+      // Without this Facebook renders a grey text card, which is the least
+      // tappable thing you can post. With it the card carries the artwork and
+      // the whole card is one tap target — the only clickable path on a phone,
+      // since an image post contains no link and nobody can scan their own screen.
+      images: [{ url: `${business.website}/og/${niche.slug}.png`, width: 1200, height: 630 }],
     },
     twitter: {
       card: "summary_large_image",
       title: niche.metaTitle,
       description: niche.metaDescription,
+      images: [`${business.website}/og/${niche.slug}.png`],
     },
   }
 }

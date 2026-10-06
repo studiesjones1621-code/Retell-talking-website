@@ -14,7 +14,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import QRCode from 'qrcode'
 
 const here = path.dirname(fileURLToPath(import.meta.url))
 const src = fs.readFileSync(path.join(here, '..', 'lib', 'niches.ts'), 'utf8')
@@ -40,17 +39,7 @@ const SIZE = { hvac: 92, 'law-firms': 84, dental: 96, medspa: 82, 'behavioral-he
 
 const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;')
 
-/*
- * utm_source=poster, not trifold: the whole point of tagging is telling the
- * two apart in analytics. Error correction Q and no margin, same as the print
- * codes — the quiet zone comes from the white tile around it instead.
- */
-const ORIGIN = 'https://ondutyagent.com'
-const qrFor = (slug) => QRCode.toString(
-  slug === 'general' ? `${ORIGIN}?utm_source=poster` : `${ORIGIN}/${slug}?utm_source=poster`,
-  { type: 'svg', errorCorrectionLevel: 'Q', margin: 0, color: { dark: '#0b0c0e', light: '#ffffff' } })
-
-const page = (eyebrow, headline, proof, size, qr, lede) => `<!doctype html><html><head><meta charset="utf-8">
+const page = (eyebrow, headline, proof, size, lede) => `<!doctype html><html><head><meta charset="utf-8">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
@@ -80,13 +69,9 @@ const page = (eyebrow, headline, proof, size, qr, lede) => `<!doctype html><html
      font-size:33px;line-height:1.3;color:#e3e5e8}
   .dot{width:16px;height:16px;margin-top:11px;background:#b6f23e;border-radius:3px}
   .foot{margin-top:auto;margin-left:-68px;margin-right:-68px;background:#b6f23e;color:#0b0c0e;
-        padding:40px 68px 42px;display:flex;align-items:center;gap:36px}
-  .cta{font-weight:700;font-size:54px;letter-spacing:-.02em}
-  .sub{margin-top:10px;font-weight:600;font-size:27px;opacity:.78}
-  .scan{margin-top:12px;font-weight:600;font-size:23px;opacity:.62}
-  /* White tile gives the code its quiet zone against the lime bar. */
-  .qr{flex:none;width:196px;height:196px;background:#fff;border-radius:14px;padding:13px}
-  .qr svg{width:100%;height:100%;display:block}
+        padding:46px 68px 50px}
+  .cta{font-weight:700;font-size:76px;letter-spacing:-.025em;line-height:1}
+  .sub{margin-top:14px;font-weight:600;font-size:30px;opacity:.78}
 </style></head><body><div class="wrap">
   <div class="brand">
     <svg class="mark" viewBox="0 0 400 400" fill="none">
@@ -104,12 +89,8 @@ const page = (eyebrow, headline, proof, size, qr, lede) => `<!doctype html><html
     <ul>${proof.map(p=>`<li><span class="dot"></span><span>${esc(p)}</span></li>`).join('')}</ul>
   </div>
   <div class="foot">
-    <div>
-      <div class="cta">ondutyagent.com</div>
-      <div class="sub">AI receptionists · websites · local SEO</div>
-      <div class="scan">Scan it, or just type it in</div>
-    </div>
-    <div class="qr">${qr}</div>
+    <div class="cta">ondutyagent.com</div>
+    <div class="sub">AI receptionists · websites · local SEO</div>
   </div>
 </div></body></html>`
 
@@ -122,10 +103,10 @@ const firstSentence = (t) => {
 const pages = []
 for (const n of niches) {
   pages.push([n.slug, page(n.name, n.headline, PROOF[n.slug], SIZE[n.slug],
-    await qrFor(n.slug), firstSentence(n.subcopy))])
+    firstSentence(n.subcopy))])
 }
 pages.push(['general', page('Any business with a phone', 'The call you missed was a customer.',
   ['Answers every call in one ring','Books it into your calendar','24 hours a day, every day'], 92,
-  await qrFor('general'), 'Every call answered in one ring, booked into your calendar, around the clock.')])
+  'Every call answered in one ring, booked into your calendar, around the clock.')])
 for (const [slug, html] of pages) fs.writeFileSync(path.join(out, `${slug}.html`), html)
 console.log('wrote', pages.length, 'poster sources to print/social/')

@@ -25,6 +25,7 @@ export const metadata: Metadata = {
     description: marketing.metaDescription,
     url: `${business.website}/marketing`,
     locale: "en_US",
+    images: [{ url: `${business.website}/og/marketing.png`, width: 1200, height: 630 }],
   },
 }
 
