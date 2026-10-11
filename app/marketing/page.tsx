@@ -10,6 +10,7 @@ import {
   MarketingServices,
   MarketingSynergy,
 } from "@/components/marketing-section"
+import { ShowcaseSection } from "@/components/showcase-section"
 import { VoiceAgentProvider } from "@/components/voice-agent/voice-agent-provider"
 import { VoiceAgentWidget } from "@/components/voice-agent/voice-agent-widget"
 
@@ -40,6 +41,7 @@ export default function MarketingPage() {
           subcopy={marketing.subcopy}
           proofPoints={["Websites that book", "Local SEO & map pack", "Reporting you can read"]}
         />
+        <ShowcaseSection />
         <MarketingServices />
         <MarketingSynergy />
         <CtaSection heading={marketing.ctaHeading} subcopy={marketing.ctaSubcopy} note={null} />
