@@ -1,12 +1,12 @@
 "use client"
 
-import { ArrowUpRight, Volume2, VolumeX } from "lucide-react"
+import { ArrowUpRight, Check, Volume2, VolumeX } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 
 import { showcase } from "@/lib/showcase"
 
 /**
- * Recent builds for /marketing: a featured screen recording in a browser frame (muted, looping, plays only
+ * Featured builds for /marketing: a featured screen recording in a browser frame (muted, looping, plays only
  * while on screen) plus a card per live site.
  */
 export function ShowcaseSection() {
@@ -88,29 +88,41 @@ export function ShowcaseSection() {
         </figure>
 
         {/* One card per live build */}
-        <div className="mt-16 grid gap-6 sm:grid-cols-2">
+        <div className={`mt-16 grid gap-6 ${showcase.builds.length > 1 ? "sm:grid-cols-2" : ""}`}>
           {showcase.builds.map((build) => (
             <a
               key={build.name}
               href={build.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-brand-900 transition-colors hover:border-brand-accent/50"
+              className={`group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-brand-900 transition-colors hover:border-brand-accent/50 ${showcase.builds.length === 1 ? "md:flex-row" : ""}`}
             >
-              <div className="overflow-hidden">
+              <div className={`overflow-hidden ${showcase.builds.length === 1 ? "md:w-[55%] md:shrink-0" : ""}`}>
                 <img
                   src={build.image}
                   alt={`${build.name} website hero`}
                   width={960}
                   height={600}
                   loading="lazy"
-                  className="aspect-[16/10] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                  className="aspect-[16/10] h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                 />
               </div>
-              <div className="flex flex-1 flex-col p-6 md:p-8">
+              <div className={`flex flex-1 flex-col p-6 md:p-8 ${showcase.builds.length === 1 ? "md:justify-center md:p-12" : ""}`}>
                 <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-brand-accent">{build.category}</p>
                 <h3 className="mt-2 text-xl font-semibold text-white">{build.name}</h3>
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-white/55">{build.description}</p>
+                <p className={`mt-2 text-sm leading-relaxed text-white/55 ${showcase.builds.length > 1 ? "flex-1" : ""}`}>
+                  {build.description}
+                </p>
+                {"highlights" in build && (
+                  <ul className="mt-5 space-y-2.5 border-t border-white/10 pt-5">
+                    {build.highlights.map((item) => (
+                      <li key={item} className="flex items-start gap-2.5 text-sm text-white/70">
+                        <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-accent" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                )}
                 <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-white">
                   View live site
                   <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
