@@ -1,13 +1,13 @@
 "use client"
 
-import { ArrowUpRight, Check, Volume2, VolumeX } from "lucide-react"
+import { Check, Volume2, VolumeX } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 
 import { showcase } from "@/lib/showcase"
 
 /**
  * Featured builds for /marketing: a featured screen recording in a browser frame (muted, looping, plays only
- * while on screen) plus a card per live site.
+ * while on screen) plus a card per build. Cards do not link out to client sites.
  */
 export function ShowcaseSection() {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -90,12 +90,9 @@ export function ShowcaseSection() {
         {/* One card per live build */}
         <div className={`mt-16 grid gap-6 ${showcase.builds.length > 1 ? "sm:grid-cols-2" : ""}`}>
           {showcase.builds.map((build) => (
-            <a
+            <div
               key={build.name}
-              href={build.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-brand-900 transition-colors hover:border-brand-accent/50 ${showcase.builds.length === 1 ? "md:flex-row" : ""}`}
+              className={`group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-brand-900 ${showcase.builds.length === 1 ? "md:flex-row" : ""}`}
             >
               <div className={`overflow-hidden ${showcase.builds.length === 1 ? "md:w-[55%] md:shrink-0" : ""}`}>
                 <img
@@ -104,7 +101,7 @@ export function ShowcaseSection() {
                   width={960}
                   height={600}
                   loading="lazy"
-                  className="aspect-[16/10] h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                  className="aspect-[16/10] h-full w-full object-cover"
                 />
               </div>
               <div className={`flex flex-1 flex-col p-6 md:p-8 ${showcase.builds.length === 1 ? "md:justify-center md:p-12" : ""}`}>
@@ -123,12 +120,8 @@ export function ShowcaseSection() {
                     ))}
                   </ul>
                 )}
-                <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-white">
-                  View live site
-                  <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                </span>
               </div>
-            </a>
+            </div>
           ))}
         </div>
       </div>
