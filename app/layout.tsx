@@ -6,9 +6,9 @@ import { Analytics } from "@/components/analytics"
 import {
   business,
   cityState,
-  fullAddress,
   hasAddress,
   hasPhone,
+  seoDescription,
   seoTitle,
 } from "@/lib/business"
 import "./globals.css"
@@ -21,7 +21,7 @@ const hostGrotesk = Host_Grotesk({
 export const metadata: Metadata = {
   metadataBase: new URL(business.website),
   title: seoTitle,
-  description: business.shortDescription,
+  description: seoDescription,
   keywords: [
     "AI receptionist",
     "AI answering service",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     type: "website",
     siteName: business.name,
     title: seoTitle,
-    description: business.shortDescription,
+    description: seoDescription,
     url: business.website,
     locale: "en_US",
     images: [{ url: `${business.website}/og/default.png`, width: 1200, height: 630 }],
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: seoTitle,
-    description: business.shortDescription,
+    description: seoDescription,
   },
   alternates: {
     canonical: business.website,
@@ -64,28 +64,46 @@ export const viewport: Viewport = {
   initialScale: 1,
 }
 
-/** LocalBusiness structured data, built from the same config the page renders. */
-const localBusinessSchema = {
+/**
+ * Organization + WebSite structured data, built from the same config the page renders. OnDuty Agent serves
+ * clients nationwide rather than from a storefront, so it is described as an Organization (a LocalBusiness
+ * without a street address is incomplete in Google's eyes). Each industry page adds its own Service entry.
+ */
+const siteSchema = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  name: business.name,
-  description: business.shortDescription,
-  url: business.website,
-  email: business.email,
-  ...(hasPhone ? { telephone: business.phone } : {}),
-  ...(hasAddress
-    ? {
-        address: {
-          "@type": "PostalAddress",
-          streetAddress: business.address.street,
-          addressLocality: business.address.city,
-          addressRegion: business.address.state,
-          postalCode: business.address.zip,
-          addressCountry: "US",
-        },
-      }
-    : { areaServed: business.serviceArea }),
-  ...(fullAddress ? {} : {}),
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${business.website}/#organization`,
+      name: business.name,
+      url: business.website,
+      logo: `${business.website}/apple-icon.png`,
+      description: business.shortDescription,
+      email: business.email,
+      ...(hasPhone ? { telephone: business.phone } : {}),
+      ...(hasAddress
+        ? {
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: business.address.street,
+              addressLocality: business.address.city,
+              addressRegion: business.address.state,
+              postalCode: business.address.zip,
+              addressCountry: "US",
+            },
+          }
+        : {}),
+      areaServed: { "@type": "Country", name: "United States" },
+      knowsAbout: ["AI receptionist", "AI answering service", "Website design", "Local SEO"],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${business.website}/#website`,
+      name: business.name,
+      url: business.website,
+      publisher: { "@id": `${business.website}/#organization` },
+    },
+  ],
 }
 
 export default function RootLayout({
@@ -99,7 +117,7 @@ export default function RootLayout({
         {children}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteSchema) }}
         />
         <Analytics />
       </body>

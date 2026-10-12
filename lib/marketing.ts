@@ -84,9 +84,9 @@ export const marketing = {
   ctaSubcopy:
     "No pitch deck. We'll look at what you rank for, what your site does with the traffic it already gets, and whether marketing is even your bottleneck — sometimes it isn't.",
 
-  metaTitle: "Website Design & Local SEO for Service Businesses | OnDuty Agent",
+  metaTitle: "Websites & Local SEO for Service Businesses | OnDuty Agent",
   metaDescription:
-    "Websites that book appointments and local SEO that puts you in the map pack — from the team that also answers your phone, so we can prove which marketing produced a booking.",
+    "Websites that book appointments and local SEO that gets you into the map pack, from the team that answers your phone, so you see which marketing books jobs.",
   keywords: [
     "local SEO services",
     "website design for contractors",

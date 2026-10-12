@@ -10,7 +10,7 @@ import { VoiceAgentProvider } from "@/components/voice-agent/voice-agent-provide
 import { VoiceAgentWidget } from "@/components/voice-agent/voice-agent-widget"
 
 export const metadata: Metadata = {
-  title: `Contact ${business.name}`,
+  title: `Contact ${business.name} | Book an AI Receptionist Demo`,
   description: `Get in touch with ${business.name} — book a demo, talk to the agent, or email us.`,
   alternates: { canonical: `${business.website}/contact` },
   openGraph: {
