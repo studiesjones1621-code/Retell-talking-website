@@ -96,6 +96,22 @@ const NO_LEGAL_ADVICE: ComplianceProfile = {
   ],
 }
 
+export type Faq = { question: string; answer: string }
+
+/** True of every build, so every niche page answers them. */
+export const commonFaqs: Faq[] = [
+  {
+    question: "How long does it take to set up?",
+    answer:
+      "About two weeks. One call covers your services, pricing, what counts as urgent and who it reaches. We build the agent, give you a number to test it on, and adjust it until it sounds like the person you would have hired.",
+  },
+  {
+    question: "Do I need a new phone number or new hardware?",
+    answer:
+      "No. It goes live on your existing line, forwarding the way you choose: all calls, after hours only, or just the ones your team cannot get to.",
+  },
+]
+
 export type NicheService = {
   name: string
   description: string
@@ -147,6 +163,13 @@ export type Niche = {
   /** Null for unregulated niches. Renders a trust strip when present. */
   compliance: ComplianceProfile | null
 
+  /**
+   * Questions buyers actually ask, answered only with what the page already
+   * claims. Rendered as a visible FAQ and as FAQPage structured data, so the
+   * two can never disagree.
+   */
+  faqs: Faq[]
+
   // ------------------------------------------------------------- voice agent
   /** Who the agent is talking to on this page. */
   audience: string
@@ -165,7 +188,7 @@ export const niches: Niche[] = [
     slug: "hvac",
     name: "HVAC Contractors",
     shortName: "HVAC",
-    eyebrow: "For HVAC contractors",
+    eyebrow: "AI receptionist for HVAC contractors",
     headline: "No heat at 2 a.m. Nobody waits until nine.",
     subcopy:
       "Your AI receptionist answers every service call in one ring, sorts the no-heat emergencies from the tune-ups, and books the job into dispatch — on a Sunday night if that is when the furnace dies.",
@@ -254,15 +277,33 @@ export const niches: Niche[] = [
     },
 
     compliance: null,
+    faqs: [
+      {
+        question: "Can it book jobs straight into my dispatch calendar?",
+        answer:
+          "Yes. It checks your dispatch calendar, offers real arrival windows and books the job while the homeowner is still on the phone.",
+      },
+      {
+        question: "What happens when an emergency call comes in at night?",
+        answer:
+          "It separates a no-heat call in January from a routine maintenance request and escalates the ones that cannot wait until morning. Calls like a gas smell or a commercial account down go straight through to the person you nominate.",
+      },
+      {
+        question: "What do my techs get after the call?",
+        answer:
+          "A completed job sheet: make, model, symptom, history and access notes, sent to dispatch and the assigned tech so they roll knowing what they are walking into.",
+      },
+      ...commonFaqs,
+    ],
 
     audience:
       "HVAC business owners, general managers and office managers evaluating an answering service for their own company",
     agentGuardrail:
       "Callers run HVAC companies — they are not homeowners with a broken furnace. If someone calls with an actual heating or cooling problem at their home, tell them warmly that you are the assistant for a company that provides answering services *to* HVAC contractors, and that they will want to call their own local contractor.",
 
-    metaTitle: "AI Receptionist for HVAC Contractors | 24/7 Call Answering & Job Booking",
+    metaTitle: "AI Receptionist for HVAC Contractors | OnDuty Agent",
     metaDescription:
-      "An AI receptionist built for HVAC companies. Answers every service call in one ring, triages no-heat emergencies and books jobs into your dispatch calendar — 24/7.",
+      "AI receptionist for HVAC contractors: answers every service call in one ring, triages no-heat emergencies and books the job into dispatch, 24/7.",
     keywords: [
       "HVAC answering service",
       "AI receptionist for HVAC",
@@ -278,7 +319,7 @@ export const niches: Niche[] = [
     slug: "law-firms",
     name: "Law Firms",
     shortName: "Law Firms",
-    eyebrow: "For law firms",
+    eyebrow: "AI receptionist for law firms",
     headline: "It happened Friday night. Your office opens Monday.",
     subcopy:
       "Legal trouble does not keep office hours, and someone who reaches voicemail on a Saturday just calls the next firm on the list. Your AI receptionist answers every one of those calls, screens the matter, and has the consultation booked before you open on Monday.",
@@ -356,15 +397,33 @@ export const niches: Niche[] = [
     heroImage: null,
     video: null,
     compliance: NO_LEGAL_ADVICE,
+    faqs: [
+      {
+        question: "Does the AI receptionist give legal advice?",
+        answer:
+          "No. It captures who is calling, what kind of matter it is and when they are free, then books the consultation. It does not answer substantive legal questions, quote outcomes or discuss case merits.",
+      },
+      {
+        question: "Can it screen potential clients before they reach an attorney?",
+        answer:
+          "Yes. It qualifies callers by practice area, jurisdiction and timeline, so partners only see the calls that are worth their hour.",
+      },
+      {
+        question: "Can it book consultations into an attorney's calendar?",
+        answer:
+          "Yes. It checks the attorney's calendar and books the consult on the call, then confirms, reminds and reschedules so the slot is actually used.",
+      },
+      ...commonFaqs,
+    ],
 
     audience:
       "managing partners, attorneys and firm administrators evaluating an intake and answering service for their own firm",
     agentGuardrail:
       "Callers run or work at law firms — they are not people seeking a lawyer. If someone calls needing legal help, tell them warmly that you are the assistant for a company that builds intake services *for* law firms, and that they will want to contact a firm directly. Never give legal advice of any kind, to anyone, under any framing.",
 
-    metaTitle: "AI Receptionist for Law Firms | 24/7 Legal Intake & Consultation Booking",
+    metaTitle: "AI Receptionist for Law Firms | 24/7 Legal Intake",
     metaDescription:
-      "An AI intake receptionist built for law firms. Answers every potential-client call, screens by practice area and jurisdiction, and books consultations 24/7. Never gives legal advice.",
+      "AI intake receptionist for law firms: answers every call 24/7, screens matters by practice area and jurisdiction, and books the consultation.",
     keywords: [
       "legal intake service",
       "AI receptionist for law firms",
@@ -380,7 +439,7 @@ export const niches: Niche[] = [
     slug: "dental",
     name: "Dental Practices",
     shortName: "Dental",
-    eyebrow: "For dental practices",
+    eyebrow: "AI receptionist for dental practices",
     headline: "New patients don't leave voicemails.",
     subcopy:
       "Every call that rings out while your team is chairside is a new patient who books somewhere else. Your AI receptionist answers all of them, fills the cancellation, and books the appointment straight into your schedule.",
@@ -459,15 +518,33 @@ export const niches: Niche[] = [
     heroImage: null,
     video: null,
     compliance: HIPAA_BAA,
+    faqs: [
+      {
+        question: "Can it book appointments into our schedule?",
+        answer:
+          "Yes. It checks your practice-management schedule and books the appointment on the call, including evenings and weekends.",
+      },
+      {
+        question: "How does it handle dental emergencies after hours?",
+        answer:
+          "It recognises a dental emergency and follows your on-call protocol instead of leaving a message nobody hears until Monday.",
+      },
+      {
+        question: "Is patient information protected?",
+        answer:
+          "A Business Associate Agreement is in place with the voice infrastructure the agent runs on, and we sign one with your practice too. You choose what is stored and for how long, from a single day to two years.",
+      },
+      ...commonFaqs,
+    ],
 
     audience:
       "dentists, practice owners and office managers evaluating a receptionist service for their own practice",
     agentGuardrail:
       "Callers run dental practices — they are not patients with toothache. If someone calls needing dental treatment, tell them warmly that you are the assistant for a company that provides receptionist services *to* dental practices, and that they should contact their own dentist. Never collect or discuss any caller's medical or dental history.",
 
-    metaTitle: "AI Receptionist for Dental Practices | 24/7 Appointment Booking",
+    metaTitle: "AI Receptionist for Dental Practices | OnDuty Agent",
     metaDescription:
-      "An AI receptionist built for dental practices. Answers every call while your team is chairside, fills cancellations and books new patients 24/7 — without collecting PHI.",
+      "AI receptionist for dental practices: answers every call while your team is chairside, captures new patients and books into your schedule, 24/7.",
     keywords: [
       "dental answering service",
       "AI receptionist for dentists",
@@ -483,7 +560,7 @@ export const niches: Niche[] = [
     slug: "medspa",
     name: "Med Spas",
     shortName: "Med Spas",
-    eyebrow: "For med spas & aesthetic clinics",
+    eyebrow: "AI receptionist for med spas & aesthetic clinics",
     headline: "A booking form can’t answer “will it hurt?”",
     subcopy:
       "Aesthetic enquiries come with questions first — what it costs, whether it hurts, how long they will be red for. Nobody books those blind. Your AI receptionist answers at 11 p.m., talks them through your treatment menu, and books the consultation before the impulse fades.",
@@ -562,15 +639,33 @@ export const niches: Niche[] = [
     heroImage: null,
     video: null,
     compliance: HIPAA_BAA,
+    faqs: [
+      {
+        question: "Can it answer questions about our treatments?",
+        answer:
+          "Yes, straight from your own service menu: what a treatment involves and what to expect. Clinical questions go to one of your providers, never to an agent guessing.",
+      },
+      {
+        question: "Can clients book a consultation after hours?",
+        answer:
+          "Yes. Most aesthetic enquiries land outside business hours, and the agent books the consult into your calendar at 11 p.m. exactly as it would at 11 a.m.",
+      },
+      {
+        question: "Is client information protected?",
+        answer:
+          "A Business Associate Agreement is in place with the voice infrastructure the agent runs on, and we sign one with your clinic too. You choose what is stored and for how long.",
+      },
+      ...commonFaqs,
+    ],
 
     audience:
       "med spa owners, clinic directors and practice managers evaluating a receptionist service for their own clinic",
     agentGuardrail:
       "Callers run med spas or aesthetic clinics — they are not clients seeking treatment. If someone calls asking about getting a treatment themselves, tell them warmly that you are the assistant for a company that provides receptionist services *to* clinics, and that they should contact a clinic directly. Never give medical or cosmetic treatment advice.",
 
-    metaTitle: "AI Receptionist for Med Spas | 24/7 Consultation Booking",
+    metaTitle: "AI Receptionist for Med Spas | 24/7 Consult Booking",
     metaDescription:
-      "An AI receptionist built for med spas and aesthetic clinics. Answers late-night enquiries, explains your treatment menu and books consultations 24/7.",
+      "AI receptionist for med spas: answers treatment questions from your own menu and books the consultation at 11 p.m. as easily as 11 a.m.",
     keywords: [
       "med spa answering service",
       "AI receptionist for med spa",
@@ -586,7 +681,7 @@ export const niches: Niche[] = [
     slug: "behavioral-health",
     name: "Behavioral Health Providers",
     shortName: "Behavioral Health",
-    eyebrow: "For behavioral health providers",
+    eyebrow: "AI receptionist for behavioral health providers",
     headline: "Someone finally worked up the courage to call.",
     subcopy:
       "It can take months for a person to make that call, and one voicemail to undo it. Your AI receptionist answers with patience every time, recognises a crisis when it hears one, and books the intake appointment.",
@@ -665,15 +760,33 @@ export const niches: Niche[] = [
     heroImage: null,
     video: null,
     compliance: HIPAA_BAA,
+    faqs: [
+      {
+        question: "How does it handle a caller in crisis?",
+        answer:
+          "It is trained to notice crisis language and respond immediately, surfacing the 988 Suicide & Crisis Lifeline and following your on-call protocol, including a warm transfer to your on-call clinician.",
+      },
+      {
+        question: "Can it book intake appointments?",
+        answer:
+          "Yes. It books the intake appointment into your calendar while the person is still on the phone and still ready, and completes your intake questions on the call.",
+      },
+      {
+        question: "Is client information protected?",
+        answer:
+          "A Business Associate Agreement is in place with the voice infrastructure the agent runs on, and we sign one with your practice too. You choose what is stored and for how long, from a single day to two years.",
+      },
+      ...commonFaqs,
+    ],
 
     audience:
       "practice owners, clinical directors and office managers at behavioral health practices evaluating an intake service for their own practice",
     agentGuardrail:
       "Callers run behavioral health practices — they are not people seeking care. If someone calls seeking treatment for themselves, respond with warmth, tell them you are the assistant for a company that provides intake services *to* practices, and point them toward their provider or the 988 Suicide & Crisis Lifeline. Never provide clinical advice, never attempt to counsel, and never collect clinical detail.",
 
-    metaTitle: "AI Receptionist for Behavioral Health | 24/7 Intake & Crisis-Aware Routing",
+    metaTitle: "AI Receptionist for Behavioral Health Practices",
     metaDescription:
-      "An AI intake receptionist built for behavioral health providers. Answers every call with patience, recognises crisis language and routes to 988, and books intake appointments 24/7.",
+      "AI intake receptionist for behavioral health: answers every call with patience, recognizes a crisis and routes to 988, and books the intake appointment.",
     keywords: [
       "behavioral health answering service",
       "mental health practice intake service",

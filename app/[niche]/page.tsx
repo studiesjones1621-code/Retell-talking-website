@@ -5,6 +5,7 @@ import { notFound } from "next/navigation"
 import { business } from "@/lib/business"
 import { getNiche, niches } from "@/lib/niches"
 import { ComplianceStrip } from "@/components/compliance-strip"
+import { FaqSection, JsonLd, faqSchema } from "@/components/faq-section"
 import { CtaSection } from "@/components/cta-section"
 import { Footer } from "@/components/footer"
 import { Hero } from "@/components/hero"
@@ -98,9 +99,37 @@ export default async function NichePage({ params }: Props) {
           about price.
         */}
         <ComplianceStrip compliance={niche.compliance} />
+        <FaqSection heading={`${niche.shortName} AI receptionist questions, answered.`} faqs={niche.faqs} />
         <MarketingTeaser />
         <CtaSection heading={niche.ctaHeading} subcopy={niche.ctaSubcopy} />
       </main>
+
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Service",
+              "@id": `${business.website}/${niche.slug}#service`,
+              name: `AI Receptionist for ${niche.name}`,
+              serviceType: "AI receptionist",
+              description: niche.metaDescription,
+              url: `${business.website}/${niche.slug}`,
+              provider: { "@id": `${business.website}/#organization` },
+              areaServed: { "@type": "Country", name: "United States" },
+              audience: { "@type": "BusinessAudience", name: niche.name },
+            },
+            {
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Home", item: business.website },
+                { "@type": "ListItem", position: 2, name: niche.name, item: `${business.website}/${niche.slug}` },
+              ],
+            },
+          ],
+        }}
+      />
+      <JsonLd data={faqSchema(niche.faqs)} />
 
       <Footer />
       <VoiceAgentWidget />

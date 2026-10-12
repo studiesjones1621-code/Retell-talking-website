@@ -137,9 +137,14 @@ export const fullAddress = hasAddress
   : null
 
 /** Falls back cleanly with no city configured. */
+// Keyword first, brand last, under ~60 characters so Google shows it whole
 export const seoTitle = cityState
-  ? `${business.name} | ${business.type} in ${cityState}`
-  : `${business.name} | ${business.type}`
+  ? `AI Receptionist for Local Businesses in ${cityState} | ${business.name}`
+  : `AI Receptionist for Local Businesses | ${business.name}`
+
+/** The home page's search snippet. Kept under ~155 characters so it is not cut off. */
+export const seoDescription =
+  "OnDuty Agent's AI receptionist answers every call in one ring, books the appointment and captures the lead 24/7, for HVAC, law, dental, med spas and more."
 
 export const mapEmbedSrc = fullAddress
   ? `https://www.google.com/maps?q=${encodeURIComponent(fullAddress)}&output=embed`

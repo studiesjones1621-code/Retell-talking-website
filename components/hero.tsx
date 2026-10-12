@@ -53,27 +53,30 @@ export function Hero({
 
       <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 items-center px-6 pb-20 pt-32 md:px-12">
         <div className="max-w-3xl">
-          <motion.span
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 rounded-full border border-brand-accent/30 bg-brand-accent/10 px-4 py-1.5 text-xs font-medium tracking-wide text-brand-accent"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-accent opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-brand-accent" />
-            </span>
-            {eyebrow ?? badge}
-          </motion.span>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.08 }}
-            className="mt-6 text-balance text-5xl font-semibold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl"
-          >
-            {headline}
-          </motion.h1>
+          {/* One h1 holds both the pill and the headline, so the page's main heading carries the search phrase
+              ("AI receptionist for HVAC contractors") as well as the hook */}
+          <h1>
+            <motion.span
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2 rounded-full border border-brand-accent/30 bg-brand-accent/10 px-4 py-1.5 text-xs font-medium tracking-wide text-brand-accent"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-accent opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-brand-accent" />
+              </span>
+              {eyebrow ?? badge}
+            </motion.span>
+            <motion.span
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.08 }}
+              className="mt-6 block text-balance text-5xl font-semibold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl"
+            >
+              {headline}
+            </motion.span>
+          </h1>
 
           <motion.p
             initial={{ opacity: 0, y: 16 }}

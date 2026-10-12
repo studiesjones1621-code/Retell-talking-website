@@ -35,7 +35,7 @@ export default function MarketingPage() {
       <CalPopupProvider />
       <main>
         <Hero
-          eyebrow="Marketing"
+          eyebrow="Website design & local SEO"
           headline={marketing.heading}
           subcopy={marketing.subcopy}
           proofPoints={["Websites that book", "Local SEO & map pack", "Reporting you can read"]}
