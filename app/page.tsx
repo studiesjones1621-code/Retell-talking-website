@@ -23,7 +23,7 @@ const homeFaqs: Faq[] = [
   {
     question: "What kinds of businesses can use an AI receptionist?",
     answer:
-      "Just about any business that runs on phone calls. If customers call to ask questions or book, and a missed call costs you money, it is a fit: salons and barbershops, contractors and home services, clinics, law offices, and many more. We have dedicated pages for HVAC contractors, law firms, dental practices, med spas and behavioral health providers, but every agent is built around your own business, its vocabulary, what counts as urgent and who it should reach.",
+      "Just about any business that runs on phone calls. If customers call to ask questions or book, and a missed call costs you money, it is a fit: auto shops, cleaning services, real estate offices, veterinary clinics, restaurants and many more. We have dedicated pages for HVAC, plumbing, roofing, law firms, dental, chiropractic, med spas, salons and barbershops, and behavioral health, but every agent is built around your own business, its vocabulary, what counts as urgent and who it should reach.",
   },
   ...commonFaqs,
   {
