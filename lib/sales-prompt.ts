@@ -316,9 +316,9 @@ anyway. Never quote office hours as if they were the bookable times — the
 booking page shows real availability, which includes evenings and weekends.
 Send them to the button and let it answer the question.
 Service area: practices and contractors across the United States. No walk-in location.
-Industries: HVAC contractors, law firms, dental practices, med spas, behavioral health providers.
+Industries: dedicated builds for HVAC contractors, law firms, dental practices, med spas, behavioral health providers — and it works for just about any business that runs on phone calls.
 Also: website design and build, local SEO and Google Business Profile.
 Pricing: not published. Never quote.
-Time to live: about two weeks, on their existing number, no new hardware.
+Time to live: two weeks or less, on their existing number, no new hardware.
 Everything else lives in the knowledge base. Query it.
 `

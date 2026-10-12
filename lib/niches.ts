@@ -103,7 +103,7 @@ export const commonFaqs: Faq[] = [
   {
     question: "How long does it take to set up?",
     answer:
-      "About two weeks. One call covers your services, pricing, what counts as urgent and who it reaches. We build the agent, give you a number to test it on, and adjust it until it sounds like the person you would have hired.",
+      "Two weeks or less. One call covers your services, pricing, what counts as urgent and who it reaches. We build the agent, give you a number to test it on, and adjust it until it sounds like the person you would have hired.",
   },
   {
     question: "Do I need a new phone number or new hardware?",
@@ -192,7 +192,7 @@ export const niches: Niche[] = [
     headline: "No heat at 2 a.m. Nobody waits until nine.",
     subcopy:
       "Your AI receptionist answers every service call in one ring, sorts the no-heat emergencies from the tune-ups, and books the job into dispatch — on a Sunday night if that is when the furnace dies.",
-    proofPoints: ["Answers in one ring", "Books into dispatch", "Live in two weeks"],
+    proofPoints: ["Answers in one ring", "Books into dispatch", "Live in 2 weeks or less"],
 
     servicesHeading: "Every service call handled.",
     servicesSubcopy:
