@@ -796,6 +796,469 @@ export const niches: Niche[] = [
       "counseling practice call answering",
     ],
   },
+
+  // ------------------------------------------------------ salons & barbershops
+  {
+    slug: "salons-barbershops",
+    name: "Salons & Barbershops",
+    shortName: "Salons",
+    eyebrow: "AI receptionist for salons & barbershops",
+    headline: "Your hands are full. Your phone still rings.",
+    subcopy:
+      "Mid-cut, mid-color, mid-fade — that is when the phone goes. Your AI receptionist answers every call in one ring, answers the price and availability questions, and books the appointment while you keep working.",
+    proofPoints: ["Answers in one ring", "Books into your calendar", "Live in 2 weeks or less"],
+
+    servicesHeading: "Every call answered, without putting the clippers down.",
+    servicesSubcopy:
+      "A ringing phone during a service is a booking you either interrupt a client for or lose. Here is what changes once the agent is on.",
+    services: [
+      {
+        name: "24/7 Call Answering",
+        description:
+          "Every call answered on the first ring, during your busiest Saturday and after you have locked up. No voicemail, no client calling the shop down the street.",
+      },
+      {
+        name: "Appointment Booking",
+        description:
+          "Checks your calendar and books the cut, color or shave with the right stylist or barber while the client is still on the phone.",
+      },
+      {
+        name: "Prices, Services and Hours, Answered",
+        description:
+          "Answers the questions that eat your day — what a service costs, how long it takes, whether you take walk-ins — straight from your own menu.",
+      },
+      {
+        name: "Rescheduling and Cancellations",
+        description:
+          "Handles the reschedule calls itself and offers the open slot to the next caller, so a cancellation becomes a booking instead of an empty chair.",
+      },
+      {
+        name: "Transfers When It Matters",
+        description:
+          "Trained on your team and who does what. A question only the owner can answer, or a regular who wants to talk to their stylist, goes straight through.",
+      },
+      {
+        name: "Reminders, Then the Review Ask",
+        description:
+          "Reminders before the appointment so the chair is not empty, and once the visit is done an invitation to leave a review on your Google profile.",
+      },
+    ],
+
+    differentiatorsHeading: "Why not just let it go to voicemail?",
+    differentiatorsSubcopy:
+      "Because people booking a haircut do not leave messages. They call the next shop on the list.",
+    differentiators: [
+      {
+        title: "It knows your menu",
+        description:
+          "A fade from a line-up, a balayage from a gloss, what each costs and who does it. Every caller gets the same right answer.",
+      },
+      {
+        title: "Saturday does not overwhelm it",
+        description: "Three people calling at once is three people booked, not two voicemails.",
+      },
+      {
+        title: "No more answering mid-service",
+        description:
+          "Your clients get your full attention, and nobody steps away from the chair to grab the phone.",
+      },
+      {
+        title: "Works for booth renters and teams",
+        description:
+          "Whether it is one chair or ten, the agent knows who is working when and books accordingly.",
+      },
+    ],
+
+    ctaHeading: "Stop losing bookings to a ringing phone.",
+    ctaSubcopy: "Talk to the agent on this page — it is the same one that would answer your phone.",
+
+    testimonials: [],
+    heroImage: null,
+    video: null,
+    compliance: null,
+    faqs: [
+      {
+        question: "Can it book appointments with a specific stylist or barber?",
+        answer:
+          "Yes. It checks your calendar and books the service with the right person while the client is still on the phone.",
+      },
+      {
+        question: "Can it answer questions about our prices and services?",
+        answer:
+          "Yes, straight from your own service menu: what a service costs, how long it takes and who does it. Anything it cannot answer goes to you or the person you nominate.",
+      },
+      {
+        question: "What happens when a client cancels?",
+        answer:
+          "The agent handles the reschedule and offers the open slot to the next caller, so a cancellation becomes a booking instead of an empty chair.",
+      },
+      ...commonFaqs,
+    ],
+
+    audience:
+      "salon and barbershop owners and managers evaluating an answering service for their own shop",
+    agentGuardrail:
+      "Callers run salons and barbershops — they are not clients trying to book a haircut. If someone calls wanting to book a service, tell them warmly that you are the assistant for a company that provides receptionist services *to* salons and barbershops, and that they should contact their own salon or barber.",
+
+    metaTitle: "AI Receptionist for Salons & Barbershops | OnDuty Agent",
+    metaDescription:
+      "AI receptionist for salons and barbershops: answers every call in one ring, answers price questions and books the appointment while you keep cutting.",
+    keywords: [
+      "salon answering service",
+      "AI receptionist for salons",
+      "barbershop answering service",
+      "AI receptionist for barbershops",
+      "salon booking phone answering",
+      "virtual receptionist for hair salon",
+    ],
+  },
+
+  // -------------------------------------------------------------- plumbing
+  {
+    slug: "plumbing",
+    name: "Plumbing Companies",
+    shortName: "Plumbing",
+    eyebrow: "AI receptionist for plumbers",
+    headline: "A burst pipe doesn't wait for Monday.",
+    subcopy:
+      "Your AI receptionist answers every call in one ring, sorts the flooding basement from the dripping faucet, and books the job into your schedule — at midnight on a holiday if that is when the pipe gives.",
+    proofPoints: ["Answers in one ring", "Triages emergencies", "Live in 2 weeks or less"],
+
+    servicesHeading: "Every call caught, every emergency sorted.",
+    servicesSubcopy:
+      "When water is coming through the ceiling, the homeowner calls until someone picks up. Make sure it is you.",
+    services: [
+      {
+        name: "24/7 Call Answering",
+        description:
+          "Every call answered on the first ring, day or night. No voicemail, no homeowner moving on to the next plumber on the list.",
+      },
+      {
+        name: "Job Booking",
+        description:
+          "Checks your schedule, offers real arrival windows and books the job while the homeowner is still on the phone.",
+      },
+      {
+        name: "Emergency Triage",
+        description:
+          "Separates an active leak or a backed-up sewer line from a routine fixture install, and escalates the ones that cannot wait until morning.",
+      },
+      {
+        name: "Live Transfer When It Matters",
+        description:
+          "Trained on your team and your on-call rotation. The calls your protocol says need a person go straight through instead of becoming a message.",
+      },
+      {
+        name: "The Job Sheet, Filled Out For You",
+        description:
+          "Captures the problem, the address, access notes and how urgent it is, then sends a completed write-up to whoever is dispatching.",
+      },
+      {
+        name: "Reminders, Then the Review Ask",
+        description:
+          "Reminders so the van does not roll to an empty house, and once the job is done an invitation to review you on your Google profile.",
+      },
+    ],
+
+    differentiatorsHeading: "Why not an answering service?",
+    differentiatorsSubcopy:
+      "Because a message taken at midnight is a job booked by somebody else by morning.",
+    differentiators: [
+      {
+        title: "It speaks plumbing",
+        description:
+          "Knows a slab leak from a slow drain and a water heater replacement from a tune-up, and asks the questions you would.",
+      },
+      {
+        title: "Storm weeks do not overwhelm it",
+        description: "When the freeze hits and every phone in town rings, nothing changes on your end.",
+      },
+      {
+        title: "Your office stops doing triage",
+        description:
+          "Price-shoppers and are-you-open calls stop reaching your team, so they work the ones that pay.",
+      },
+      {
+        title: "You find out what voicemail cost",
+        description:
+          "Every after-hours ring and abandoned call lands in a log. Most owners are surprised by the number.",
+      },
+    ],
+
+    ctaHeading: "Stop missing emergency calls.",
+    ctaSubcopy: "Talk to the agent on this page — it is the same one that would answer your phone.",
+
+    testimonials: [],
+    heroImage: null,
+    video: null,
+    compliance: null,
+    faqs: [
+      {
+        question: "What happens when an emergency call comes in after hours?",
+        answer:
+          "It separates an active leak or a sewer backup from a routine request and escalates the ones that cannot wait, following your on-call protocol.",
+      },
+      {
+        question: "Can it book jobs into my schedule?",
+        answer:
+          "Yes. It checks your schedule, offers real arrival windows and books the job while the homeowner is still on the phone.",
+      },
+      {
+        question: "Will it quote prices to customers?",
+        answer:
+          "Only what you tell it to. It never quotes a firm price sight-unseen or diagnoses a fault; it books the visit and passes along everything your tech needs to know.",
+      },
+      ...commonFaqs,
+    ],
+
+    audience:
+      "plumbing company owners, general managers and office managers evaluating an answering service for their own company",
+    agentGuardrail:
+      "Callers run plumbing companies — they are not homeowners with a leak. If someone calls with an actual plumbing problem at their home, tell them warmly that you are the assistant for a company that provides answering services *to* plumbers, and that they will want to call their own local plumber. If water is actively causing damage, suggest they shut off the main water valve and call a plumber right away.",
+
+    metaTitle: "AI Receptionist for Plumbers | 24/7 Emergency Call Answering",
+    metaDescription:
+      "AI receptionist for plumbing companies: answers every call in one ring, triages leaks and backups, and books the job into your schedule, 24/7.",
+    keywords: [
+      "plumbing answering service",
+      "AI receptionist for plumbers",
+      "24/7 plumbing call answering",
+      "after hours plumbing answering service",
+      "plumber virtual receptionist",
+      "emergency plumbing call service",
+    ],
+  },
+
+  // --------------------------------------------------------------- roofing
+  {
+    slug: "roofing",
+    name: "Roofing Contractors",
+    shortName: "Roofing",
+    eyebrow: "AI receptionist for roofing contractors",
+    headline: "After the storm, everybody calls at once.",
+    subcopy:
+      "Hail on Tuesday means a hundred calls by Wednesday. Your AI receptionist answers every one in one ring, captures the details and books the inspection, while your crews stay on the roof.",
+    proofPoints: ["Answers in one ring", "Books inspections", "Live in 2 weeks or less"],
+
+    servicesHeading: "Every lead captured, even on storm day.",
+    servicesSubcopy:
+      "Roofing leads are worth thousands, and they go to whoever answers first. Here is what changes once the agent is on.",
+    services: [
+      {
+        name: "24/7 Call Answering",
+        description:
+          "Every call answered on the first ring, including the surge after a storm. No voicemail, no homeowner moving on to the next roofer.",
+      },
+      {
+        name: "Inspection Booking",
+        description:
+          "Checks your calendar and books the estimate or inspection while the homeowner is still on the phone.",
+      },
+      {
+        name: "Urgent Leak Triage",
+        description:
+          "Separates water coming through the ceiling from a quote request for next spring, and escalates the ones that need a tarp today.",
+      },
+      {
+        name: "Lead Details, Captured",
+        description:
+          "Address, roof age, what happened, whether insurance is involved and the best time to visit, sent to your team as a completed write-up.",
+      },
+      {
+        name: "Live Transfer When It Matters",
+        description:
+          "Trained on your team. An adjuster, a commercial account or a job already in progress goes straight to the right person.",
+      },
+      {
+        name: "Reminders, Then the Review Ask",
+        description:
+          "Reminders before the inspection, and once the job is done an invitation to review you on your Google profile.",
+      },
+    ],
+
+    differentiatorsHeading: "Why not an answering service?",
+    differentiatorsSubcopy:
+      "Because after a storm, a homeowner calls three roofers, and books the first one that answers.",
+    differentiators: [
+      {
+        title: "It speaks roofing",
+        description:
+          "Knows hail damage from wear, a repair from a replacement, and which questions your estimator needs answered first.",
+      },
+      {
+        title: "Storm surges do not overwhelm it",
+        description: "A hundred calls in a day is a hundred calls answered, not a full voicemail box.",
+      },
+      {
+        title: "Your crews stay on the roof",
+        description:
+          "Nobody climbs down to take a call, and nobody loses the lead either.",
+      },
+      {
+        title: "Every lead lands in one place",
+        description:
+          "Every call, booked or not, lands in a log with its details, so no storm lead slips through.",
+      },
+    ],
+
+    ctaHeading: "Catch every storm lead.",
+    ctaSubcopy: "Talk to the agent on this page — it is the same one that would answer your phone.",
+
+    testimonials: [],
+    heroImage: null,
+    video: null,
+    compliance: null,
+    faqs: [
+      {
+        question: "Can it handle the call volume after a storm?",
+        answer:
+          "Yes. It answers every call at once, with no hold queue, so a hundred calls in a day is a hundred calls answered.",
+      },
+      {
+        question: "Can it book inspections and estimates?",
+        answer:
+          "Yes. It checks your calendar and books the inspection while the homeowner is still on the phone, then sends your team the details.",
+      },
+      {
+        question: "Will it give homeowners a price?",
+        answer:
+          "No. It never quotes a price sight-unseen. It captures the details your estimator needs and books the visit.",
+      },
+      ...commonFaqs,
+    ],
+
+    audience:
+      "roofing company owners, general managers and office managers evaluating an answering service for their own company",
+    agentGuardrail:
+      "Callers run roofing companies — they are not homeowners with a leaking roof. If someone calls about damage to their own roof, tell them warmly that you are the assistant for a company that provides answering services *to* roofing contractors, and that they will want to call their own local roofer.",
+
+    metaTitle: "AI Receptionist for Roofing Contractors | OnDuty Agent",
+    metaDescription:
+      "AI receptionist for roofing contractors: answers every call in one ring, even after a storm, captures lead details and books the inspection, 24/7.",
+    keywords: [
+      "roofing answering service",
+      "AI receptionist for roofers",
+      "roofing call answering",
+      "storm damage lead capture",
+      "roofing virtual receptionist",
+      "after hours roofing answering service",
+    ],
+  },
+
+  // ------------------------------------------------------------- chiropractic
+  {
+    slug: "chiropractic",
+    name: "Chiropractic Clinics",
+    shortName: "Chiropractic",
+    eyebrow: "AI receptionist for chiropractors",
+    headline: "You're adjusting a patient. The phone won't stop.",
+    subcopy:
+      "Every call that rings out during a treatment is a new patient who books somewhere else. Your AI receptionist answers all of them, books the visit into your schedule and handles the reschedules, so you can stay with the patient in front of you.",
+    proofPoints: ["Answers in one ring", "Books into your schedule", "Live in 2 weeks or less"],
+
+    servicesHeading: "Every call answered, every visit booked.",
+    servicesSubcopy:
+      "Chiropractic runs on visit plans and rebookings. Here is what stops slipping through once the agent is on.",
+    services: [
+      {
+        name: "24/7 Appointment Booking",
+        description:
+          "Checks your schedule and books the visit on the call, including evenings and weekends.",
+      },
+      {
+        name: "New Patient Capture",
+        description:
+          "Takes contact details and the reason for the visit, then books the first appointment, the highest-value call your clinic gets.",
+      },
+      {
+        name: "Rescheduling and Recall",
+        description:
+          "Handles reschedule calls and fills the slot a cancellation just opened, so visit plans stay on track.",
+      },
+      {
+        name: "Transfers to Your Team",
+        description:
+          "Trained on your staff and who covers what. Clinical questions go to a person who can answer them, never to an agent guessing.",
+      },
+      {
+        name: "New Patient Details, Already Taken",
+        description:
+          "Collects contact details, insurance carrier and plan, and the reason for the visit, and hands your front desk a completed record.",
+      },
+      {
+        name: "Reminders, Then the Review Ask",
+        description:
+          "Reminders before each visit to cut no-shows, and once the visit is done an invitation to review the clinic.",
+      },
+    ],
+
+    differentiatorsHeading: "Why not a front desk alone?",
+    differentiatorsSubcopy:
+      "Because your front desk is checking someone in when the phone rings, and the next caller does not wait.",
+    differentiators: [
+      {
+        title: "Two lines ringing is two patients booked",
+        description: "No hold queue. Every caller gets an answer, not a voicemail.",
+      },
+      {
+        title: "It never diagnoses",
+        description:
+          "It books, collects intake and routes clinical questions to your team. It never assesses symptoms or gives advice.",
+      },
+      {
+        title: "No training week, no turnover",
+        description: "It learns your clinic once and does not need retraining every few months.",
+      },
+      {
+        title: "Visit plans stay on track",
+        description:
+          "Reschedules are handled on the spot, so patients do not drift out of their care plan.",
+      },
+    ],
+
+    ctaHeading: "Stop losing new patients to voicemail.",
+    ctaSubcopy: "Talk to the agent on this page — it is the same one that would answer your phone.",
+
+    testimonials: [],
+    heroImage: null,
+    video: null,
+    compliance: HIPAA_BAA,
+    faqs: [
+      {
+        question: "Can it book appointments into our schedule?",
+        answer:
+          "Yes. It checks your schedule and books the visit on the call, including evenings and weekends, and handles reschedules too.",
+      },
+      {
+        question: "Does it give patients medical advice?",
+        answer:
+          "No. It books visits, collects intake details and routes clinical questions to your team. It never assesses symptoms or gives advice.",
+      },
+      {
+        question: "Is patient information protected?",
+        answer:
+          "A Business Associate Agreement is in place with the voice infrastructure the agent runs on, and we sign one with your clinic too. You choose what is stored and for how long, from a single day to two years.",
+      },
+      ...commonFaqs,
+    ],
+
+    audience:
+      "chiropractors, clinic owners and office managers evaluating a receptionist service for their own clinic",
+    agentGuardrail:
+      "Callers run chiropractic clinics — they are not patients with back pain. If someone calls needing treatment, tell them warmly that you are the assistant for a company that provides receptionist services *to* chiropractic clinics, and that they should contact their own chiropractor. Never collect or discuss any caller's medical history.",
+
+    metaTitle: "AI Receptionist for Chiropractors | 24/7 Patient Booking",
+    metaDescription:
+      "AI receptionist for chiropractic clinics: answers every call while you treat, books new patients and reschedules into your schedule, 24/7.",
+    keywords: [
+      "chiropractic answering service",
+      "AI receptionist for chiropractors",
+      "chiropractor virtual receptionist",
+      "chiropractic appointment booking",
+      "after hours chiropractic answering",
+      "chiropractic front desk automation",
+    ],
+  },
 ]
 
 // ------------------------------------------------------------------ helpers
