@@ -21,9 +21,9 @@ const homeFaqs: Faq[] = [
       "A voice agent that answers your business line like a trained receptionist. It picks up in one ring, answers questions about your services, books the appointment into your calendar and captures the caller's details, 24 hours a day.",
   },
   {
-    question: "Which businesses do you build AI receptionists for?",
+    question: "What kinds of businesses can use an AI receptionist?",
     answer:
-      "HVAC contractors, law firms, dental practices, med spas and aesthetic clinics, and behavioral health providers. Each agent is built for its industry: it knows the vocabulary, what counts as urgent and who it should reach.",
+      "Just about any business that runs on phone calls. If customers call to ask questions or book, and a missed call costs you money, it is a fit: salons and barbershops, contractors and home services, clinics, law offices, and many more. We have dedicated pages for HVAC contractors, law firms, dental practices, med spas and behavioral health providers, but every agent is built around your own business, its vocabulary, what counts as urgent and who it should reach.",
   },
   ...commonFaqs,
   {
@@ -42,7 +42,7 @@ export default function Home() {
           eyebrow="24/7 AI receptionist for local businesses"
           headline="Never miss another call."
           subcopy="An AI receptionist that answers every call in one ring, books the appointment and captures the lead — 24 hours a day, in the language of your industry."
-          proofPoints={["Answers in one ring", "Books into your calendar", "Live in two weeks"]}
+          proofPoints={["Answers in one ring", "Books into your calendar", "Live in 2 weeks or less"]}
         />
         <NichePicker />
         <HowItWorks />

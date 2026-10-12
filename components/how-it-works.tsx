@@ -30,7 +30,7 @@ export function HowItWorks() {
             How it works
           </p>
           <h2 className="mt-4 text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-            Live in about two weeks.
+            Live in two weeks or less.
           </h2>
         </div>
 

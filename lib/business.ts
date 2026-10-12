@@ -32,7 +32,7 @@ export const business = {
   tagline: "Never miss another call.",
   /** One sentence. Meta description for the general pages. */
   shortDescription:
-    "OnDuty Agent builds AI receptionists that answer every call, book the appointment and capture the lead 24 hours a day — for HVAC companies, law firms, dental practices, med spas and behavioral health providers.",
+    "OnDuty Agent builds AI receptionists that answer every call, book the appointment and capture the lead 24 hours a day — for HVAC companies, law firms, dental practices, med spas, behavioral health providers and just about any business that runs on phone calls.",
 
   // ------------------------------------------------------------------ contact
   /**
