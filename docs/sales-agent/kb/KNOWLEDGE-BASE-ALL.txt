@@ -23,12 +23,12 @@
 
 ## What we build
 AI receptionists that answer every call, book the appointment, capture the lead
-and route to the right person — 24/7. Built per industry: HVAC contractors, law
-firms, dental practices, med spas, behavioral health providers. We also build
+and route to the right person — 24/7. Works for just about any business that runs on phone calls, with dedicated builds for HVAC
+contractors, law firms, dental practices, med spas and behavioral health providers. We also build
 websites and do local SEO / Google Business Profile for the same clients.
 
 ## How long does setup take?
-About two weeks from the first call to going live. That covers learning the
+Two weeks or less from the first call to going live. That covers learning the
 business, building the agent, and a test number the client can call and try to
 break before anything touches their real line.
 
