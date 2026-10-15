@@ -4,6 +4,21 @@ import Link from "next/link"
 import { business } from "@/lib/business"
 import { niches } from "@/lib/niches"
 
+const extras = [
+  {
+    name: "Websites",
+    headline: "A site built around your business, with the voice agent on it to answer and book.",
+    cta: "See our builds",
+    href: "/marketing#builds",
+  },
+  {
+    name: "Marketing",
+    headline: "Local SEO and Google profile work that brings in the calls your agent answers.",
+    cta: "See what we do",
+    href: "/marketing#services",
+  },
+]
+
 /**
  * The general homepage's job is to route, not to sell. Every visitor here
  * belongs on a niche page — this section gets them there in one click, and the
@@ -44,7 +59,25 @@ export function NichePicker() {
             </Link>
           ))}
 
-          {/* Balances the grid at three columns and captures everyone else. */}
+          {/* Websites and marketing, then a catch-all: 12 tiles fill the grid at two and three columns. */}
+          {extras.map((extra) => (
+            <Link
+              key={extra.name}
+              href={extra.href}
+              className="group flex flex-col justify-between gap-8 bg-brand-800 p-8 transition-colors hover:bg-brand-700"
+            >
+              <div>
+                <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-brand-accent">Also from OnDuty</p>
+                <h3 className="mt-2 text-xl font-semibold text-white">{extra.name}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-white/60">{extra.headline}</p>
+              </div>
+              <span className="inline-flex items-center gap-2 text-sm font-semibold text-brand-accent">
+                {extra.cta}
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </span>
+            </Link>
+          ))}
+
           <div className="flex flex-col justify-between gap-8 bg-brand-800 p-8">
             <div>
               <h3 className="text-xl font-semibold text-white">Something else?</h3>
