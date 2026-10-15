@@ -1,22 +1,26 @@
 "use client"
 
-import { Check, Volume2, VolumeX } from "lucide-react"
+import { Volume2, VolumeX } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 
 import { showcase } from "@/lib/showcase"
 
 /**
- * Featured builds for /marketing: a featured screen recording in a browser frame (muted, looping, plays only
- * while on screen) plus a card per build. Cards do not link out to client sites.
+ * Featured builds for /marketing: screen recordings in a browser frame (muted, looping, plays only while on screen),
+ * with a tab per build to switch between them. Nothing links out to client sites.
  */
 export function ShowcaseSection() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [muted, setMuted] = useState(true)
+  const [index, setIndex] = useState(0)
+  const active = showcase.videos[index]
 
-  // Play only while visible so the video never costs bandwidth or battery off screen
+  // Play only while visible so the video never costs bandwidth or battery off screen. Re-runs for each recording,
+  // since switching tabs mounts a new <video>.
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
+    video.muted = muted
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
     const io = new IntersectionObserver(
       ([entry]) => {
@@ -27,7 +31,9 @@ export function ShowcaseSection() {
     )
     io.observe(video)
     return () => io.disconnect()
-  }, [])
+    // muted is applied on mount only; the toggle sets it directly
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [index])
 
   const toggleSound = () => {
     const video = videoRef.current
@@ -50,80 +56,79 @@ export function ShowcaseSection() {
           <p className="mt-5 text-lg leading-relaxed text-white/60">{showcase.subcopy}</p>
         </div>
 
-        {/* Featured walkthrough, framed like a browser window */}
-        <figure className="mt-14">
+        {/* One tab per recording */}
+        {showcase.videos.length > 1 && (
+          <div role="tablist" aria-label="Featured builds" className="mt-12 flex flex-wrap gap-2">
+            {showcase.videos.map((v, i) => (
+              <button
+                key={v.id}
+                type="button"
+                role="tab"
+                id={`build-tab-${v.id}`}
+                aria-selected={i === index}
+                aria-controls="build-panel"
+                onClick={() => setIndex(i)}
+                className={`rounded-full border px-4 py-2 text-left text-sm transition-colors ${
+                  i === index
+                    ? "border-brand-accent bg-brand-accent/10 text-white"
+                    : "border-white/15 text-white/60 hover:border-white/30 hover:text-white"
+                }`}
+              >
+                <span className="font-semibold">{v.title}</span>
+                <span className="ml-2 text-xs text-white/45">{v.category}</span>
+              </button>
+            ))}
+          </div>
+        )}
+
+        {/* The active walkthrough, framed like a browser window */}
+        <figure
+          id="build-panel"
+          role="tabpanel"
+          aria-labelledby={`build-tab-${active.id}`}
+          className={showcase.videos.length > 1 ? "mt-6" : "mt-14"}
+        >
           <div className="overflow-hidden rounded-2xl border border-white/10 bg-brand-900 shadow-2xl shadow-black/40">
             <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3">
               <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
               <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
               <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
-              <span className="ml-3 truncate text-xs text-white/40">{showcase.video.title}</span>
-            </div>
-            <div className="relative">
-              <video
-                ref={videoRef}
-                className="block aspect-[1600/792] w-full bg-black object-cover"
-                poster={showcase.video.poster}
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                aria-label={`Screen recording of the ${showcase.video.title} website`}
-              >
-                <source src={showcase.video.webm} type="video/webm" />
-                <source src={showcase.video.src} type="video/mp4" />
-              </video>
+              <span className="ml-3 min-w-0 flex-1 truncate text-xs text-white/40">{active.title}</span>
+              {/* Up here, not over the video: the site's floating "Talk to us" launcher sits in the bottom corner */}
               <button
                 type="button"
                 onClick={toggleSound}
-                className="absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/60 px-4 py-2 text-xs font-semibold text-white backdrop-blur-sm transition-colors hover:bg-black/80"
+                className="inline-flex shrink-0 items-center gap-2 rounded-full border border-white/20 bg-white/5 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-white/15"
                 aria-pressed={!muted}
               >
                 {muted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
-                {muted ? "Sound on to hear the agent" : "Sound off"}
+                {muted ? (
+                  <>
+                    <span className="sm:hidden">Sound on</span>
+                    <span className="hidden sm:inline">Sound on to hear the agent</span>
+                  </>
+                ) : (
+                  "Sound off"
+                )}
               </button>
             </div>
+            <video
+              key={active.id}
+              ref={videoRef}
+              className="block aspect-[1600/792] w-full bg-black object-cover"
+              poster={active.poster}
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-label={`Screen recording of the ${active.title} website`}
+              >
+              <source src={active.webm} type="video/webm" />
+              <source src={active.src} type="video/mp4" />
+            </video>
           </div>
-          <figcaption className="mt-4 text-sm text-white/50">{showcase.video.caption}</figcaption>
+          <figcaption className="mt-4 text-sm text-white/50">{active.caption}</figcaption>
         </figure>
-
-        {/* One card per live build */}
-        <div className={`mt-16 grid gap-6 ${showcase.builds.length > 1 ? "sm:grid-cols-2" : ""}`}>
-          {showcase.builds.map((build) => (
-            <div
-              key={build.name}
-              className={`group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-brand-900 ${showcase.builds.length === 1 ? "md:flex-row" : ""}`}
-            >
-              <div className={`overflow-hidden ${showcase.builds.length === 1 ? "md:w-[55%] md:shrink-0" : ""}`}>
-                <img
-                  src={build.image}
-                  alt={`${build.name} website hero`}
-                  width={960}
-                  height={600}
-                  loading="lazy"
-                  className="aspect-[16/10] h-full w-full object-cover"
-                />
-              </div>
-              <div className={`flex flex-1 flex-col p-6 md:p-8 ${showcase.builds.length === 1 ? "md:justify-center md:p-12" : ""}`}>
-                <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-brand-accent">{build.category}</p>
-                <h3 className="mt-2 text-xl font-semibold text-white">{build.name}</h3>
-                <p className={`mt-2 text-sm leading-relaxed text-white/55 ${showcase.builds.length > 1 ? "flex-1" : ""}`}>
-                  {build.description}
-                </p>
-                {"highlights" in build && (
-                  <ul className="mt-5 space-y-2.5 border-t border-white/10 pt-5">
-                    {build.highlights.map((item) => (
-                      <li key={item} className="flex items-start gap-2.5 text-sm text-white/70">
-                        <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-accent" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   )
