@@ -1,31 +1,31 @@
 /**
- * Talking-website builds shown on /marketing (only clients who have agreed to be featured). Screenshots and the walkthrough recording live in
- * /public/showcase. Each site has its own voice agent that answers and books through Cal.com.
+ * Talking-website builds shown on /marketing. Each recording is a screen capture of a live build, with a tab to switch
+ * between them. Files live in /public/showcase. Real businesses appear only once the owner has agreed; concept demos
+ * use fictional names, people and details.
  */
 export const showcase = {
-  eyebrow: "Featured build",
+  eyebrow: "Featured builds",
   heading: "Websites that talk, and book.",
   subcopy:
     "Every build is designed around the business itself, with a voice agent that knows the menu, the prices and the calendar. Visitors ask a question and leave with an appointment.",
-  video: {
-    src: "/showcase/first-class-cutz-walkthrough.mp4",
-    webm: "/showcase/first-class-cutz-walkthrough.webm",
-    poster: "/showcase/first-class-cutz-poster.jpg",
-    title: "First Class Cutz by Reem",
-    caption: "A full walkthrough: the cinematic hero, services, reviews and prices, then a live call with the voice agent.",
-  },
-  builds: [
+  videos: [
     {
-      name: "First Class Cutz by Reem",
+      id: "first-class-cutz",
+      title: "First Class Cutz by Reem",
       category: "Barbershop",
-      description: "The real barber chair turned into a pilot seat, then a jet flies through the clouds into the menu.",
-      image: "/showcase/first-class-cutz.webp",
-      url: "https://temporary-express-onyx-lc2ix7l.vercel.app",
-      highlights: [
-        "Voice agent that answers questions and books real appointments",
-        "Cinematic scroll hero built from the shop's own chair",
-        "Real prices, hours and Booksy reviews, plus online booking",
-      ],
+      src: "/showcase/first-class-cutz-walkthrough.mp4",
+      webm: "/showcase/first-class-cutz-walkthrough.webm",
+      poster: "/showcase/first-class-cutz-poster.jpg",
+      caption: "A full walkthrough: the cinematic hero, services, reviews and prices, then a live call with the voice agent.",
+    },
+    {
+      id: "lumen-skin",
+      title: "Lumen Skin Studio",
+      category: "Skincare concept demo",
+      src: "/showcase/lumen-skin-walkthrough.mp4",
+      webm: "/showcase/lumen-skin-walkthrough.webm",
+      poster: "/showcase/lumen-skin-poster.jpg",
+      caption: "A skincare studio concept: treatments, a 3D look beneath the skin, reviews, then a live call with the voice agent.",
     },
   ],
 } as const
