@@ -10,6 +10,8 @@
 
 export type MarketingService = {
   name: string
+  /** Anchor id of this service's card on /marketing, which the homepage teaser links to */
+  id: string
   /**
    * The symptom this service treats, addressed to the reader. Rendered as a
    * labelled problem statement, never in quotation marks — quoting it made it
@@ -53,6 +55,7 @@ export const marketing = {
   services: [
     {
       name: "Website Design & Build",
+      id: "website-design",
       problem: "Your site looks like it was built in 2014 and it doesn't book anyone.",
       description:
         "A fast, modern site built to turn visitors into booked appointments — not to win design awards. Optionally with the voice agent built in, so the site answers questions and books at any hour.",
@@ -66,6 +69,7 @@ export const marketing = {
     },
     {
       name: "Local SEO & Google Business Profile",
+      id: "local-seo",
       problem: "You're invisible in the map pack while your competitor sits at the top.",
       description:
         "The highest-intent channel there is: someone searching for what you do, near where you are, right now. We get you into the local three-pack and keep you there.",

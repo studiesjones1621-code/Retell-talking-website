@@ -35,8 +35,15 @@ export function MarketingTeaser() {
 
           <div className="grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10">
             {marketing.services.map((service) => (
-              <div key={service.name} className="bg-brand-800 p-8">
-                <h3 className="text-lg font-semibold text-white">{service.name}</h3>
+              <Link
+                key={service.name}
+                href={`/marketing#${service.id}`}
+                className="group block bg-brand-800 p-8 transition-colors hover:bg-brand-700"
+              >
+                <h3 className="flex items-center justify-between gap-4 text-lg font-semibold text-white">
+                  {service.name}
+                  <ArrowRight className="h-4 w-4 shrink-0 text-brand-accent transition-transform group-hover:translate-x-1" />
+                </h3>
                 <p className="mt-3 flex gap-2.5 text-sm leading-relaxed text-white/50">
                   <span
                     aria-hidden="true"
@@ -45,7 +52,7 @@ export function MarketingTeaser() {
                   {service.problem}
                 </p>
                 <p className="mt-3 text-sm leading-relaxed text-white/60">{service.description}</p>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -63,7 +70,8 @@ export function MarketingServices() {
           {marketing.services.map((service) => (
             <article
               key={service.name}
-              className="flex flex-col rounded-2xl border border-white/10 bg-brand-800 p-8 md:p-10"
+              id={service.id}
+              className="flex scroll-mt-8 flex-col rounded-2xl border border-white/10 bg-brand-800 p-8 md:p-10"
             >
               <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-brand-accent">
                 The problem
