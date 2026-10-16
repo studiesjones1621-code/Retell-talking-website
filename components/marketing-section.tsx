@@ -37,7 +37,7 @@ export function MarketingTeaser() {
             {marketing.services.map((service) => (
               <Link
                 key={service.name}
-                href="/marketing"
+                href={service.id === "local-seo" ? "/marketing#local-seo" : "/marketing"}
                 className="group block bg-brand-800 p-8 transition-colors hover:bg-brand-700"
               >
                 <h3 className="flex items-center justify-between gap-4 text-lg font-semibold text-white">
